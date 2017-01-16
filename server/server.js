@@ -34,6 +34,14 @@ app.use(function(req, res, next) {
   next();
 });
 
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.redirect("/login");
+  }
+}
+
 app.get("/", function(req, res) {
   User.find()
     .sort({ createAt: "descending" })
@@ -56,8 +64,16 @@ app.get("/logout", function(req, res) {
   res.redirect("/");
 });
 
+app.get("/profile", ensureAuthenticated, function(req, res) {
+  res.render("profile.ejs");
+})
+
+app.get("/app", ensureAuthenticated, function(req, res) {
+  res.render("app.ejs");
+})
+
 app.post("/login", passport.authenticate("login", {
-  successRedirect: "/",
+  successRedirect: "/app",
   failureRedirect: "/login"
 }));
 
@@ -80,7 +96,7 @@ app.post("/signup", function(req, res, next) {
 
     });
   }, passport.authenticate("login", {
-    successRedirect: "/",
+    successRedirect: "/app",
     failureRedirect: "/signup",
 }));
 
