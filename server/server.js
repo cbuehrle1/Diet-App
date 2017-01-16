@@ -29,15 +29,39 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(function(req, res, next) {
+  res.locals.currentUser = req.user;
+  next();
+});
+
 app.get("/", function(req, res) {
-  res.render("index.ejs");
+  User.find()
+    .sort({ createAt: "descending" })
+    .exec(function(err, users) {
+      if (err) { return next(err) }
+      res.render("index", { users: users });
+    });
 });
 
 app.get("/login", function(req, res) {
   res.render("login.ejs");
 });
 
-app.post("/login", function(req, res, next) {
+app.get("/signup", function(req, res) {
+  res.render("signup.ejs")
+});
+
+app.get("/logout", function(req, res) {
+  req.logout();
+  res.redirect("/");
+});
+
+app.post("/login", passport.authenticate("login", {
+  successRedirect: "/",
+  failureRedirect: "/login"
+}));
+
+app.post("/signup", function(req, res, next) {
   var username = req.body.username;
   var password = req.body.password;
 
