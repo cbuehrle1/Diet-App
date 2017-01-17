@@ -71,26 +71,31 @@ var AppComponent = function (_React$Component) {
           )
         );
       } else {
+        var top = this.state.height / 2 - 131;
         navBar = React.createElement(
           "div",
-          { className: this.state.sidebar, style: { height: this.state.height } },
-          React.createElement(
-            "h1",
-            null,
-            "Welcome ",
-            this.state.user.displayName
-          ),
-          React.createElement(
-            "p",
-            null,
-            "This is an app designed around food pairing. Press Enter to start exploring new custom recipies today!"
-          ),
+          { className: this.state.sidebar, style: { height: this.state.height, paddingTop: top } },
           React.createElement(
             "div",
-            { className: "start-button", onClick: function onClick() {
-                _this3.moveToSideBar();
-              } },
-            "Enter"
+            { style: { width: "620px", margin: "0 auto" } },
+            React.createElement(
+              "h1",
+              null,
+              "Welcome ",
+              this.state.user.displayName
+            ),
+            React.createElement(
+              "p",
+              null,
+              "This is an app designed around food pairing. Press Enter to start exploring new custom recipies today!"
+            ),
+            React.createElement(
+              "div",
+              { className: "start-button", onClick: function onClick() {
+                  _this3.moveToSideBar();
+                } },
+              "Enter"
+            )
           )
         );
       }

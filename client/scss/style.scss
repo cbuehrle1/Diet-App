@@ -20,11 +20,11 @@ header{
   color: white;
   text-align: center;
   width: 100%;
-  transition-property: width;
+  opacity: 0.7;
+  transition-property: width, opacity;
   transition-duration: 1s;
   h1{
     font-size: 48px;
-    padding-top: 25px;
   }
   p{
     font-size: 36px;
@@ -48,7 +48,8 @@ header{
   padding-left: 10px;
   background-color: #63C7B2;
   color: white;
-  transition-property: width;
+  opacity: 1;
+  transition-property: width, opacity;
   transition-duration: 1s;
   h1{
     font-size: 24px;
