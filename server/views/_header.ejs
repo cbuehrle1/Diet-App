@@ -11,7 +11,7 @@
   <body>
     <header>
       <% if (currentUser) { %>
-        <div><a href="/profile">Hello, <%- currentUser.name() %></a></div>
+        <div><a href="/profile">Hello, <%- currentUser.displayName %></a></div>
         <div><a href="/logout">Log Out</a></div>
       <% } else { %>
         <div><a href="/login">Login</a></div>

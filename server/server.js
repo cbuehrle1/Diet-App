@@ -9,7 +9,7 @@ var User = require("./models/user");
 
 var app = express();
 
-mongoose.connect("mongodb://localhost:27017/foodpairing");
+mongoose.connect("mongodb://localhost:27017/foodpair");
 
 setUpPassport();
 
@@ -80,6 +80,7 @@ app.post("/login", passport.authenticate("login", {
 app.post("/signup", function(req, res, next) {
   var username = req.body.username;
   var password = req.body.password;
+  var displayName = req.body.displayName;
 
   User.findOne({ username: username }, function(err, user) {
     if (err) { return next(err); }
@@ -89,7 +90,8 @@ app.post("/signup", function(req, res, next) {
 
     var newUser = new User ({
       username: username,
-      password: password
+      password: password,
+      displayName: displayName
     });
 
     newUser.save(next);
