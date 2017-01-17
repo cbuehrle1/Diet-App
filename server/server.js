@@ -6,6 +6,7 @@ var session = require('express-session');
 var mongoose = require('mongoose');
 var setUpPassport = require("./setuppassport");
 var User = require("./models/user");
+var apiRoutes = require("./api-routes.js")
 
 var app = express();
 
@@ -102,6 +103,7 @@ app.post("/signup", function(req, res, next) {
     failureRedirect: "/signup",
 }));
 
+app.use(require("./api-routes.js")());
 
 app.listen(5000, function() {
   console.log('listening on port 5000.');

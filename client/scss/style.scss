@@ -1,5 +1,58 @@
 @import 'reset';
-
-p {
-  color: red;
+body{
+  font-family: 'PT Sans Narrow', sans-serif;
+}
+header{
+  background-color: #B8BDB5;
+  color: white;
+  overflow: auto;
+  div{
+    float: right;
+    width: 10%;
+  }
+}
+#react-root{
+  overflow: auto;
+  height: 100%;
+}
+.main-landing{
+  background-color: #63C7B2;
+  color: white;
+  text-align: center;
+  width: 100%;
+  transition-property: width;
+  transition-duration: 1s;
+  h1{
+    font-size: 48px;
+    padding-top: 25px;
+  }
+  p{
+    font-size: 36px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+  }
+  .start-button{
+    padding: 20px;
+    background-color: #5F7470;
+    font-weight: bold;
+    display: inline-block;
+    border-radius: 30%;
+  }
+  .start-button:hover{
+    background-color: #B8BDB5;
+  }
+}
+.side-bar{
+  float: left;
+  width: 20%;
+  padding-left: 10px;
+  background-color: #63C7B2;
+  color: white;
+  transition-property: width;
+  transition-duration: 1s;
+  h1{
+    font-size: 24px;
+    color: white;
+    text-align: left;
+  }
 }
