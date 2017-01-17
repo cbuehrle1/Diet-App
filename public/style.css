@@ -51,10 +51,15 @@ body {
 header {
   background-color: #B8BDB5;
   color: white;
-  overflow: auto; }
+  overflow: auto;
+  opacity: 0.7; }
   header div {
     float: right;
-    width: 10%; }
+    width: 5%;
+    padding: 10px; }
+  header a {
+    text-decoration: none;
+    color: white; }
 
 #react-root {
   overflow: auto;
@@ -95,6 +100,7 @@ header {
   .side-bar h1 {
     font-size: 24px;
     color: white;
-    text-align: left; }
+    text-align: left;
+    padding: 20px 0; }
 
 /*# sourceMappingURL=style.css.map */

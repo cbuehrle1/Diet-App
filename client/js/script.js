@@ -36,14 +36,15 @@ class AppComponent extends React.Component {
 
   render() {
     var navBar;
+    var top = (this.state.height/2) - 151;
+    var theHeight = this.state.height - 36;
 
     if (this.state.sidebar === "side-bar") {
-      navBar = <div className={this.state.sidebar} style={ { height: this.state.height } }>
+      navBar = <div className={this.state.sidebar} style={ { height: theHeight } }>
         <h1>{this.state.user.displayName + "'"}s Pairings</h1>
       </div>
     } else {
-      var top = (this.state.height/2) - 131;
-      navBar = <div className={this.state.sidebar} style={ { height: this.state.height, paddingTop: top } }><div style={{ width: "620px", margin: "0 auto" }}><h1>Welcome {this.state.user.displayName}</h1>
+      navBar = <div className={this.state.sidebar} style={ { height: theHeight } }><div style={{ width: "620px", margin: "0 auto", paddingTop: top }}><h1>Welcome {this.state.user.displayName}</h1>
       <p>This is an app designed around food pairing. Press Enter to start exploring new custom recipies today!</p>
       <div className="start-button" onClick={() => { this.moveToSideBar(); }}>Enter</div></div>
       </div>;

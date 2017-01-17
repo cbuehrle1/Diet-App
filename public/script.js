@@ -58,11 +58,13 @@ var AppComponent = function (_React$Component) {
       var _this3 = this;
 
       var navBar;
+      var top = this.state.height / 2 - 151;
+      var theHeight = this.state.height - 36;
 
       if (this.state.sidebar === "side-bar") {
         navBar = React.createElement(
           "div",
-          { className: this.state.sidebar, style: { height: this.state.height } },
+          { className: this.state.sidebar, style: { height: theHeight } },
           React.createElement(
             "h1",
             null,
@@ -71,13 +73,12 @@ var AppComponent = function (_React$Component) {
           )
         );
       } else {
-        var top = this.state.height / 2 - 131;
         navBar = React.createElement(
           "div",
-          { className: this.state.sidebar, style: { height: this.state.height, paddingTop: top } },
+          { className: this.state.sidebar, style: { height: theHeight } },
           React.createElement(
             "div",
-            { style: { width: "620px", margin: "0 auto" } },
+            { style: { width: "620px", margin: "0 auto", paddingTop: top } },
             React.createElement(
               "h1",
               null,

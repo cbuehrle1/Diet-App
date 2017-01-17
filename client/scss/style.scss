@@ -6,9 +6,15 @@ header{
   background-color: #B8BDB5;
   color: white;
   overflow: auto;
+  opacity: 0.7;
   div{
     float: right;
-    width: 10%;
+    width: 5%;
+    padding: 10px;
+  }
+  a{
+    text-decoration: none;
+    color: white;
   }
 }
 #react-root{
@@ -55,5 +61,6 @@ header{
     font-size: 24px;
     color: white;
     text-align: left;
+    padding: 20px 0;
   }
 }
