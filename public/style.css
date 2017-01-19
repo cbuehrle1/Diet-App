@@ -90,8 +90,8 @@ header {
 
 .side-bar {
   float: left;
-  width: 20%;
-  padding-left: 10px;
+  width: 19%;
+  padding-left: 1%;
   background-color: #63C7B2;
   color: white;
   opacity: 1;
@@ -102,5 +102,10 @@ header {
     color: white;
     text-align: left;
     padding: 20px 0; }
+
+.content-container {
+  float: left;
+  width: 80%;
+  text-align: center; }
 
 /*# sourceMappingURL=style.css.map */
