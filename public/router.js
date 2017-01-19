@@ -16,7 +16,8 @@ if (window.FC === undefined) {
     React.createElement(
       Route,
       { path: "/", component: FC.AppComponent },
-      React.createElement(ReactRouter.IndexRoute, { component: FC.LandingComponent })
+      React.createElement(ReactRouter.IndexRoute, { component: FC.LandingComponent }),
+      React.createElement(Route, { path: "/RecipeSearch", component: FC.RecipeSearchComponent })
     )
   );
 

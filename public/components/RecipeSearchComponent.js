@@ -13,63 +13,29 @@ if (window.FC === undefined) {
 }
 
 (function () {
-  var LandingComponent = function (_React$Component) {
-    _inherits(LandingComponent, _React$Component);
+  var RecipeSearchComponent = function (_React$Component) {
+    _inherits(RecipeSearchComponent, _React$Component);
 
-    function LandingComponent() {
-      _classCallCheck(this, LandingComponent);
+    function RecipeSearchComponent() {
+      _classCallCheck(this, RecipeSearchComponent);
 
-      return _possibleConstructorReturn(this, (LandingComponent.__proto__ || Object.getPrototypeOf(LandingComponent)).apply(this, arguments));
+      return _possibleConstructorReturn(this, (RecipeSearchComponent.__proto__ || Object.getPrototypeOf(RecipeSearchComponent)).apply(this, arguments));
     }
 
-    _createClass(LandingComponent, [{
+    _createClass(RecipeSearchComponent, [{
       key: "render",
       value: function render() {
         return React.createElement(
           "div",
-          { className: "content-container" },
-          React.createElement(
-            "h1",
-            null,
-            "What would you like to do?"
-          ),
-          React.createElement(
-            "h1",
-            null,
-            "Create a ",
-            React.createElement(
-              "a",
-              { href: "abc.com" },
-              "diet"
-            )
-          ),
-          React.createElement(
-            "h1",
-            null,
-            "Search for ",
-            React.createElement(
-              ReactRouter.Link,
-              { to: "/RecipeSearch" },
-              "recipes"
-            )
-          ),
-          React.createElement(
-            "h1",
-            null,
-            "Search for recipes by ",
-            React.createElement(
-              "a",
-              { href: "abc.com" },
-              "nutritional targets"
-            )
-          )
+          null,
+          "Recipe Search Thing"
         );
       }
     }]);
 
-    return LandingComponent;
+    return RecipeSearchComponent;
   }(React.Component);
 
-  FC.LandingComponent = LandingComponent;
+  FC.RecipeSearchComponent = RecipeSearchComponent;
 })();
-//# sourceMappingURL=LandingComponent.js.map
+//# sourceMappingURL=RecipeSearchComponent.js.map

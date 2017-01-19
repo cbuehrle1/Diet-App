@@ -26,7 +26,8 @@ if (window.FC === undefined) {
       key: "renderChildren",
       value: function renderChildren() {
         this.setState({
-          show: "show"
+          show: true,
+          appHeader: "app-header"
         });
       }
     }, {
@@ -35,15 +36,59 @@ if (window.FC === undefined) {
         var _this2 = this;
 
         var children;
+        var headerStyle;
+        var headerLinks;
 
-        if (this.state !== null && this.state.show === "show") {
+        if (this.state !== null && this.state.show === true) {
           children = this.props.children;
-          console.log(children);
+          headerStyle = this.state.appHeader;
+          headerLinks = React.createElement(
+            "ul",
+            { className: "ul-left" },
+            React.createElement(
+              "li",
+              { className: "left-header-li" },
+              React.createElement(
+                ReactRouter.Link,
+                { to: "/" },
+                "Chads App"
+              )
+            ),
+            React.createElement(
+              "li",
+              { className: "left-header-li" },
+              React.createElement(
+                ReactRouter.Link,
+                { to: "/RecipeSearch" },
+                "Search Recipes"
+              )
+            )
+          );
+        } else if (this.state === null) {
+          headerStyle = "app-header-main";
         }
 
         return React.createElement(
           "div",
           null,
+          React.createElement(
+            "header",
+            { className: headerStyle },
+            React.createElement(
+              "ul",
+              null,
+              React.createElement(
+                "li",
+                null,
+                React.createElement(
+                  "a",
+                  { href: "/logout" },
+                  "logout"
+                )
+              )
+            ),
+            headerLinks
+          ),
           React.createElement(FC.NavBar, { callback: function callback() {
               _this2.renderChildren();
             } }),

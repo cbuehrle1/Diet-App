@@ -9,6 +9,7 @@ if (window.FC === undefined) { window.FC = {}; }
   var router = <Router history={ReactRouter.hashHistory}>
     <Route path="/" component={FC.AppComponent}>
       <ReactRouter.IndexRoute component={FC.LandingComponent} />
+      <Route path="/RecipeSearch" component={FC.RecipeSearchComponent} />
     </Route>
   </Router>;
 
