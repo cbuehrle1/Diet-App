@@ -62,6 +62,24 @@ if (window.FC === undefined) {
                 { to: "/RecipeSearch" },
                 "Search Recipes"
               )
+            ),
+            React.createElement(
+              "li",
+              { className: "nutrients-search" },
+              React.createElement(
+                ReactRouter.Link,
+                { to: "/NutrientsSearch" },
+                "Search by Nutrients"
+              )
+            ),
+            React.createElement(
+              "li",
+              { className: "left-header-li" },
+              React.createElement(
+                ReactRouter.Link,
+                { to: "/CreateDiet" },
+                "Create Diet"
+              )
             )
           );
         } else if (this.state === null) {

@@ -13,63 +13,29 @@ if (window.FC === undefined) {
 }
 
 (function () {
-  var LandingComponent = function (_React$Component) {
-    _inherits(LandingComponent, _React$Component);
+  var NutrientsSearchComponent = function (_React$Component) {
+    _inherits(NutrientsSearchComponent, _React$Component);
 
-    function LandingComponent() {
-      _classCallCheck(this, LandingComponent);
+    function NutrientsSearchComponent() {
+      _classCallCheck(this, NutrientsSearchComponent);
 
-      return _possibleConstructorReturn(this, (LandingComponent.__proto__ || Object.getPrototypeOf(LandingComponent)).apply(this, arguments));
+      return _possibleConstructorReturn(this, (NutrientsSearchComponent.__proto__ || Object.getPrototypeOf(NutrientsSearchComponent)).apply(this, arguments));
     }
 
-    _createClass(LandingComponent, [{
+    _createClass(NutrientsSearchComponent, [{
       key: "render",
       value: function render() {
         return React.createElement(
           "div",
-          { className: "content-container" },
-          React.createElement(
-            "h1",
-            null,
-            "What would you like to do?"
-          ),
-          React.createElement(
-            "h1",
-            null,
-            "Create a ",
-            React.createElement(
-              ReactRouter.Link,
-              { to: "/CreateDiet" },
-              "diet"
-            )
-          ),
-          React.createElement(
-            "h1",
-            null,
-            "Search for ",
-            React.createElement(
-              ReactRouter.Link,
-              { to: "/RecipeSearch" },
-              "recipes"
-            )
-          ),
-          React.createElement(
-            "h1",
-            null,
-            "Search for recipes by ",
-            React.createElement(
-              ReactRouter.Link,
-              { to: "/NutrientsSearch" },
-              "nutritional targets"
-            )
-          )
+          null,
+          "Nutrients Search Thing"
         );
       }
     }]);
 
-    return LandingComponent;
+    return NutrientsSearchComponent;
   }(React.Component);
 
-  FC.LandingComponent = LandingComponent;
+  FC.NutrientsSearchComponent = NutrientsSearchComponent;
 })();
-//# sourceMappingURL=LandingComponent.js.map
+//# sourceMappingURL=NutrientsSearchComponent.js.map

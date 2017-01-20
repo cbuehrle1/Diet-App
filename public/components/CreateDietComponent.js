@@ -13,63 +13,29 @@ if (window.FC === undefined) {
 }
 
 (function () {
-  var LandingComponent = function (_React$Component) {
-    _inherits(LandingComponent, _React$Component);
+  var CreateDietComponent = function (_React$Component) {
+    _inherits(CreateDietComponent, _React$Component);
 
-    function LandingComponent() {
-      _classCallCheck(this, LandingComponent);
+    function CreateDietComponent() {
+      _classCallCheck(this, CreateDietComponent);
 
-      return _possibleConstructorReturn(this, (LandingComponent.__proto__ || Object.getPrototypeOf(LandingComponent)).apply(this, arguments));
+      return _possibleConstructorReturn(this, (CreateDietComponent.__proto__ || Object.getPrototypeOf(CreateDietComponent)).apply(this, arguments));
     }
 
-    _createClass(LandingComponent, [{
+    _createClass(CreateDietComponent, [{
       key: "render",
       value: function render() {
         return React.createElement(
           "div",
-          { className: "content-container" },
-          React.createElement(
-            "h1",
-            null,
-            "What would you like to do?"
-          ),
-          React.createElement(
-            "h1",
-            null,
-            "Create a ",
-            React.createElement(
-              ReactRouter.Link,
-              { to: "/CreateDiet" },
-              "diet"
-            )
-          ),
-          React.createElement(
-            "h1",
-            null,
-            "Search for ",
-            React.createElement(
-              ReactRouter.Link,
-              { to: "/RecipeSearch" },
-              "recipes"
-            )
-          ),
-          React.createElement(
-            "h1",
-            null,
-            "Search for recipes by ",
-            React.createElement(
-              ReactRouter.Link,
-              { to: "/NutrientsSearch" },
-              "nutritional targets"
-            )
-          )
+          null,
+          "Create a Diet"
         );
       }
     }]);
 
-    return LandingComponent;
+    return CreateDietComponent;
   }(React.Component);
 
-  FC.LandingComponent = LandingComponent;
+  FC.CreateDietComponent = CreateDietComponent;
 })();
-//# sourceMappingURL=LandingComponent.js.map
+//# sourceMappingURL=CreateDietComponent.js.map

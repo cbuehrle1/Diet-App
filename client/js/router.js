@@ -10,6 +10,8 @@ if (window.FC === undefined) { window.FC = {}; }
     <Route path="/" component={FC.AppComponent}>
       <ReactRouter.IndexRoute component={FC.LandingComponent} />
       <Route path="/RecipeSearch" component={FC.RecipeSearchComponent} />
+      <Route path="/NutrientsSearch" component={FC.NutrientsSearchComponent} />
+      <Route path="/CreateDiet" component={FC.CreateDietComponent} />
     </Route>
   </Router>;
 
