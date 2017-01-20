@@ -42,6 +42,7 @@ header{
   background-color: #5F7470;
   width: 100%;
   color: white;
+  position: fixed;
   overflow: auto;
   opacity: 1;
   transition-property: opacity, background-color;
@@ -113,6 +114,8 @@ header{
   background-color: #63C7B2;
   color: white;
   opacity: 1;
+  position: fixed;
+  top: 36px;
   transition-property: width, opacity;
   transition-duration: 1s;
   h1{
@@ -123,7 +126,38 @@ header{
   }
 }
 .content-container{
-  float: left;
+  margin: 36px;
+  float: right;
   width: 80%;
   text-align: center;
+}
+.search-container{
+  float: right;
+  width: 76%;
+  margin: 52px 2% 2% 2%;
+  form{
+    margin: 1% 0;
+  }
+  h1{
+    margin: 1% 0;
+  }
+  p{
+    margin: 1% 0;
+  }
+}
+.search-results{
+  li{
+    margin: 1% 0;
+  }
+  p{
+    display: inline;
+    padding-right: 15px;
+  }
+  img{
+    width: 100px;
+    height: 100px;
+    display: inline;
+    vertical-align: middle;
+    padding-right: 15px;
+  }
 }
