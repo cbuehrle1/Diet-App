@@ -52,6 +52,7 @@ if (window.FC === undefined) {
         var windowBottom = windowHeight + window.pageYOffset;
 
         if (windowBottom >= docHeight) {
+
           var queryStr = this.queryInput.value;
           var offsetAmt = this.state.offset;
 
@@ -81,7 +82,7 @@ if (window.FC === undefined) {
 
         evt.preventDefault();
         var queryStr = this.queryInput.value;
-        console.log(this.queryInput.value);
+
         $.ajax({
           url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=10&offset=0&query=" + queryStr,
           type: 'GET',
