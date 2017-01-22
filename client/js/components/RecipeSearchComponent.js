@@ -80,7 +80,6 @@ if (window.FC === undefined) { window.FC = {}; }
 
     }
 
-
     render() {
 
       var searchForm;
@@ -96,7 +95,8 @@ if (window.FC === undefined) { window.FC = {}; }
          <ul className="search-results">
           {this.state.results.map((recipe, index) => {
             return <li key={index}><img src={imageUrl + recipe.image} />
-            <p>{recipe.title}</p><p>Ready in {recipe.readyInMinutes} minutes</p></li>
+            <ReactRouter.Link to={"/recipe/" + recipe.id}><p>{recipe.title}</p></ReactRouter.Link>
+            <p>Ready in {recipe.readyInMinutes} minutes</p></li>
           })}
          </ul>
          </div>

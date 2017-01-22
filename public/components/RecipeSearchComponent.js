@@ -159,9 +159,13 @@ if (window.FC === undefined) {
                   { key: index },
                   React.createElement("img", { src: imageUrl + recipe.image }),
                   React.createElement(
-                    "p",
-                    null,
-                    recipe.title
+                    ReactRouter.Link,
+                    { to: "/recipe/" + recipe.id },
+                    React.createElement(
+                      "p",
+                      null,
+                      recipe.title
+                    )
                   ),
                   React.createElement(
                     "p",
