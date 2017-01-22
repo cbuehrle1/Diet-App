@@ -21,22 +21,69 @@ if (window.FC === undefined) {
 
       var _this = _possibleConstructorReturn(this, (RecipeSearchComponent.__proto__ || Object.getPrototypeOf(RecipeSearchComponent)).call(this));
 
-      _this.state = { data: {
-          results: []
-        }, form: true };
+      _this.state = { baseUri: "",
+        results: [],
+        form: true,
+        offset: 1
+      };
+      _this.handleScroll = _this.handleScroll.bind(_this);
       return _this;
     }
 
     _createClass(RecipeSearchComponent, [{
+      key: "componentDidMount",
+      value: function componentDidMount() {
+        window.addEventListener("scroll", this.handleScroll);
+      }
+    }, {
+      key: "componentWillUnmount",
+      value: function componentWillUnmount() {
+        window.removeEventListener("scroll", this.handleScroll);
+      }
+    }, {
+      key: "handleScroll",
+      value: function handleScroll() {
+        var _this2 = this;
+
+        var windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+        var body = document.body;
+        var html = document.documentElement;
+        var docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+        var windowBottom = windowHeight + window.pageYOffset;
+
+        if (windowBottom >= docHeight) {
+          var queryStr = this.queryInput.value;
+          var offsetAmt = this.state.offset;
+
+          $.ajax({
+            url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=10&offset=" + offsetAmt + "&query=" + queryStr,
+            type: 'GET',
+            beforeSend: function beforeSend(xhr) {
+              xhr.setRequestHeader("X-Mashape-Key", "lfLi0pd5ComshP5lbLvR2GHC5uP6p1b7AOujsnP5aI9GJrDgG1");
+              xhr.setRequestHeader("Accept", "application/json");
+            }
+          }).done(function (data) {
+            var concatRecipes = _this2.state.results.concat(data.results);
+
+            _this2.setState({
+              baseUri: data.baseUri,
+              results: concatRecipes,
+              form: false,
+              offset: _this2.state.offset + 10
+            });
+          });
+        }
+      }
+    }, {
       key: "callSearch",
       value: function callSearch(evt) {
-        var _this2 = this;
+        var _this3 = this;
 
         evt.preventDefault();
         var queryStr = this.queryInput.value;
         console.log(this.queryInput.value);
         $.ajax({
-          url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=10&offset=0&query=" + queryStr + "&ranking=1&type=main+course",
+          url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=10&offset=0&query=" + queryStr,
           type: 'GET',
           beforeSend: function beforeSend(xhr) {
             xhr.setRequestHeader("X-Mashape-Key", "lfLi0pd5ComshP5lbLvR2GHC5uP6p1b7AOujsnP5aI9GJrDgG1");
@@ -44,18 +91,19 @@ if (window.FC === undefined) {
           }
         }).done(function (data) {
 
-          _this2.setState({
-            data: data,
-            form: false
+          _this3.setState({
+            baseUri: data.baseUri,
+            results: data.results,
+            form: false,
+            offset: _this3.state.offset
           });
         });
       }
     }, {
       key: "render",
       value: function render() {
-        var _this3 = this;
+        var _this4 = this;
 
-        console.log(this.state.data);
         var searchForm;
         var searchResults;
         var imageUrl;
@@ -65,28 +113,28 @@ if (window.FC === undefined) {
             "form",
             null,
             React.createElement("input", { ref: function ref(input) {
-                _this3.queryInput = input;
+                _this4.queryInput = input;
               }, placeholder: "Search" }),
             React.createElement(
               "button",
               { onClick: function onClick(evt) {
-                  _this3.callSearch(evt);
+                  _this4.callSearch(evt);
                 } },
               "Search"
             )
           );
         } else if (this.state.form === false) {
-          imageUrl = this.state.data.baseUri;
+          imageUrl = this.state.baseUri;
           searchForm = React.createElement(
             "form",
             null,
             React.createElement("input", { ref: function ref(input) {
-                _this3.queryInput = input;
+                _this4.queryInput = input;
               }, placeholder: "Search" }),
             React.createElement(
               "button",
               { onClick: function onClick(evt) {
-                  _this3.callSearch(evt);
+                  _this4.callSearch(evt);
                 } },
               "Search"
             )
@@ -104,10 +152,10 @@ if (window.FC === undefined) {
             React.createElement(
               "ul",
               { className: "search-results" },
-              this.state.data.results.map(function (recipe) {
+              this.state.results.map(function (recipe) {
                 return React.createElement(
                   "li",
-                  null,
+                  { key: recipe.id },
                   React.createElement("img", { src: imageUrl + recipe.image }),
                   React.createElement(
                     "p",
