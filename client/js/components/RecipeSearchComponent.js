@@ -68,7 +68,7 @@ if (window.FC === undefined) { window.FC = {}; }
       	}
       })
       .done((data) => {
-
+        console.log(data.results);
         this.setState({
           baseUri: data.baseUri,
           results: data.results,
@@ -94,8 +94,8 @@ if (window.FC === undefined) { window.FC = {}; }
         searchForm = <form><input ref={(input) => { this.queryInput = input }} placeholder="Search" /><button onClick={(evt) => { this.callSearch(evt); }}>Search</button></form>
         searchResults = <div><h1>Search results for "{this.queryInput.value}"</h1>
          <ul className="search-results">
-          {this.state.results.map((recipe) => {
-            return <li key={recipe.id}><img src={imageUrl + recipe.image} />
+          {this.state.results.map((recipe, index) => {
+            return <li key={index}><img src={imageUrl + recipe.image} />
             <p>{recipe.title}</p><p>Ready in {recipe.readyInMinutes} minutes</p></li>
           })}
          </ul>

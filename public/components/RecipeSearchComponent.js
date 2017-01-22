@@ -91,7 +91,7 @@ if (window.FC === undefined) {
             xhr.setRequestHeader("Accept", "application/json");
           }
         }).done(function (data) {
-
+          console.log(data.results);
           _this3.setState({
             baseUri: data.baseUri,
             results: data.results,
@@ -153,10 +153,10 @@ if (window.FC === undefined) {
             React.createElement(
               "ul",
               { className: "search-results" },
-              this.state.results.map(function (recipe) {
+              this.state.results.map(function (recipe, index) {
                 return React.createElement(
                   "li",
-                  { key: recipe.id },
+                  { key: index },
                   React.createElement("img", { src: imageUrl + recipe.image }),
                   React.createElement(
                     "p",
