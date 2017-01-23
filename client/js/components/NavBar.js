@@ -10,22 +10,11 @@ if (window.FC === undefined) { window.FC = {}; }
         displayName: ""
       }, sidebar: "main-landing",
       height: window.innerHeight,
-      diet: []
+      diet: { diets: [] }
       }
     }
 
     componentDidMount() {
-
-      var user;
-      var getDiet = (user) => {
-        user = user
-        $.ajax({
-          url: "/api/diet"
-        })
-        .done((data) => {
-          cb(data, user)
-        });
-      }
 
       var cb = (data, user) => {
         console.log(user, data);
@@ -41,7 +30,7 @@ if (window.FC === undefined) { window.FC = {}; }
         url: "/api/user"
       })
       .done(function(data) {
-        getDiet(data);
+        FC.dietData.getDiets(cb, data);
       });
 
     }
@@ -59,9 +48,13 @@ if (window.FC === undefined) { window.FC = {}; }
       var top = (this.state.height/2) - 151;
       var theHeight = this.state.height - 36;
 
+
       if (this.state.sidebar === "side-bar") {
         navBar = <div className={this.state.sidebar} style={ { height: theHeight } }>
           <h1>{this.state.user.displayName + "'"}s Pairings</h1>
+          {this.state.diet.diets.map((diet) => {
+            return <div key={diet.id}><h1>{diet.diet}</h1><p><ReactRouter.Link to={"/diet/" + diet.id}>Edit</ReactRouter.Link></p></div>
+          })}
         </div>
       } else {
         navBar = <div className={this.state.sidebar} style={ { height: theHeight } }><div style={{ width: "620px", margin: "0 auto", paddingTop: top }}><h1>Welcome {this.state.user.displayName}</h1>

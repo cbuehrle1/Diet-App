@@ -20,7 +20,8 @@ if (window.FC === undefined) {
       React.createElement(Route, { path: "/RecipeSearch", component: FC.RecipeSearchComponent }),
       React.createElement(Route, { path: "/NutrientsSearch", component: FC.NutrientsSearchComponent }),
       React.createElement(Route, { path: "/CreateDiet", component: FC.CreateDietComponent }),
-      React.createElement(Route, { path: "/recipe/:recipeId", component: FC.RecipeDetailComponent })
+      React.createElement(Route, { path: "/recipe/:recipeId", component: FC.RecipeDetailComponent }),
+      React.createElement(Route, { path: "/diet/:dietId", component: FC.EditDietComponent })
     )
   );
 

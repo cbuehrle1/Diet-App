@@ -64,7 +64,8 @@ module.exports = function() {
           calories: diet.calories,
           fat: diet.fat,
           carbs: diet.carbohydrates,
-          protein: diet.protein
+          protein: diet.protein,
+          id: diet._id
         }
         diets.push(item)
       });
@@ -74,6 +75,27 @@ module.exports = function() {
       });
 
     });
+  });
+
+  router.get("/api/diet/:dietId", function(req, res) {
+
+    var diet;
+
+    Diet.find({
+      _id: req.params.dietId
+    })
+    .exec(function(err, data) {
+      if (err) {
+        console.log(err)
+      }
+
+      diet = data;
+
+      res.send({
+        diet: diet
+      });
+    });
+
   });
 
   return router;

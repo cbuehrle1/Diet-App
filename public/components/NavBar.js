@@ -25,7 +25,7 @@ if (window.FC === undefined) {
           displayName: ""
         }, sidebar: "main-landing",
         height: window.innerHeight,
-        diet: []
+        diet: { diets: [] }
       };
       return _this;
     }
@@ -34,16 +34,6 @@ if (window.FC === undefined) {
       key: "componentDidMount",
       value: function componentDidMount() {
         var _this2 = this;
-
-        var user;
-        var getDiet = function getDiet(user) {
-          user = user;
-          $.ajax({
-            url: "/api/diet"
-          }).done(function (data) {
-            cb(data, user);
-          });
-        };
 
         var cb = function cb(data, user) {
           console.log(user, data);
@@ -58,7 +48,7 @@ if (window.FC === undefined) {
         $.ajax({
           url: "/api/user"
         }).done(function (data) {
-          getDiet(data);
+          FC.dietData.getDiets(cb, data);
         });
       }
     }, {
@@ -88,7 +78,27 @@ if (window.FC === undefined) {
               null,
               this.state.user.displayName + "'",
               "s Pairings"
-            )
+            ),
+            this.state.diet.diets.map(function (diet) {
+              return React.createElement(
+                "div",
+                { key: diet.id },
+                React.createElement(
+                  "h1",
+                  null,
+                  diet.diet
+                ),
+                React.createElement(
+                  "p",
+                  null,
+                  React.createElement(
+                    ReactRouter.Link,
+                    { to: "/diet/" + diet.id },
+                    "Edit"
+                  )
+                )
+              );
+            })
           );
         } else {
           navBar = React.createElement(

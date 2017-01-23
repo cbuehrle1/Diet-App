@@ -152,7 +152,13 @@ header {
     font-size: 24px;
     color: white;
     text-align: left;
-    padding: 20px 0; }
+    padding: 20px 0;
+    display: inline-block; }
+  .side-bar p {
+    display: inline-block;
+    font-size: 14px;
+    color: white;
+    padding-left: 20px; }
 
 .content-container {
   margin: 36px;
