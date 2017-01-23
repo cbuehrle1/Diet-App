@@ -31,13 +31,16 @@ class RecipeDetailComponent extends React.Component {
   render() {
 
     return <div className="search-container"><h1>{this.state.data.title}</h1>
-      <ul>{this.state.data.extendedIngredients.map((ingredient) => {
-        return <li>{ingredient.originalString}</li>;
+      <img className="detail-img" src={this.state.data.image} />
+      <h1>ingredients</h1>
+      <ul className="search-results">{this.state.data.extendedIngredients.map((ingredient, index) => {
+        return <li key={index} >{ingredient.originalString}</li>;
       })}
       </ul>
-      <ol>
-        {this.state.instructions.map((step) => {
-          return <li>{step.step}</li>;
+      <h1>instructions</h1>
+      <ol className="search-results">
+        {this.state.instructions.map((step, index) => {
+          return <li key={index}>{step.step}</li>;
         })}
       </ol>
     </div>

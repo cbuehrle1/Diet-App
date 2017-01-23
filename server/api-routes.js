@@ -1,5 +1,6 @@
 var express = require('express');
 var User = require("./models/user.js");
+var Diet = require("./models/diet.js");
 
 module.exports = function() {
 
@@ -26,6 +27,11 @@ module.exports = function() {
       res.send(userInfo);
     });
   });
+
+  router.post("/api/diet", function(req, res) {
+
+
+  })
 
   return router;
 }

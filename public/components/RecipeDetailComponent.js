@@ -57,24 +57,35 @@ if (window.FC === undefined) {
             null,
             this.state.data.title
           ),
+          React.createElement("img", { className: "detail-img", src: this.state.data.image }),
+          React.createElement(
+            "h1",
+            null,
+            "ingredients"
+          ),
           React.createElement(
             "ul",
-            null,
-            this.state.data.extendedIngredients.map(function (ingredient) {
+            { className: "search-results" },
+            this.state.data.extendedIngredients.map(function (ingredient, index) {
               return React.createElement(
                 "li",
-                null,
+                { key: index },
                 ingredient.originalString
               );
             })
           ),
           React.createElement(
-            "ol",
+            "h1",
             null,
-            this.state.instructions.map(function (step) {
+            "instructions"
+          ),
+          React.createElement(
+            "ol",
+            { className: "search-results" },
+            this.state.instructions.map(function (step, index) {
               return React.createElement(
                 "li",
-                null,
+                { key: index },
                 step.step
               );
             })
