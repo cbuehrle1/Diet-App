@@ -24,7 +24,8 @@ if (window.FC === undefined) {
       _this.state = { user: {
           displayName: ""
         }, sidebar: "main-landing",
-        height: window.innerHeight
+        height: window.innerHeight,
+        diet: []
       };
       return _this;
     }
@@ -34,18 +35,30 @@ if (window.FC === undefined) {
       value: function componentDidMount() {
         var _this2 = this;
 
-        var cb = function cb(data) {
+        var user;
+        var getDiet = function getDiet(user) {
+          user = user;
+          $.ajax({
+            url: "/api/diet"
+          }).done(function (data) {
+            cb(data, user);
+          });
+        };
+
+        var cb = function cb(data, user) {
+          console.log(user, data);
           _this2.setState({
-            user: data,
+            user: user,
             sidebar: _this2.state.sidebar,
-            height: window.innerHeight
+            height: window.innerHeight,
+            diet: data
           });
         };
 
         $.ajax({
           url: "/api/user"
         }).done(function (data) {
-          cb(data);
+          getDiet(data);
         });
       }
     }, {

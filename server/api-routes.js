@@ -30,8 +30,51 @@ module.exports = function() {
 
   router.post("/api/diet", function(req, res) {
 
+    var cb = (err, data) => {
+      console.log(data);
+      res.send(data);
+    }
 
-  })
+    var diet = new Diet();
+    diet.userId = req.user._id;
+    diet.name = req.body.diet;
+    diet.calories = req.body.calories;
+    diet.fat = req.body.fats;
+    diet.carbohydrates = req.body.carbs;
+    diet.protein = req.body.protein;
+    diet.save(cb);
+  });
+
+  router.get("/api/diet", function(req, res) {
+
+    var diets = []
+
+    Diet.find({
+      userId: req.user._id
+    })
+    .exec(function(err, data) {
+      console.log(data);
+      if (err) {
+        console.log(err);
+      }
+
+      data.map(function(diet) {
+        var item = {
+          diet: diet.name,
+          calories: diet.calories,
+          fat: diet.fat,
+          carbs: diet.carbohydrates,
+          protein: diet.protein
+        }
+        diets.push(item)
+      });
+
+      res.send({
+        diets: diets
+      });
+
+    });
+  });
 
   return router;
 }

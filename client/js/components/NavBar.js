@@ -9,16 +9,31 @@ if (window.FC === undefined) { window.FC = {}; }
       this.state = { user: {
         displayName: ""
       }, sidebar: "main-landing",
-      height: window.innerHeight
+      height: window.innerHeight,
+      diet: []
       }
     }
 
     componentDidMount() {
-      var cb = (data) => {
+
+      var user;
+      var getDiet = (user) => {
+        user = user
+        $.ajax({
+          url: "/api/diet"
+        })
+        .done((data) => {
+          cb(data, user)
+        });
+      }
+
+      var cb = (data, user) => {
+        console.log(user, data);
         this.setState({
-          user: data,
+          user: user,
           sidebar: this.state.sidebar,
-          height: window.innerHeight
+          height: window.innerHeight,
+          diet: data
         });
       }
 
@@ -26,7 +41,7 @@ if (window.FC === undefined) { window.FC = {}; }
         url: "/api/user"
       })
       .done(function(data) {
-        cb(data);
+        getDiet(data);
       });
 
     }

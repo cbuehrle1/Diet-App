@@ -23,12 +23,63 @@ if (window.FC === undefined) {
     }
 
     _createClass(CreateDietComponent, [{
+      key: "saveDiet",
+      value: function saveDiet(evt) {
+        evt.preventDefault();
+
+        $.ajax({
+          url: "/api/diet",
+          method: "POST",
+          data: {
+            diet: this.dietName.value,
+            calories: this.calories.value,
+            fats: this.fats.value,
+            carbs: this.carbs.value,
+            protein: this.protein.value
+          }
+        }).done(function (data) {
+          ReactRouter.browserHistory.goBack();
+        });
+      }
+    }, {
       key: "render",
       value: function render() {
+        var _this2 = this;
+
         return React.createElement(
           "div",
-          null,
-          "Create a Diet"
+          { className: "search-container" },
+          React.createElement(
+            "h1",
+            null,
+            "Create a Diet"
+          ),
+          React.createElement(
+            "form",
+            { onSubmit: function onSubmit(evt) {
+                _this2.saveDiet(evt);
+              } },
+            React.createElement("input", { ref: function ref(input) {
+                _this2.dietName = input;
+              }, placeholder: "Diet Name" }),
+            React.createElement("input", { ref: function ref(input) {
+                _this2.calories = input;
+              }, placeholder: "Target Calorie Count" }),
+            React.createElement("input", { ref: function ref(input) {
+                _this2.fats = input;
+              }, placeholder: "Target Fat Count" }),
+            React.createElement("input", { ref: function ref(input) {
+                _this2.carbs = input;
+              }, placeholder: "Target Carb Count" }),
+            React.createElement("input", { ref: function ref(input) {
+                _this2.protein = input;
+              }, placeholder: "Target Protein Count" }),
+            React.createElement(
+              "button",
+              null,
+              "Create Diet"
+            )
+          )
         );
       }
     }]);
