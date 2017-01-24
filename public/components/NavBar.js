@@ -36,7 +36,7 @@ if (window.FC === undefined) {
         var _this2 = this;
 
         var cb = function cb(data, user) {
-          console.log(user, data);
+
           _this2.setState({
             user: user,
             sidebar: _this2.state.sidebar,
@@ -45,11 +45,9 @@ if (window.FC === undefined) {
           });
         };
 
-        $.ajax({
-          url: "/api/user"
-        }).done(function (data) {
-          FC.dietData.getDiets(cb, data);
-        });
+        FC.dietData.registerCallback(cb);
+
+        FC.dietData.loadUser();
       }
     }, {
       key: "moveToSideBar",

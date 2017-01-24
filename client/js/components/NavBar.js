@@ -17,21 +17,19 @@ if (window.FC === undefined) { window.FC = {}; }
     componentDidMount() {
 
       var cb = (data, user) => {
-        console.log(user, data);
+
         this.setState({
           user: user,
           sidebar: this.state.sidebar,
           height: window.innerHeight,
           diet: data
         });
+
       }
 
-      $.ajax({
-        url: "/api/user"
-      })
-      .done(function(data) {
-        FC.dietData.getDiets(cb, data);
-      });
+      FC.dietData.registerCallback(cb);
+
+      FC.dietData.loadUser();
 
     }
 

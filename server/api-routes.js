@@ -98,5 +98,23 @@ module.exports = function() {
 
   });
 
+  router.post("/api/diet/:dietId", function(req, res) {
+
+    var cb = (err, data) => {
+      console.log(data);
+      res.send(data);
+    }
+
+    Diet.findByIdAndUpdate(
+      req.params.dietId,
+      {name: req.body.diet,
+      calories: req.body.calories,
+      fat: req.body.fats,
+      carbohydrates: req.body.carbs,
+      protein: req.body.protein},
+      {safe: true, new: true},
+      cb);
+  });
+
   return router;
 }

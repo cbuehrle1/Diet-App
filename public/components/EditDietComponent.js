@@ -21,7 +21,7 @@ if (window.FC === undefined) {
 
       var _this = _possibleConstructorReturn(this, (EditDietComponent.__proto__ || Object.getPrototypeOf(EditDietComponent)).call(this));
 
-      _this.state = { diet: {} };
+      _this.state = { diet: { diet: [] } };
       return _this;
     }
 
@@ -43,13 +43,68 @@ if (window.FC === undefined) {
         });
       }
     }, {
+      key: "editDiet",
+      value: function editDiet(evt) {
+
+        evt.preventDefault();
+
+        $.ajax({
+          url: "/api/diet/" + this.props.params.dietId,
+          method: "POST",
+          data: {
+            diet: this.dietName.value,
+            calories: this.calories.value,
+            fats: this.fats.value,
+            carbs: this.carbs.value,
+            protein: this.protein.value
+          }
+        }).done(function (data) {
+          FC.dietData.loadUser();
+          ReactRouter.browserHistory.goBack();
+        });
+      }
+    }, {
       key: "render",
       value: function render() {
-        console.trace(this.state.diet);
+        var _this3 = this;
+
+        console.log(this.state.diet.diet);
         return React.createElement(
           "div",
           { className: "search-container" },
-          "Edit Diet Component"
+          React.createElement(
+            "h1",
+            null,
+            "Edit Diet Component"
+          ),
+          this.state.diet.diet.map(function (diet, index) {
+            return React.createElement(
+              "form",
+              { key: index, className: "update-diet", onSubmit: function onSubmit(evt) {
+                  _this3.editDiet(evt);
+                } },
+              React.createElement("input", { ref: function ref(input) {
+                  _this3.dietName = input;
+                }, defaultValue: diet.name }),
+              React.createElement("input", { ref: function ref(input) {
+                  _this3.calories = input;
+                }, defaultValue: diet.calories }),
+              React.createElement("input", { ref: function ref(input) {
+                  _this3.fats = input;
+                }, defaultValue: diet.fat }),
+              React.createElement("input", { ref: function ref(input) {
+                  _this3.carbs = input;
+                }, defaultValue: diet.carbohydrates }),
+              React.createElement("input", { ref: function ref(input) {
+                  _this3.protein = input;
+                }, defaultValue: diet.protein }),
+              React.createElement(
+                "button",
+                null,
+                "Save Changes"
+              )
+            );
+          })
         );
       }
     }]);
