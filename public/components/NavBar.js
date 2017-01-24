@@ -25,7 +25,9 @@ if (window.FC === undefined) {
           displayName: ""
         }, sidebar: "main-landing",
         height: window.innerHeight,
-        diet: { diets: [] }
+        diet: { diets: [] },
+        addCat: false,
+        catagory: { catagories: [] }
       };
       return _this;
     }
@@ -35,13 +37,15 @@ if (window.FC === undefined) {
       value: function componentDidMount() {
         var _this2 = this;
 
-        var cb = function cb(data, user) {
+        var cb = function cb(user, diet, catagory) {
 
           _this2.setState({
             user: user,
             sidebar: _this2.state.sidebar,
             height: window.innerHeight,
-            diet: data
+            diet: diet,
+            addCat: false,
+            catagory: catagory
           });
         };
 
@@ -59,6 +63,35 @@ if (window.FC === undefined) {
         });
       }
     }, {
+      key: "createCatagory",
+      value: function createCatagory() {
+
+        this.setState({
+          user: this.state.user,
+          sidebar: this.state.sidebar,
+          height: window.innerHeight,
+          diet: this.state.diet,
+          addCat: true
+        });
+      }
+    }, {
+      key: "saveCatagory",
+      value: function saveCatagory(evt) {
+
+        evt.preventDefault();
+
+        $.ajax({
+          url: "/api/catagory",
+          method: "POST",
+          data: {
+            dietId: this.state.diet.diets[0].id,
+            name: this.catagoryName.value
+          }
+        }).done(function (data) {
+          FC.dietData.loadUser();
+        });
+      }
+    }, {
       key: "render",
       value: function render() {
         var _this3 = this;
@@ -66,6 +99,27 @@ if (window.FC === undefined) {
         var navBar;
         var top = this.state.height / 2 - 151;
         var theHeight = this.state.height - 36;
+        var catagories;
+
+        if (this.state.addCat === false) {
+          catagories = React.createElement(
+            "p",
+            { onClick: function onClick() {
+                _this3.createCatagory();
+              } },
+            "add catagory"
+          );
+        } else {
+          catagories = React.createElement(
+            "form",
+            { onSubmit: function onSubmit(evt) {
+                _this3.saveCatagory(evt);
+              } },
+            React.createElement("input", { ref: function ref(input) {
+                _this3.catagoryName = input;
+              }, placeholder: "Catagory Name" })
+          );
+        }
 
         if (this.state.sidebar === "side-bar") {
           navBar = React.createElement(
@@ -103,7 +157,8 @@ if (window.FC === undefined) {
                   "Delete"
                 )
               );
-            })
+            }),
+            catagories
           );
         } else {
           navBar = React.createElement(

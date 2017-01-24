@@ -6,6 +6,18 @@ if (window.FC === undefined) { window.FC = {}; }
 
   window.FC.dietData = {
 
+    getCatagories: function (user, diet) {
+      var userVar = user;
+      var dietVar = diet;
+      console.log(dietVar);
+      $.ajax({
+        url: "/api/catagory/" + dietVar.diets[0].id
+      })
+      .done((data) => {
+        this.callbacks.forEach((cb) => { cb(userVar, dietVar, data); })
+      })
+    },
+
     getDiets: function(user) {
       var userVar = user;
 
@@ -13,7 +25,7 @@ if (window.FC === undefined) { window.FC = {}; }
         url: "/api/diet"
       })
       .done((data) => {
-        this.callbacks.forEach((cb) => { cb(data, user); });
+        this.getCatagories(userVar, data);
       });
     },
 

@@ -1,6 +1,7 @@
 var express = require('express');
 var User = require("./models/user.js");
 var Diet = require("./models/diet.js");
+var Catagory = require("./models/catagory.js");
 
 module.exports = function() {
 
@@ -121,6 +122,50 @@ module.exports = function() {
       res.sendStatus(204);
     }
     Diet.findByIdAndRemove(req.params.dietId, cb);
+  });
+
+  router.post("/api/catagory", function(req, res) {
+
+    var cb = (err, data) => {
+      console.log(data);
+      res.send(data);
+    }
+
+    var catagory = new Catagory();
+    catagory.dietId = req.body.dietId;
+    catagory.name = req.body.name;
+    catagory.save(cb);
+
+  });
+
+  router.get("/api/catagory/:dietId", function(req, res) {
+
+    Catagory.find({
+      dietId: req.params.dietId
+    })
+    .exec(function (err, data) {
+      console.log(data);
+      if (err) {
+        console.log(err)
+      }
+
+      var catagories = []
+
+      data.forEach(function(catagory) {
+
+        var item = {
+          name: catagory.name,
+          recipes: catagory.recipes
+        }
+
+        catagories.push(item);
+      });
+
+      res.send({
+        catagories: catagories
+      });
+
+    });
   });
 
   return router;
