@@ -94,6 +94,13 @@ if (window.FC === undefined) {
                     { to: "/diet/" + diet.id },
                     "Edit"
                   )
+                ),
+                React.createElement(
+                  "p",
+                  { onClick: function onClick() {
+                      FC.dietData.deleteDiet(diet.id);
+                    } },
+                  "Delete"
                 )
               );
             })

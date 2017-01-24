@@ -30,6 +30,16 @@ if (window.FC === undefined) { window.FC = {}; }
 
     registerCallback: function(cb) {
       this.callbacks.push(cb);
+    },
+
+    deleteDiet: function(diet) {
+      $.ajax({
+        url: "api/diet/" + diet,
+        method: "DELETE"
+      })
+      .done((data) => {
+        this.loadUser();
+      });
     }
 
   }

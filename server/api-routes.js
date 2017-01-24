@@ -116,5 +116,12 @@ module.exports = function() {
       cb);
   });
 
+  router.delete("/api/diet/:dietId", function(req, res) {
+    var cb = (err, data) => {
+      res.sendStatus(204);
+    }
+    Diet.findByIdAndRemove(req.params.dietId, cb);
+  });
+
   return router;
 }

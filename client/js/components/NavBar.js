@@ -51,7 +51,7 @@ if (window.FC === undefined) { window.FC = {}; }
         navBar = <div className={this.state.sidebar} style={ { height: theHeight } }>
           <h1>{this.state.user.displayName + "'"}s Pairings</h1>
           {this.state.diet.diets.map((diet) => {
-            return <div key={diet.id}><h1>{diet.diet}</h1><p><ReactRouter.Link to={"/diet/" + diet.id}>Edit</ReactRouter.Link></p></div>
+            return <div key={diet.id}><h1>{diet.diet}</h1><p><ReactRouter.Link to={"/diet/" + diet.id}>Edit</ReactRouter.Link></p><p onClick={() => { FC.dietData.deleteDiet(diet.id); }}>Delete</p></div>
           })}
         </div>
       } else {

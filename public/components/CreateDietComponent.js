@@ -38,6 +38,7 @@ if (window.FC === undefined) {
             protein: this.protein.value
           }
         }).done(function (data) {
+          FC.dietData.loadUser();
           ReactRouter.browserHistory.goBack();
         });
       }

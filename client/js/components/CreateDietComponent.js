@@ -19,6 +19,7 @@ if (window.FC === undefined) { window.FC = {}; }
         }
       })
       .done((data) => {
+        FC.dietData.loadUser();
         ReactRouter.browserHistory.goBack();
       })
     }

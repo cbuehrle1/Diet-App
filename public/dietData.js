@@ -38,6 +38,17 @@ if (window.FC === undefined) {
 
     registerCallback: function registerCallback(cb) {
       this.callbacks.push(cb);
+    },
+
+    deleteDiet: function deleteDiet(diet) {
+      var _this3 = this;
+
+      $.ajax({
+        url: "api/diet/" + diet,
+        method: "DELETE"
+      }).done(function (data) {
+        _this3.loadUser();
+      });
     }
 
   };
