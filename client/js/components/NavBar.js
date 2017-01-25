@@ -145,7 +145,7 @@ if (window.FC === undefined) { window.FC = {}; }
                 </ul></div>
               }
               else {
-                catagories = <div><form onSubmit={(evt) => { this.saveCatagory(evt); }}><input ref={(input) => { this.catagoryName = input }} placeholder="Catagory Name" /></form>
+                catagories = <div><form onSubmit={(evt) => { this.saveCatagory(evt); }}><input ref={(input) => { this.catagoryName = input }} placeholder="add catagory" /></form>
                 <ul>{this.state.catagory.catagories.map((catagory, index) => {
                   return <li key={index}>{catagory.name}</li>
                 })}</ul>

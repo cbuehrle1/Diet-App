@@ -160,7 +160,17 @@ header {
     color: white;
     padding-left: 20px; }
   .side-bar .add-catagory {
-    display: block; }
+    padding-left: 10px;
+    display: block;
+    padding-bottom: 5px; }
+  .side-bar ul {
+    padding-left: 10px; }
+  .side-bar li {
+    padding: 5px 0;
+    font-size: 14px; }
+  .side-bar form {
+    padding-left: 10px;
+    padding-bottom: 5px; }
 
 .content-container {
   margin: 36px;

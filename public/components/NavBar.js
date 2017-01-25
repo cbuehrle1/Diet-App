@@ -201,7 +201,7 @@ if (window.FC === undefined) {
                         } },
                       React.createElement("input", { ref: function ref(input) {
                           _this4.catagoryName = input;
-                        }, placeholder: "Catagory Name" })
+                        }, placeholder: "add catagory" })
                     ),
                     React.createElement(
                       "ul",
