@@ -6,7 +6,8 @@ var dietSchema = mongoose.Schema({
   calories: Number,
   fat: Number,
   carbohydrates: Number,
-  protein: Number
+  protein: Number,
+  active: Boolean
 })
 
 var diet = mongoose.model("diet", dietSchema);

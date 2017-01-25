@@ -159,6 +159,8 @@ header {
     font-size: 14px;
     color: white;
     padding-left: 20px; }
+  .side-bar .add-catagory {
+    display: block; }
 
 .content-container {
   margin: 36px;

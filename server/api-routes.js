@@ -14,7 +14,7 @@ module.exports = function() {
       _id: req.user._id
     })
     .exec(function(err, data) {
-      console.log(data);
+      // console.log(data);
       if (err) {
         console.log(err);
       }
@@ -32,7 +32,7 @@ module.exports = function() {
   router.post("/api/diet", function(req, res) {
 
     var cb = (err, data) => {
-      console.log(data);
+      // console.log(data);
       res.send(data);
     }
 
@@ -43,6 +43,7 @@ module.exports = function() {
     diet.fat = req.body.fats;
     diet.carbohydrates = req.body.carbs;
     diet.protein = req.body.protein;
+    diet.active = false;
     diet.save(cb);
   });
 
@@ -54,7 +55,7 @@ module.exports = function() {
       userId: req.user._id
     })
     .exec(function(err, data) {
-      console.log(data);
+
       if (err) {
         console.log(err);
       }
@@ -66,7 +67,8 @@ module.exports = function() {
           fat: diet.fat,
           carbs: diet.carbohydrates,
           protein: diet.protein,
-          id: diet._id
+          id: diet._id,
+          active: diet.active
         }
         diets.push(item)
       });
@@ -102,7 +104,7 @@ module.exports = function() {
   router.post("/api/diet/:dietId", function(req, res) {
 
     var cb = (err, data) => {
-      console.log(data);
+
       res.send(data);
     }
 
@@ -115,6 +117,32 @@ module.exports = function() {
       protein: req.body.protein},
       {safe: true, new: true},
       cb);
+  });
+
+  router.post("/api/makeactive/:dietId", function(req, res) {
+
+    var cb1 = (err, data) => {
+      // console.log(data);
+      res.send(data);
+    }
+
+    var cb = (err, data) => {
+      // console.log(data);
+
+      Diet.findByIdAndUpdate(
+        req.params.dietId,
+        {active: true},
+        {safe: true, new: true},
+        cb1)
+      }
+
+    Diet.findOneAndUpdate(
+      { active: true },
+      { active: false },
+      {safe: true, new: true},
+      cb)
+
+
   });
 
   router.delete("/api/diet/:dietId", function(req, res) {
@@ -131,6 +159,8 @@ module.exports = function() {
       res.send(data);
     }
 
+    console.log(req.body);
+
     var catagory = new Catagory();
     catagory.dietId = req.body.dietId;
     catagory.name = req.body.name;
@@ -139,31 +169,38 @@ module.exports = function() {
   });
 
   router.get("/api/catagory/:dietId", function(req, res) {
-
+    console.log(req.params.dietId);
     Catagory.find({
       dietId: req.params.dietId
     })
     .exec(function (err, data) {
-      console.log(data);
+      // console.log(data);
       if (err) {
         console.log(err)
       }
 
       var catagories = []
 
-      data.forEach(function(catagory) {
+      if (data === undefined) {
+        // console.log(data)
+        res.send( {} );
+      } else {
 
-        var item = {
-          name: catagory.name,
-          recipes: catagory.recipes
-        }
+        data.forEach(function(catagory) {
 
-        catagories.push(item);
-      });
+         var item = {
+           name: catagory.name,
+           recipes: catagory.recipes
+         }
 
-      res.send({
-        catagories: catagories
-      });
+         catagories.push(item);
+       });
+
+       res.send({
+         catagories: catagories
+       });
+
+      }
 
     });
   });

@@ -20,21 +20,33 @@ if (window.FC === undefined) { window.FC = {}; }
 
       var cb = (user, diet, catagory) => {
 
-        this.setState({
-          user: user,
-          sidebar: this.state.sidebar,
-          height: window.innerHeight,
-          diet: diet,
-          addCat: false,
-          catagory: catagory
-        });
+        if (catagory === undefined) {
+          this.setState({
+            user: user,
+            sidebar: this.state.sidebar,
+            height: window.innerHeight,
+            diet: diet,
+            addCat: false,
+            catagory: this.state.catagory
+          });
+        } else {
+
+          this.setState({
+            user: user,
+            sidebar: this.state.sidebar,
+            height: window.innerHeight,
+            diet: diet,
+            addCat: false,
+            catagory: catagory
+          });
+
+        }
 
       }
 
       FC.dietData.registerCallback(cb);
 
       FC.dietData.loadUser();
-
     }
 
     moveToSideBar() {
@@ -61,13 +73,43 @@ if (window.FC === undefined) { window.FC = {}; }
 
       evt.preventDefault();
 
+      var dietIdParam = () => {
+        var activeId;
+
+        this.state.diet.diets.forEach((diet) => {
+
+          if (diet.active === true) {
+            activeId = diet.id;
+            console.log(diet.id)
+          }
+
+        });
+
+        return activeId;
+      }
+
+
       $.ajax({
         url: "/api/catagory",
         method: "POST",
         data: {
-          dietId: this.state.diet.diets[0].id,
+          dietId: dietIdParam(),
           name: this.catagoryName.value
         }
+      })
+      .done((data) => {
+        console.log(data);
+        FC.dietData.loadUser();
+      });
+
+    }
+
+    makeActive(evt) {
+
+      $.ajax({
+        url: "/api/makeactive/" + evt.target.id,
+        method: "POST",
+        data: {}
       })
       .done((data) => {
         FC.dietData.loadUser();
@@ -79,21 +121,41 @@ if (window.FC === undefined) { window.FC = {}; }
       var navBar;
       var top = (this.state.height/2) - 151;
       var theHeight = this.state.height - 36;
-      var catagories;
-
-      if (this.state.addCat === false) {
-        catagories = <p onClick={() => { this.createCatagory(); }} >add catagory</p>
-      } else {
-        catagories = <form onSubmit={(evt) => { this.saveCatagory(evt); }}><input ref={(input) => { this.catagoryName = input }} placeholder="Catagory Name" /></form>
-      }
+      var active;
 
       if (this.state.sidebar === "side-bar") {
+
         navBar = <div className={this.state.sidebar} style={ { height: theHeight } }>
           <h1>{this.state.user.displayName + "'"}s Pairings</h1>
           {this.state.diet.diets.map((diet) => {
-            return <div key={diet.id}><h1>{diet.diet}</h1><p><ReactRouter.Link to={"/diet/" + diet.id}>Edit</ReactRouter.Link></p><p onClick={() => { FC.dietData.deleteDiet(diet.id); }}>Delete</p></div>
+
+            var catagories;
+
+            if (diet.active === false) {
+              active = <p id={diet.id} onClick={(evt) => { this.makeActive(evt); }}>Make Active</p>;
+            }
+            else {
+              active = undefined;
+
+              if (this.state.addCat === false) {
+                catagories = <div><p className="add-catagory" onClick={() => { this.createCatagory(); }} >add catagory</p>
+                <ul>{this.state.catagory.catagories.map((catagory, index) => {
+                  return <li key={index}>{catagory.name}</li>
+                })}
+                </ul></div>
+              }
+              else {
+                catagories = <div><form onSubmit={(evt) => { this.saveCatagory(evt); }}><input ref={(input) => { this.catagoryName = input }} placeholder="Catagory Name" /></form>
+                <ul>{this.state.catagory.catagories.map((catagory, index) => {
+                  return <li key={index}>{catagory.name}</li>
+                })}</ul>
+                </div>
+              }
+            }
+
+            return <div key={diet.id}><h1>{diet.diet}</h1><p><ReactRouter.Link to={"/diet/" + diet.id}>Edit</ReactRouter.Link>
+            </p><p onClick={() => { FC.dietData.deleteDiet(diet.id); }}>Delete</p>{active}{catagories}</div>
           })}
-          {catagories}
         </div>
       } else {
         navBar = <div className={this.state.sidebar} style={ { height: theHeight } }><div style={{ width: "620px", margin: "0 auto", paddingTop: top }}><h1>Welcome {this.state.user.displayName}</h1>

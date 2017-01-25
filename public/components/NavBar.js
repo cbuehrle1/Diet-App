@@ -39,14 +39,26 @@ if (window.FC === undefined) {
 
         var cb = function cb(user, diet, catagory) {
 
-          _this2.setState({
-            user: user,
-            sidebar: _this2.state.sidebar,
-            height: window.innerHeight,
-            diet: diet,
-            addCat: false,
-            catagory: catagory
-          });
+          if (catagory === undefined) {
+            _this2.setState({
+              user: user,
+              sidebar: _this2.state.sidebar,
+              height: window.innerHeight,
+              diet: diet,
+              addCat: false,
+              catagory: _this2.state.catagory
+            });
+          } else {
+
+            _this2.setState({
+              user: user,
+              sidebar: _this2.state.sidebar,
+              height: window.innerHeight,
+              diet: diet,
+              addCat: false,
+              catagory: catagory
+            });
+          }
         };
 
         FC.dietData.registerCallback(cb);
@@ -77,16 +89,44 @@ if (window.FC === undefined) {
     }, {
       key: "saveCatagory",
       value: function saveCatagory(evt) {
+        var _this3 = this;
 
         evt.preventDefault();
+
+        var dietIdParam = function dietIdParam() {
+          var activeId;
+
+          _this3.state.diet.diets.forEach(function (diet) {
+
+            if (diet.active === true) {
+              activeId = diet.id;
+              console.log(diet.id);
+            }
+          });
+
+          return activeId;
+        };
 
         $.ajax({
           url: "/api/catagory",
           method: "POST",
           data: {
-            dietId: this.state.diet.diets[0].id,
+            dietId: dietIdParam(),
             name: this.catagoryName.value
           }
+        }).done(function (data) {
+          console.log(data);
+          FC.dietData.loadUser();
+        });
+      }
+    }, {
+      key: "makeActive",
+      value: function makeActive(evt) {
+
+        $.ajax({
+          url: "/api/makeactive/" + evt.target.id,
+          method: "POST",
+          data: {}
         }).done(function (data) {
           FC.dietData.loadUser();
         });
@@ -94,34 +134,15 @@ if (window.FC === undefined) {
     }, {
       key: "render",
       value: function render() {
-        var _this3 = this;
+        var _this4 = this;
 
         var navBar;
         var top = this.state.height / 2 - 151;
         var theHeight = this.state.height - 36;
-        var catagories;
-
-        if (this.state.addCat === false) {
-          catagories = React.createElement(
-            "p",
-            { onClick: function onClick() {
-                _this3.createCatagory();
-              } },
-            "add catagory"
-          );
-        } else {
-          catagories = React.createElement(
-            "form",
-            { onSubmit: function onSubmit(evt) {
-                _this3.saveCatagory(evt);
-              } },
-            React.createElement("input", { ref: function ref(input) {
-                _this3.catagoryName = input;
-              }, placeholder: "Catagory Name" })
-          );
-        }
+        var active;
 
         if (this.state.sidebar === "side-bar") {
+
           navBar = React.createElement(
             "div",
             { className: this.state.sidebar, style: { height: theHeight } },
@@ -132,6 +153,71 @@ if (window.FC === undefined) {
               "s Pairings"
             ),
             this.state.diet.diets.map(function (diet) {
+
+              var catagories;
+
+              if (diet.active === false) {
+                active = React.createElement(
+                  "p",
+                  { id: diet.id, onClick: function onClick(evt) {
+                      _this4.makeActive(evt);
+                    } },
+                  "Make Active"
+                );
+              } else {
+                active = undefined;
+
+                if (_this4.state.addCat === false) {
+                  catagories = React.createElement(
+                    "div",
+                    null,
+                    React.createElement(
+                      "p",
+                      { className: "add-catagory", onClick: function onClick() {
+                          _this4.createCatagory();
+                        } },
+                      "add catagory"
+                    ),
+                    React.createElement(
+                      "ul",
+                      null,
+                      _this4.state.catagory.catagories.map(function (catagory, index) {
+                        return React.createElement(
+                          "li",
+                          { key: index },
+                          catagory.name
+                        );
+                      })
+                    )
+                  );
+                } else {
+                  catagories = React.createElement(
+                    "div",
+                    null,
+                    React.createElement(
+                      "form",
+                      { onSubmit: function onSubmit(evt) {
+                          _this4.saveCatagory(evt);
+                        } },
+                      React.createElement("input", { ref: function ref(input) {
+                          _this4.catagoryName = input;
+                        }, placeholder: "Catagory Name" })
+                    ),
+                    React.createElement(
+                      "ul",
+                      null,
+                      _this4.state.catagory.catagories.map(function (catagory, index) {
+                        return React.createElement(
+                          "li",
+                          { key: index },
+                          catagory.name
+                        );
+                      })
+                    )
+                  );
+                }
+              }
+
               return React.createElement(
                 "div",
                 { key: diet.id },
@@ -155,10 +241,11 @@ if (window.FC === undefined) {
                       FC.dietData.deleteDiet(diet.id);
                     } },
                   "Delete"
-                )
+                ),
+                active,
+                catagories
               );
-            }),
-            catagories
+            })
           );
         } else {
           navBar = React.createElement(
@@ -181,7 +268,7 @@ if (window.FC === undefined) {
               React.createElement(
                 "div",
                 { className: "start-button", onClick: function onClick() {
-                    _this3.moveToSideBar();
+                    _this4.moveToSideBar();
                   } },
                 "Enter"
               )

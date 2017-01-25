@@ -15,14 +15,36 @@ if (window.FC === undefined) {
 
       var userVar = user;
       var dietVar = diet;
-      console.log(dietVar);
-      $.ajax({
-        url: "/api/catagory/" + dietVar.diets[0].id
-      }).done(function (data) {
-        _this.callbacks.forEach(function (cb) {
-          cb(userVar, dietVar, data);
+
+      if (dietVar.diets.length === 0) {
+
+        this.callbacks.forEach(function (cb) {
+          cb(userVar, dietVar);
         });
-      });
+      } else {
+
+        var activeDiet;
+
+        dietVar.diets.forEach(function (diet) {
+          if (diet.active === true) {
+            activeDiet = diet.id;
+          }
+        });
+
+        if (activeDiet === undefined) {
+          this.callbacks.forEach(function (cb) {
+            cb(userVar, dietVar);
+          });
+        } else {
+          $.ajax({
+            url: "/api/catagory/" + activeDiet
+          }).done(function (data) {
+            _this.callbacks.forEach(function (cb) {
+              cb(userVar, dietVar, data);
+            });
+          });
+        }
+      }
     },
 
     getDiets: function getDiets(user) {
@@ -33,7 +55,7 @@ if (window.FC === undefined) {
       $.ajax({
         url: "/api/diet"
       }).done(function (data) {
-        _this2.getCatagories(userVar, data);
+        _this2.getCatagories(user, data);
       });
     },
 

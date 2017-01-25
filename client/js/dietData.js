@@ -9,13 +9,37 @@ if (window.FC === undefined) { window.FC = {}; }
     getCatagories: function (user, diet) {
       var userVar = user;
       var dietVar = diet;
-      console.log(dietVar);
-      $.ajax({
-        url: "/api/catagory/" + dietVar.diets[0].id
-      })
-      .done((data) => {
-        this.callbacks.forEach((cb) => { cb(userVar, dietVar, data); })
-      })
+
+      if (dietVar.diets.length === 0) {
+
+        this.callbacks.forEach((cb) => { cb(userVar, dietVar); })
+      }
+      else {
+
+        var activeDiet;
+
+        dietVar.diets.forEach((diet) => {
+          if (diet.active === true) {
+            activeDiet = diet.id;
+          }
+
+        });
+
+        if (activeDiet === undefined) {
+          this.callbacks.forEach((cb) => { cb(userVar, dietVar); })
+        }
+        else {
+          $.ajax({
+            url: "/api/catagory/" + activeDiet
+          })
+          .done((data) => {
+            this.callbacks.forEach((cb) => { cb(userVar, dietVar, data); })
+          })
+
+        }
+
+      }
+
     },
 
     getDiets: function(user) {
@@ -25,8 +49,9 @@ if (window.FC === undefined) { window.FC = {}; }
         url: "/api/diet"
       })
       .done((data) => {
-        this.getCatagories(userVar, data);
+        this.getCatagories(user, data);
       });
+
     },
 
     callbacks: [],
