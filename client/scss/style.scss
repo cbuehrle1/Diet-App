@@ -119,17 +119,21 @@ header{
   transition-property: width, opacity;
   transition-duration: 1s;
   h1{
-    font-size: 24px;
+    font-size: 20px;
     color: white;
     text-align: left;
-    padding: 20px 0;
+    padding: 10px 0;
     display: inline-block;
+  }
+  .title-h1{
+    padding: 20px 0;
+    font-size: 24px;
   }
   p{
     display: inline-block;
     font-size: 14px;
     color: white;
-    padding-left: 20px;
+    padding-left: 10px;
   }
   .add-catagory{
     padding-left: 10px;

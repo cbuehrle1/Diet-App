@@ -38,11 +38,13 @@ if (window.FC === undefined) {
             xhr.setRequestHeader("Accept", "application/json");
           }
         }).done(function (data) {
+
+          FC.dietData.storeRecipeInfo(data);
+
           _this2.setState({
             data: data,
             instructions: data.analyzedInstructions[0].steps
           });
-          console.log(data);
         });
       }
     }, {
@@ -52,6 +54,7 @@ if (window.FC === undefined) {
         return React.createElement(
           "div",
           { className: "search-container" },
+          React.createElement(FC.SaveToComponent, { data: this.state.data }),
           React.createElement(
             "h1",
             null,

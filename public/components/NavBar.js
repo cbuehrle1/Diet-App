@@ -148,7 +148,7 @@ if (window.FC === undefined) {
             { className: this.state.sidebar, style: { height: theHeight } },
             React.createElement(
               "h1",
-              null,
+              { className: "title-h1" },
               this.state.user.displayName + "'",
               "s Pairings"
             ),
@@ -162,7 +162,7 @@ if (window.FC === undefined) {
                   { id: diet.id, onClick: function onClick(evt) {
                       _this4.makeActive(evt);
                     } },
-                  "Make Active"
+                  "Activate"
                 );
               } else {
                 active = undefined;

@@ -149,16 +149,19 @@ header {
   transition-property: width, opacity;
   transition-duration: 1s; }
   .side-bar h1 {
-    font-size: 24px;
+    font-size: 20px;
     color: white;
     text-align: left;
-    padding: 20px 0;
+    padding: 10px 0;
     display: inline-block; }
+  .side-bar .title-h1 {
+    padding: 20px 0;
+    font-size: 24px; }
   .side-bar p {
     display: inline-block;
     font-size: 14px;
     color: white;
-    padding-left: 20px; }
+    padding-left: 10px; }
   .side-bar .add-catagory {
     padding-left: 10px;
     display: block;

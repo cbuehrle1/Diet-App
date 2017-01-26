@@ -2,6 +2,7 @@ var express = require('express');
 var User = require("./models/user.js");
 var Diet = require("./models/diet.js");
 var Catagory = require("./models/catagory.js");
+var uuid = require("node-uuid");
 
 module.exports = function() {
 
@@ -189,6 +190,7 @@ module.exports = function() {
         data.forEach(function(catagory) {
 
          var item = {
+           id: catagory._id,
            name: catagory.name,
            recipes: catagory.recipes
          }
@@ -204,6 +206,34 @@ module.exports = function() {
 
     });
   });
+
+  router.post("/api/catagory/:catagoryId/recipe", function(req, res) {
+
+    var cb = (err, data) => {
+      console.log(data);
+      res.send(data);
+    }
+
+    console.log(req.body);
+
+    var recipe = {
+      id: uuid.v4(),
+      name: req.body.name,
+      servings: req.body.servings,
+      readyInMinutes: req.body.readyInMinutes,
+      image: req.body.image,
+      nutrients: req.body.nutrients,
+      extendedIngredients: req.body.extendedIngredients,
+      analyzedInstructions: req.body.analyzedInstructions
+    }
+
+    Catagory.findByIdAndUpdate(
+      req.params.catagoryId,
+      {$push: {"recipes": recipe}},
+      {safe: true, upsert: true, new: true},
+      cb)
+
+  })
 
   return router;
 }

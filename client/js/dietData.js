@@ -2,7 +2,11 @@ if (window.FC === undefined) { window.FC = {}; }
 
 (() => {
 
-  var dietData;
+  var storedInfo = {
+    userInfo: {},
+    dietInfo: {},
+    catagoryInfo: {}
+  }
 
   window.FC.dietData = {
 
@@ -33,6 +37,7 @@ if (window.FC === undefined) { window.FC = {}; }
             url: "/api/catagory/" + activeDiet
           })
           .done((data) => {
+            storedInfo.catagoryInfo = data;
             this.callbacks.forEach((cb) => { cb(userVar, dietVar, data); })
           })
 
@@ -44,23 +49,27 @@ if (window.FC === undefined) { window.FC = {}; }
 
     getDiets: function(user) {
       var userVar = user;
+      console.log(FC.dietData.recipeInfo);
 
       $.ajax({
         url: "/api/diet"
       })
       .done((data) => {
+        storedInfo.dietInfo = data;
         this.getCatagories(user, data);
       });
 
     },
 
     callbacks: [],
+    recipeInfo: [],
 
     loadUser: function() {
       $.ajax({
         url: "api/user"
       })
       .done((data) => {
+        storedInfo.userInfo = data;
         this.getDiets(data);
       })
     },
@@ -77,6 +86,20 @@ if (window.FC === undefined) { window.FC = {}; }
       .done((data) => {
         this.loadUser();
       });
+    },
+
+    storeRecipeInfo: function(data) {
+      this.recipeInfo.push(data);
+    },
+
+    sendRecipeInfo: function() {
+
+      var info = {
+        catagoryInfo: storedInfo.catagoryInfo,
+        recipeInfo: this.recipeInfo
+      }
+
+      return info;
     }
 
   }

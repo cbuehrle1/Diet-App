@@ -29,6 +29,7 @@ if (window.FC === undefined) { window.FC = {}; }
             addCat: false,
             catagory: this.state.catagory
           });
+          
         } else {
 
           this.setState({
@@ -126,13 +127,13 @@ if (window.FC === undefined) { window.FC = {}; }
       if (this.state.sidebar === "side-bar") {
 
         navBar = <div className={this.state.sidebar} style={ { height: theHeight } }>
-          <h1>{this.state.user.displayName + "'"}s Pairings</h1>
+          <h1 className="title-h1">{this.state.user.displayName + "'"}s Pairings</h1>
           {this.state.diet.diets.map((diet) => {
 
             var catagories;
 
             if (diet.active === false) {
-              active = <p id={diet.id} onClick={(evt) => { this.makeActive(evt); }}>Make Active</p>;
+              active = <p id={diet.id} onClick={(evt) => { this.makeActive(evt); }}>Activate</p>;
             }
             else {
               active = undefined;

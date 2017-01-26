@@ -11,6 +11,7 @@ class RecipeDetailComponent extends React.Component {
 
   componentDidMount() {
 
+
     $.ajax({
       url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/" + this.props.params.recipeId + "/information?includeNutrition=true",
       type: 'GET',
@@ -20,17 +21,20 @@ class RecipeDetailComponent extends React.Component {
       }
     })
     .done((data) => {
+
+      FC.dietData.storeRecipeInfo(data);
+
       this.setState({
         data: data,
         instructions: data.analyzedInstructions[0].steps
       });
-      console.log(data);
+
     });
   }
 
   render() {
 
-    return <div className="search-container"><h1>{this.state.data.title}</h1>
+    return <div className="search-container"><FC.SaveToComponent data={this.state.data}/><h1>{this.state.data.title}</h1>
       <img className="detail-img" src={this.state.data.image} />
       <h1>ingredients</h1>
       <ul className="search-results">{this.state.data.extendedIngredients.map((ingredient, index) => {
