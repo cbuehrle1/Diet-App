@@ -29,7 +29,7 @@ if (window.FC === undefined) { window.FC = {}; }
             addCat: false,
             catagory: this.state.catagory
           });
-          
+
         } else {
 
           this.setState({
@@ -133,7 +133,7 @@ if (window.FC === undefined) { window.FC = {}; }
             var catagories;
 
             if (diet.active === false) {
-              active = <p id={diet.id} onClick={(evt) => { this.makeActive(evt); }}>Activate</p>;
+              active = <h2 id={diet.id} onClick={(evt) => { this.makeActive(evt); }}>Activate</h2>;
             }
             else {
               active = undefined;
@@ -141,9 +141,10 @@ if (window.FC === undefined) { window.FC = {}; }
               if (this.state.addCat === false) {
                 catagories = <div><p className="add-catagory" onClick={() => { this.createCatagory(); }} >add catagory</p>
                 <ul>{this.state.catagory.catagories.map((catagory, index) => {
-                  return <li key={index}>{catagory.name}</li>
+                  return <li key={index}><h3>{catagory.name}</h3><FC.SavedRecipeComponent recipes={catagory.recipes}/></li>
                 })}
                 </ul></div>
+
               }
               else {
                 catagories = <div><form onSubmit={(evt) => { this.saveCatagory(evt); }}><input ref={(input) => { this.catagoryName = input }} placeholder="add catagory" /></form>
@@ -154,8 +155,8 @@ if (window.FC === undefined) { window.FC = {}; }
               }
             }
 
-            return <div key={diet.id}><h1>{diet.diet}</h1><p><ReactRouter.Link to={"/diet/" + diet.id}>Edit</ReactRouter.Link>
-            </p><p onClick={() => { FC.dietData.deleteDiet(diet.id); }}>Delete</p>{active}{catagories}</div>
+            return <div key={diet.id}><h1>{diet.diet}</h1><h2><ReactRouter.Link to={"/diet/" + diet.id}>Edit</ReactRouter.Link>
+            </h2><h2 onClick={() => { FC.dietData.deleteDiet(diet.id); }}>Delete</h2>{active}{catagories}</div>
           })}
         </div>
       } else {

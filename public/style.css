@@ -154,11 +154,18 @@ header {
     text-align: left;
     padding: 10px 0;
     display: inline-block; }
+  .side-bar h2 {
+    display: inline-block;
+    font-size: 14px;
+    color: white;
+    padding-left: 10px; }
   .side-bar .title-h1 {
     padding: 20px 0;
     font-size: 24px; }
+  .side-bar h3 {
+    font-size: 14px;
+    color: white; }
   .side-bar p {
-    display: inline-block;
     font-size: 14px;
     color: white;
     padding-left: 10px; }
@@ -172,6 +179,11 @@ header {
     padding: 5px 0;
     font-size: 14px; }
   .side-bar form {
+    padding-left: 10px;
+    padding-bottom: 5px; }
+  .side-bar .recipes {
+    font-size: 12px;
+    padding-top: 5px;
     padding-left: 10px;
     padding-bottom: 5px; }
 

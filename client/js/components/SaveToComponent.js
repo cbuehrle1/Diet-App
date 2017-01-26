@@ -20,6 +20,10 @@ if (window.FC === undefined) { window.FC = {}; }
 
     }
 
+    componentWillUnmount() {
+      FC.dietData.recipeInfo = []
+    }
+
     clicked() {
 
       if (this.state.click === false) {
@@ -51,7 +55,9 @@ if (window.FC === undefined) { window.FC = {}; }
       $.ajax({
         url: "/api/catagory/" + evt.target.id + "/recipe",
         method: "POST",
-        data: JSON.stringify(postData)
+        data: JSON.stringify(postData),
+        contentType: "application/json",
+        dataType: "json"
       })
       .done((req, res) => {
         FC.dietData.loadUser();

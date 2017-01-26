@@ -125,12 +125,21 @@ header{
     padding: 10px 0;
     display: inline-block;
   }
+  h2{
+    display: inline-block;
+    font-size: 14px;
+    color: white;
+    padding-left: 10px;
+  }
   .title-h1{
     padding: 20px 0;
     font-size: 24px;
   }
+  h3{
+    font-size: 14px;
+    color: white;
+  }
   p{
-    display: inline-block;
     font-size: 14px;
     color: white;
     padding-left: 10px;
@@ -148,6 +157,12 @@ header{
     font-size: 14px;
   }
   form{
+    padding-left: 10px;
+    padding-bottom: 5px;
+  }
+  .recipes{
+    font-size: 12px;
+    padding-top: 5px;
     padding-left: 10px;
     padding-bottom: 5px;
   }

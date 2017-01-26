@@ -158,7 +158,7 @@ if (window.FC === undefined) {
 
               if (diet.active === false) {
                 active = React.createElement(
-                  "p",
+                  "h2",
                   { id: diet.id, onClick: function onClick(evt) {
                       _this4.makeActive(evt);
                     } },
@@ -185,7 +185,12 @@ if (window.FC === undefined) {
                         return React.createElement(
                           "li",
                           { key: index },
-                          catagory.name
+                          React.createElement(
+                            "h3",
+                            null,
+                            catagory.name
+                          ),
+                          React.createElement(FC.SavedRecipeComponent, { recipes: catagory.recipes })
                         );
                       })
                     )
@@ -227,7 +232,7 @@ if (window.FC === undefined) {
                   diet.diet
                 ),
                 React.createElement(
-                  "p",
+                  "h2",
                   null,
                   React.createElement(
                     ReactRouter.Link,
@@ -236,7 +241,7 @@ if (window.FC === undefined) {
                   )
                 ),
                 React.createElement(
-                  "p",
+                  "h2",
                   { onClick: function onClick() {
                       FC.dietData.deleteDiet(diet.id);
                     } },

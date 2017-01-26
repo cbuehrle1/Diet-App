@@ -37,6 +37,11 @@ if (window.FC === undefined) {
         });
       }
     }, {
+      key: "componentWillUnmount",
+      value: function componentWillUnmount() {
+        FC.dietData.recipeInfo = [];
+      }
+    }, {
       key: "clicked",
       value: function clicked() {
 
@@ -68,7 +73,9 @@ if (window.FC === undefined) {
         $.ajax({
           url: "/api/catagory/" + evt.target.id + "/recipe",
           method: "POST",
-          data: JSON.stringify(postData)
+          data: JSON.stringify(postData),
+          contentType: "application/json",
+          dataType: "json"
         }).done(function (req, res) {
           FC.dietData.loadUser();
           ReactRouter.browserHistory.goBack();
