@@ -100,6 +100,29 @@ if (window.FC === undefined) { window.FC = {}; }
       }
 
       return info;
+    },
+
+    getSavedRecipe: function(catagoryId, recipeId) {
+      var detailedRecipeInfo;
+      var selectedCatagory;
+
+      storedInfo.catagoryInfo.catagories.forEach((catagory) => {
+
+        if (catagory.id === catagoryId) {
+          selectedCatagory = catagory;
+        }
+
+      });
+
+      selectedCatagory.recipes.forEach((recipe) => {
+
+        if (recipe.id === recipeId) {
+          detailedRecipeInfo = recipe
+        }
+
+      });
+
+      return detailedRecipeInfo;
     }
 
   }

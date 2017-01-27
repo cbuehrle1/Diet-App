@@ -4,11 +4,24 @@ if (window.FC === undefined) { window.FC = {}; }
 
   class SavedRecipeComponent extends React.Component {
 
-    render() {
+    constructor() {
+      super();
+      this.state = { thing: false }
+    }
 
-      return <div>{this.props.recipes.map((recipe, index) => {
-        return <p key={index} className="recipes">{recipe.name}</p>
-      })}</div>
+    componentDidMount() {
+      console.log(this.props.catagory);
+    }
+
+    render() {
+      var catagoryId;
+      return <ul>{this.props.catagory.map((catagory, index) => {
+        catagoryId = catagory.id;
+        return<li key={index}><h3>{catagory.name}</h3>
+        {catagory.recipes.map((recipe, index) => {
+          return <ReactRouter.Link key={index} to={"/catagory/" + catagoryId + "/recipe/" + recipe.id}><p>{recipe.name}</p></ReactRouter.Link>
+        })}</li>
+      })}</ul>
     }
   }
 FC.SavedRecipeComponent = SavedRecipeComponent

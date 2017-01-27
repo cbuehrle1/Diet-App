@@ -13,60 +13,52 @@ if (window.FC === undefined) {
 }
 
 (function () {
-  var SavedRecipeComponent = function (_React$Component) {
-    _inherits(SavedRecipeComponent, _React$Component);
+  var SavedRecipeDetailComponent = function (_React$Component) {
+    _inherits(SavedRecipeDetailComponent, _React$Component);
 
-    function SavedRecipeComponent() {
-      _classCallCheck(this, SavedRecipeComponent);
+    function SavedRecipeDetailComponent() {
+      _classCallCheck(this, SavedRecipeDetailComponent);
 
-      var _this = _possibleConstructorReturn(this, (SavedRecipeComponent.__proto__ || Object.getPrototypeOf(SavedRecipeComponent)).call(this));
+      var _this = _possibleConstructorReturn(this, (SavedRecipeDetailComponent.__proto__ || Object.getPrototypeOf(SavedRecipeDetailComponent)).call(this));
 
-      _this.state = { thing: false };
+      _this.state = { recipe: { analyzedInstructions: [],
+          extendedIngredients: [], nutrients: [] } };
       return _this;
     }
 
-    _createClass(SavedRecipeComponent, [{
+    _createClass(SavedRecipeDetailComponent, [{
       key: "componentDidMount",
       value: function componentDidMount() {
-        console.log(this.props.catagory);
+        var recipe = FC.dietData.getSavedRecipe(this.props.params.catagoryId, this.props.params.recipeId);
+
+        this.setState({
+          recipe: recipe
+        });
+      }
+    }, {
+      key: "componentWillReceiveProps",
+      value: function componentWillReceiveProps() {
+        var recipe = FC.dietData.getSavedRecipe(this.props.params.catagoryId, this.props.params.recipeId);
+
+        this.setState({
+          recipe: recipe
+        });
       }
     }, {
       key: "render",
       value: function render() {
-        var catagoryId;
+        console.log(this.state.recipe);
         return React.createElement(
-          "ul",
-          null,
-          this.props.catagory.map(function (catagory, index) {
-            catagoryId = catagory.id;
-            return React.createElement(
-              "li",
-              { key: index },
-              React.createElement(
-                "h3",
-                null,
-                catagory.name
-              ),
-              catagory.recipes.map(function (recipe, index) {
-                return React.createElement(
-                  ReactRouter.Link,
-                  { key: index, to: "/catagory/" + catagoryId + "/recipe/" + recipe.id },
-                  React.createElement(
-                    "p",
-                    null,
-                    recipe.name
-                  )
-                );
-              })
-            );
-          })
+          "div",
+          { className: "search-container" },
+          "Reached Saved Recipe Detail Page"
         );
       }
     }]);
 
-    return SavedRecipeComponent;
+    return SavedRecipeDetailComponent;
   }(React.Component);
 
-  FC.SavedRecipeComponent = SavedRecipeComponent;
+  FC.SavedRecipeDetailComponent = SavedRecipeDetailComponent;
 })();
-//# sourceMappingURL=SavedRecipeComponent.js.map
+//# sourceMappingURL=SavedRecipeDetailComponent.js.map

@@ -140,17 +140,13 @@ if (window.FC === undefined) { window.FC = {}; }
 
               if (this.state.addCat === false) {
                 catagories = <div><p className="add-catagory" onClick={() => { this.createCatagory(); }} >add catagory</p>
-                <ul>{this.state.catagory.catagories.map((catagory, index) => {
-                  return <li key={index}><h3>{catagory.name}</h3><FC.SavedRecipeComponent recipes={catagory.recipes}/></li>
-                })}
-                </ul></div>
+                <FC.SavedRecipeComponent catagory={this.state.catagory.catagories} />
+                </div>
 
               }
               else {
                 catagories = <div><form onSubmit={(evt) => { this.saveCatagory(evt); }}><input ref={(input) => { this.catagoryName = input }} placeholder="add catagory" /></form>
-                <ul>{this.state.catagory.catagories.map((catagory, index) => {
-                  return <li key={index}>{catagory.name}</li>
-                })}</ul>
+                <FC.SavedRecipeComponent catagory={this.state.catagory.catagories} />
                 </div>
               }
             }

@@ -164,11 +164,13 @@ header {
     font-size: 24px; }
   .side-bar h3 {
     font-size: 14px;
-    color: white; }
+    color: white;
+    padding: 5px 0; }
   .side-bar p {
     font-size: 14px;
     color: white;
-    padding-left: 10px; }
+    padding-left: 12px;
+    padding-top: 3px; }
   .side-bar .add-catagory {
     padding-left: 10px;
     display: block;

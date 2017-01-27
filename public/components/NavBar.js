@@ -178,22 +178,7 @@ if (window.FC === undefined) {
                         } },
                       "add catagory"
                     ),
-                    React.createElement(
-                      "ul",
-                      null,
-                      _this4.state.catagory.catagories.map(function (catagory, index) {
-                        return React.createElement(
-                          "li",
-                          { key: index },
-                          React.createElement(
-                            "h3",
-                            null,
-                            catagory.name
-                          ),
-                          React.createElement(FC.SavedRecipeComponent, { recipes: catagory.recipes })
-                        );
-                      })
-                    )
+                    React.createElement(FC.SavedRecipeComponent, { catagory: _this4.state.catagory.catagories })
                   );
                 } else {
                   catagories = React.createElement(
@@ -208,17 +193,7 @@ if (window.FC === undefined) {
                           _this4.catagoryName = input;
                         }, placeholder: "add catagory" })
                     ),
-                    React.createElement(
-                      "ul",
-                      null,
-                      _this4.state.catagory.catagories.map(function (catagory, index) {
-                        return React.createElement(
-                          "li",
-                          { key: index },
-                          catagory.name
-                        );
-                      })
-                    )
+                    React.createElement(FC.SavedRecipeComponent, { catagory: _this4.state.catagory.catagories })
                   );
                 }
               }

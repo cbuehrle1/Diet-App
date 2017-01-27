@@ -107,6 +107,27 @@ if (window.FC === undefined) {
       };
 
       return info;
+    },
+
+    getSavedRecipe: function getSavedRecipe(catagoryId, recipeId) {
+      var detailedRecipeInfo;
+      var selectedCatagory;
+
+      storedInfo.catagoryInfo.catagories.forEach(function (catagory) {
+
+        if (catagory.id === catagoryId) {
+          selectedCatagory = catagory;
+        }
+      });
+
+      selectedCatagory.recipes.forEach(function (recipe) {
+
+        if (recipe.id === recipeId) {
+          detailedRecipeInfo = recipe;
+        }
+      });
+
+      return detailedRecipeInfo;
     }
 
   };

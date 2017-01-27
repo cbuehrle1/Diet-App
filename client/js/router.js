@@ -14,6 +14,7 @@ if (window.FC === undefined) { window.FC = {}; }
       <Route path="/CreateDiet" component={FC.CreateDietComponent} />
       <Route path="/recipe/:recipeId" component={FC.RecipeDetailComponent} />
       <Route path="/diet/:dietId" component={FC.EditDietComponent} />
+      <Route path= "/catagory/:catagoryId/recipe/:recipeId" component={FC.SavedRecipeDetailComponent} />
     </Route>
   </Router>;
 
