@@ -19,20 +19,14 @@ if (window.FC === undefined) {
     function SavedRecipeComponent() {
       _classCallCheck(this, SavedRecipeComponent);
 
-      var _this = _possibleConstructorReturn(this, (SavedRecipeComponent.__proto__ || Object.getPrototypeOf(SavedRecipeComponent)).call(this));
-
-      _this.state = { thing: false };
-      return _this;
+      return _possibleConstructorReturn(this, (SavedRecipeComponent.__proto__ || Object.getPrototypeOf(SavedRecipeComponent)).call(this));
     }
 
     _createClass(SavedRecipeComponent, [{
-      key: "componentDidMount",
-      value: function componentDidMount() {
-        console.log(this.props.catagory);
-      }
-    }, {
       key: "render",
       value: function render() {
+        console.log('rendering category', this.props.catagory);
+
         var catagoryId;
         return React.createElement(
           "ul",

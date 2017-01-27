@@ -37,6 +37,7 @@ if (window.FC === undefined) { window.FC = {}; }
             url: "/api/catagory/" + activeDiet
           })
           .done((data) => {
+            console.log('set category info', data);
             storedInfo.catagoryInfo = data;
             this.callbacks.forEach((cb) => { cb(userVar, dietVar, data); })
           })
@@ -49,7 +50,6 @@ if (window.FC === undefined) { window.FC = {}; }
 
     getDiets: function(user) {
       var userVar = user;
-      console.log(FC.dietData.recipeInfo);
 
       $.ajax({
         url: "/api/diet"
@@ -94,6 +94,7 @@ if (window.FC === undefined) { window.FC = {}; }
 
     sendRecipeInfo: function() {
 
+      console.log('send recipe info', storedInfo.catagoryInfo);
       var info = {
         catagoryInfo: storedInfo.catagoryInfo,
         recipeInfo: this.recipeInfo
@@ -105,26 +106,28 @@ if (window.FC === undefined) { window.FC = {}; }
     getSavedRecipe: function(catagoryId, recipeId) {
       var detailedRecipeInfo;
       var selectedCatagory;
+      console.log('getting saved category id', catagoryId);
 
-      storedInfo.catagoryInfo.catagories.forEach((catagory) => {
+        storedInfo.catagoryInfo.catagories.forEach((catagory) => {
 
-        if (catagory.id === catagoryId) {
-          selectedCatagory = catagory;
-        }
+          if (catagory.id === catagoryId) {
 
-      });
+            selectedCatagory = catagory;
+          }
 
-      selectedCatagory.recipes.forEach((recipe) => {
+        });
 
-        if (recipe.id === recipeId) {
-          detailedRecipeInfo = recipe
-        }
+        selectedCatagory.recipes.forEach((recipe) => {
 
-      });
+          if (recipe.id === recipeId) {
+            detailedRecipeInfo = recipe
+          }
 
-      return detailedRecipeInfo;
+        });
+
+        return detailedRecipeInfo;
+      }
+
     }
-
-  }
 
 })();

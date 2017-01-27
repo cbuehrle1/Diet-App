@@ -6,14 +6,11 @@ if (window.FC === undefined) { window.FC = {}; }
 
     constructor() {
       super();
-      this.state = { thing: false }
-    }
-
-    componentDidMount() {
-      console.log(this.props.catagory);
     }
 
     render() {
+      console.log('rendering category', this.props.catagory);
+
       var catagoryId;
       return <ul>{this.props.catagory.map((catagory, index) => {
         catagoryId = catagory.id;

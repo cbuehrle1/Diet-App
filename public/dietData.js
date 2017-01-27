@@ -43,6 +43,7 @@ if (window.FC === undefined) {
           $.ajax({
             url: "/api/catagory/" + activeDiet
           }).done(function (data) {
+            console.log('set category info', data);
             storedInfo.catagoryInfo = data;
             _this.callbacks.forEach(function (cb) {
               cb(userVar, dietVar, data);
@@ -56,7 +57,6 @@ if (window.FC === undefined) {
       var _this2 = this;
 
       var userVar = user;
-      console.log(FC.dietData.recipeInfo);
 
       $.ajax({
         url: "/api/diet"
@@ -101,6 +101,7 @@ if (window.FC === undefined) {
 
     sendRecipeInfo: function sendRecipeInfo() {
 
+      console.log('send recipe info', storedInfo.catagoryInfo);
       var info = {
         catagoryInfo: storedInfo.catagoryInfo,
         recipeInfo: this.recipeInfo
@@ -112,10 +113,12 @@ if (window.FC === undefined) {
     getSavedRecipe: function getSavedRecipe(catagoryId, recipeId) {
       var detailedRecipeInfo;
       var selectedCatagory;
+      console.log('getting saved category id', catagoryId);
 
       storedInfo.catagoryInfo.catagories.forEach(function (catagory) {
 
         if (catagory.id === catagoryId) {
+
           selectedCatagory = catagory;
         }
       });

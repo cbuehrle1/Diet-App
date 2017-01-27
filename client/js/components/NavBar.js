@@ -81,7 +81,7 @@ if (window.FC === undefined) { window.FC = {}; }
 
           if (diet.active === true) {
             activeId = diet.id;
-            console.log(diet.id)
+    
           }
 
         });
@@ -140,13 +140,14 @@ if (window.FC === undefined) { window.FC = {}; }
 
               if (this.state.addCat === false) {
                 catagories = <div><p className="add-catagory" onClick={() => { this.createCatagory(); }} >add catagory</p>
-                <FC.SavedRecipeComponent catagory={this.state.catagory.catagories} />
+                <FC.SavedRecipeComponent dietId={diet.id} catagory={this.state.catagory.catagories} />
                 </div>
 
               }
               else {
                 catagories = <div><form onSubmit={(evt) => { this.saveCatagory(evt); }}><input ref={(input) => { this.catagoryName = input }} placeholder="add catagory" /></form>
-                <FC.SavedRecipeComponent catagory={this.state.catagory.catagories} />
+                <FC.SavedRecipeComponent dietId={diet.id}
+                catagory={this.state.catagory.catagories} />
                 </div>
               }
             }

@@ -100,7 +100,6 @@ if (window.FC === undefined) {
 
             if (diet.active === true) {
               activeId = diet.id;
-              console.log(diet.id);
             }
           });
 
@@ -178,7 +177,7 @@ if (window.FC === undefined) {
                         } },
                       "add catagory"
                     ),
-                    React.createElement(FC.SavedRecipeComponent, { catagory: _this4.state.catagory.catagories })
+                    React.createElement(FC.SavedRecipeComponent, { dietId: diet.id, catagory: _this4.state.catagory.catagories })
                   );
                 } else {
                   catagories = React.createElement(
@@ -193,7 +192,8 @@ if (window.FC === undefined) {
                           _this4.catagoryName = input;
                         }, placeholder: "add catagory" })
                     ),
-                    React.createElement(FC.SavedRecipeComponent, { catagory: _this4.state.catagory.catagories })
+                    React.createElement(FC.SavedRecipeComponent, { dietId: diet.id,
+                      catagory: _this4.state.catagory.catagories })
                   );
                 }
               }
