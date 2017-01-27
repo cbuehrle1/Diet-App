@@ -43,7 +43,6 @@ if (window.FC === undefined) {
           $.ajax({
             url: "/api/catagory/" + activeDiet
           }).done(function (data) {
-            console.log('set category info', data);
             storedInfo.catagoryInfo = data;
             _this.callbacks.forEach(function (cb) {
               cb(userVar, dietVar, data);
@@ -101,7 +100,6 @@ if (window.FC === undefined) {
 
     sendRecipeInfo: function sendRecipeInfo() {
 
-      console.log('send recipe info', storedInfo.catagoryInfo);
       var info = {
         catagoryInfo: storedInfo.catagoryInfo,
         recipeInfo: this.recipeInfo
@@ -113,7 +111,8 @@ if (window.FC === undefined) {
     getSavedRecipe: function getSavedRecipe(catagoryId, recipeId) {
       var detailedRecipeInfo;
       var selectedCatagory;
-      console.log('getting saved category id', catagoryId);
+
+      console.log('getting category', catagoryId);
 
       storedInfo.catagoryInfo.catagories.forEach(function (catagory) {
 
@@ -122,6 +121,13 @@ if (window.FC === undefined) {
           selectedCatagory = catagory;
         }
       });
+
+      //BUG: This is a workaround for componentWillReceiveProps on SavedRecipeDetailComponent firing
+      //  twice, first with old data. Find real fix.
+      if (selectedCatagory === undefined) {
+        console.log('returning wrong category');
+        return storedInfo.catagoryInfo.catagories[0].recipes[0];
+      }
 
       selectedCatagory.recipes.forEach(function (recipe) {
 

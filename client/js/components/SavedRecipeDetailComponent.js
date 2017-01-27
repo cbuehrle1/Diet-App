@@ -11,7 +11,9 @@ if (window.FC === undefined) { window.FC = {}; }
     }
 
     componentWillReceiveProps() {
-      console.log(this.props.params.catagoryId)
+
+      console.log('receivin them props', this.props.params.catagoryId);
+
       var recipe = FC.dietData.getSavedRecipe(this.props.params.catagoryId, this.props.params.recipeId);
 
       this.setState({
@@ -21,6 +23,8 @@ if (window.FC === undefined) { window.FC = {}; }
     }
 
     render() {
+
+      console.log('rendering SavedRecipeDetailComponent');
 
       return <div className="search-container"><h1>{this.state.recipe.name}</h1>
       <img className="detail-img" src={this.state.recipe.image} />
