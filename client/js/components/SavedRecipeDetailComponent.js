@@ -12,8 +12,6 @@ if (window.FC === undefined) { window.FC = {}; }
 
     componentWillReceiveProps() {
 
-      console.log('receivin them props', this.props.params.catagoryId);
-
       var recipe = FC.dietData.getSavedRecipe(this.props.params.catagoryId, this.props.params.recipeId);
 
       this.setState({
@@ -23,13 +21,40 @@ if (window.FC === undefined) { window.FC = {}; }
     }
 
     render() {
+      var nutrientsArray = []
 
-      console.log('rendering SavedRecipeDetailComponent');
+      this.state.recipe.nutrients.map((nutrient) => {
+
+        if (nutrient.title.indexOf("Calories") !== -1) {
+          nutrientsArray.push(nutrient);
+        }
+        else if (nutrient.title.indexOf("Fat") !== -1) {
+          nutrientsArray.push(nutrient);
+        }
+        else if (nutrient.title.indexOf("Carbohydrates") !== -1) {
+          nutrientsArray.push(nutrient);
+        }
+        else if (nutrient.title.indexOf("Protein") !== -1) {
+          nutrientsArray.push(nutrient);
+        }
+
+      });
+
+
+      console.log(this.state.recipe);
 
       return <div className="search-container"><h1>{this.state.recipe.name}</h1>
       <img className="detail-img" src={this.state.recipe.image} />
       <h2>Servings: {this.state.recipe.servings}</h2>
       <h2>Ready in {this.state.recipe.readyInMinutes} minutes</h2>
+      <div>
+        <h2>Nutritional Information</h2>
+        <ul>
+          {nutrientsArray.map((nutrient, index) => {
+            return <li key={index}>{nutrient.title + ": " + nutrient.amount + " " + nutrient.unit}</li>
+          })}
+        </ul>
+      </div>
       <div>
       <h1>ingredients</h1>
       <ul className="search-results">

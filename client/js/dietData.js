@@ -105,8 +105,6 @@ if (window.FC === undefined) { window.FC = {}; }
       var detailedRecipeInfo;
       var selectedCatagory;
 
-      console.log('getting category', catagoryId);
-
         storedInfo.catagoryInfo.catagories.forEach((catagory) => {
 
           if (catagory.id === catagoryId) {
@@ -119,7 +117,7 @@ if (window.FC === undefined) { window.FC = {}; }
         //BUG: This is a workaround for componentWillReceiveProps on SavedRecipeDetailComponent firing
         //  twice, first with old data. Find real fix.
         if (selectedCatagory === undefined) {
-          console.log('returning wrong category');
+      
           return storedInfo.catagoryInfo.catagories[0].recipes[0];
         }
 

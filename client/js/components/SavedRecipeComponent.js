@@ -9,7 +9,7 @@ if (window.FC === undefined) { window.FC = {}; }
     }
 
     render() {
-      console.log('rendering SavedRecipeComponent');
+
       var catagoryId;
       return <ul>{this.props.catagory.map((catagory, index) => {
         catagoryId = catagory.id;

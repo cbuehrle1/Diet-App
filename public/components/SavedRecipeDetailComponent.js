@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -27,10 +27,8 @@ if (window.FC === undefined) {
     }
 
     _createClass(SavedRecipeDetailComponent, [{
-      key: 'componentWillReceiveProps',
+      key: "componentWillReceiveProps",
       value: function componentWillReceiveProps() {
-
-        console.log('receivin them props', this.props.params.catagoryId);
 
         var recipe = FC.dietData.getSavedRecipe(this.props.params.catagoryId, this.props.params.recipeId);
 
@@ -39,47 +37,81 @@ if (window.FC === undefined) {
         });
       }
     }, {
-      key: 'render',
+      key: "render",
       value: function render() {
+        var nutrientsArray = [];
 
-        console.log('rendering SavedRecipeDetailComponent');
+        this.state.recipe.nutrients.map(function (nutrient) {
+
+          if (nutrient.title.indexOf("Calories") !== -1) {
+            nutrientsArray.push(nutrient);
+          } else if (nutrient.title.indexOf("Fat") !== -1) {
+            nutrientsArray.push(nutrient);
+          } else if (nutrient.title.indexOf("Carbohydrates") !== -1) {
+            nutrientsArray.push(nutrient);
+          } else if (nutrient.title.indexOf("Protein") !== -1) {
+            nutrientsArray.push(nutrient);
+          }
+        });
+
+        console.log(this.state.recipe);
 
         return React.createElement(
-          'div',
-          { className: 'search-container' },
+          "div",
+          { className: "search-container" },
           React.createElement(
-            'h1',
+            "h1",
             null,
             this.state.recipe.name
           ),
-          React.createElement('img', { className: 'detail-img', src: this.state.recipe.image }),
+          React.createElement("img", { className: "detail-img", src: this.state.recipe.image }),
           React.createElement(
-            'h2',
+            "h2",
             null,
-            'Servings: ',
+            "Servings: ",
             this.state.recipe.servings
           ),
           React.createElement(
-            'h2',
+            "h2",
             null,
-            'Ready in ',
+            "Ready in ",
             this.state.recipe.readyInMinutes,
-            ' minutes'
+            " minutes"
           ),
           React.createElement(
-            'div',
+            "div",
             null,
             React.createElement(
-              'h1',
+              "h2",
               null,
-              'ingredients'
+              "Nutritional Information"
             ),
             React.createElement(
-              'ul',
-              { className: 'search-results' },
+              "ul",
+              null,
+              nutrientsArray.map(function (nutrient, index) {
+                return React.createElement(
+                  "li",
+                  { key: index },
+                  nutrient.title + ": " + nutrient.amount + " " + nutrient.unit
+                );
+              })
+            )
+          ),
+          React.createElement(
+            "div",
+            null,
+            React.createElement(
+              "h1",
+              null,
+              "ingredients"
+            ),
+            React.createElement(
+              "ul",
+              { className: "search-results" },
               this.state.recipe.extendedIngredients.map(function (ingredient, index) {
                 return React.createElement(
-                  'li',
+                  "li",
                   { key: index },
                   ingredient.originalString
                 );
@@ -87,20 +119,20 @@ if (window.FC === undefined) {
             )
           ),
           React.createElement(
-            'div',
+            "div",
             null,
             React.createElement(
-              'h1',
+              "h1",
               null,
-              'Instructions'
+              "Instructions"
             ),
             this.state.recipe.analyzedInstructions.map(function (recipe, index) {
               return React.createElement(
-                'ul',
-                { className: 'search-results', key: index },
+                "ul",
+                { className: "search-results", key: index },
                 recipe.steps.map(function (step, index) {
                   return React.createElement(
-                    'li',
+                    "li",
                     { key: index },
                     step.step
                   );

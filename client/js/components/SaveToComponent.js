@@ -42,7 +42,7 @@ if (window.FC === undefined) { window.FC = {}; }
     }
 
     saveCatagory(evt) {
-      console.log("save", this.state.info.recipeInfo[0], "to" + evt.target.id);
+      console.log(this.state.info.recipeInfo[0])
       var postData = {
         name: this.state.info.recipeInfo[0].title,
         servings: this.state.info.recipeInfo[0].servings,

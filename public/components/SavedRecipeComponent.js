@@ -25,7 +25,7 @@ if (window.FC === undefined) {
     _createClass(SavedRecipeComponent, [{
       key: "render",
       value: function render() {
-        console.log('rendering SavedRecipeComponent');
+
         var catagoryId;
         return React.createElement(
           "ul",
