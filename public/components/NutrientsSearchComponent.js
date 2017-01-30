@@ -19,16 +19,90 @@ if (window.FC === undefined) {
     function NutrientsSearchComponent() {
       _classCallCheck(this, NutrientsSearchComponent);
 
-      return _possibleConstructorReturn(this, (NutrientsSearchComponent.__proto__ || Object.getPrototypeOf(NutrientsSearchComponent)).apply(this, arguments));
+      var _this = _possibleConstructorReturn(this, (NutrientsSearchComponent.__proto__ || Object.getPrototypeOf(NutrientsSearchComponent)).call(this));
+
+      _this.state = { form: true, advancedForm: false };
+      return _this;
     }
 
     _createClass(NutrientsSearchComponent, [{
+      key: "callSearch",
+      value: function callSearch(evt) {
+        var _this2 = this;
+
+        evt.preventDefault();
+
+        var queryStr = this.queryInput.value;
+        var maxCalories = this.maxCalories.value;
+        var maxFat = this.maxFat.value;
+        var maxCarbs = this.maxCarbs.value;
+        var maxProtein = this.maxProtein.value;
+
+        $.ajax({
+          url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?limitLicense=false&maxCalories=" + maxCalories + "&maxCarbs=" + maxCarbs + "&maxFat=" + maxFat + "&maxProtein=" + maxProtein + "&number=10&offset=0&query=" + queryStr + "&ranking=1",
+          type: 'GET',
+          beforeSend: function beforeSend(xhr) {
+            xhr.setRequestHeader("X-Mashape-Key", "lfLi0pd5ComshP5lbLvR2GHC5uP6p1b7AOujsnP5aI9GJrDgG1");
+            xhr.setRequestHeader("Accept", "application/json");
+          }
+        }).done(function (data) {
+          console.log(data.results);
+          _this2.setState({
+            form: false
+          });
+        });
+      }
+    }, {
       key: "render",
       value: function render() {
+        var _this3 = this;
+
+        var searchForm;
+
+        if (this.state.form === true) {
+          searchForm = React.createElement(
+            "form",
+            { onSubmit: function onSubmit(evt) {
+                _this3.callSearch(evt);
+              } },
+            React.createElement("input", { ref: function ref(input) {
+                _this3.queryInput = input;
+              }, placeholder: "Recipe Keyword" }),
+            React.createElement("input", { ref: function ref(input) {
+                _this3.maxCalories = input;
+              }, placeholder: "Max Calories" }),
+            React.createElement("input", { ref: function ref(input) {
+                _this3.maxFat = input;
+              }, placeholder: "Max Fat" }),
+            React.createElement("input", { ref: function ref(input) {
+                _this3.maxCarbs = input;
+              }, placeholder: "Max Carbohydrates" }),
+            React.createElement("input", { ref: function ref(input) {
+                _this3.maxProtein = input;
+              }, placeholder: "Max Protein" }),
+            React.createElement(
+              "button",
+              null,
+              "Search"
+            )
+          );
+        } else {
+          searchForm = React.createElement(
+            "div",
+            null,
+            "Search Results"
+          );
+        }
+
         return React.createElement(
           "div",
-          null,
-          "Nutrients Search Thing"
+          { className: "search-container" },
+          React.createElement(
+            "h1",
+            null,
+            "Nutrients Search Thing"
+          ),
+          searchForm
         );
       }
     }]);
