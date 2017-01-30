@@ -111,7 +111,7 @@ if (window.FC === undefined) {
     getSavedRecipe: function getSavedRecipe(catagoryId, recipeId) {
       var detailedRecipeInfo;
       var selectedCatagory;
-
+      console.log(storedInfo.dietInfo);
       storedInfo.catagoryInfo.catagories.forEach(function (catagory) {
 
         if (catagory.id === catagoryId) {
@@ -135,8 +135,11 @@ if (window.FC === undefined) {
       });
 
       return detailedRecipeInfo;
-    }
+    },
 
+    getDietInfo: function getDietInfo() {
+      return storedInfo.dietInfo;
+    }
   };
 })();
 //# sourceMappingURL=dietData.js.map

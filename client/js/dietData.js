@@ -104,7 +104,7 @@ if (window.FC === undefined) { window.FC = {}; }
     getSavedRecipe: function(catagoryId, recipeId) {
       var detailedRecipeInfo;
       var selectedCatagory;
-
+      console.log(storedInfo.dietInfo);
         storedInfo.catagoryInfo.catagories.forEach((catagory) => {
 
           if (catagory.id === catagoryId) {
@@ -117,7 +117,7 @@ if (window.FC === undefined) { window.FC = {}; }
         //BUG: This is a workaround for componentWillReceiveProps on SavedRecipeDetailComponent firing
         //  twice, first with old data. Find real fix.
         if (selectedCatagory === undefined) {
-      
+
           return storedInfo.catagoryInfo.catagories[0].recipes[0];
         }
 
@@ -130,6 +130,10 @@ if (window.FC === undefined) { window.FC = {}; }
         });
 
         return detailedRecipeInfo;
+      },
+
+      getDietInfo() {
+        return storedInfo.dietInfo;
       }
 
     }

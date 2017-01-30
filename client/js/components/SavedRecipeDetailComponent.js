@@ -7,41 +7,86 @@ if (window.FC === undefined) { window.FC = {}; }
     constructor() {
       super();
       this.state = { recipe: { analyzedInstructions: [],
-      extendedIngredients: [], nutrients: [] } }
+      extendedIngredients: [], nutrients: [] }, diets: { diets: [] } }
     }
 
     componentWillReceiveProps() {
 
       var recipe = FC.dietData.getSavedRecipe(this.props.params.catagoryId, this.props.params.recipeId);
+      var diets = FC.dietData.getDietInfo();
 
       this.setState({
-        recipe: recipe
+        recipe: recipe,
+        diets: diets
       });
 
     }
 
-    render() {
+    findNutrients(item, itemTwo, itemThree, itemFour) {
+
       var nutrientsArray = []
 
       this.state.recipe.nutrients.map((nutrient) => {
 
-        if (nutrient.title.indexOf("Calories") !== -1) {
+        if (nutrient.title.indexOf(item) !== -1) {
           nutrientsArray.push(nutrient);
         }
-        else if (nutrient.title.indexOf("Fat") !== -1) {
+        else if (nutrient.title === itemTwo) {
           nutrientsArray.push(nutrient);
         }
-        else if (nutrient.title.indexOf("Carbohydrates") !== -1) {
+        else if (nutrient.title.indexOf(itemThree) !== -1) {
           nutrientsArray.push(nutrient);
         }
-        else if (nutrient.title.indexOf("Protein") !== -1) {
+        else if (nutrient.title.indexOf(itemFour) !== -1) {
           nutrientsArray.push(nutrient);
         }
 
       });
 
+      return nutrientsArray;
+    }
 
-      console.log(this.state.recipe);
+    findActiveDiet() {
+      var activeDiet = {}
+      var dailyValueArray = []
+      this.state.diets.diets.map((diet) => {
+        if (diet.active === true) {
+          activeDiet = diet
+        }
+      });
+
+      dailyValueArray.push(activeDiet.calories);
+      dailyValueArray.push(activeDiet.fat);
+      dailyValueArray.push(activeDiet.carbs);
+      dailyValueArray.push(activeDiet.protein);
+
+      return dailyValueArray;
+    }
+
+
+    render() {
+
+      var diet = this.findActiveDiet();
+      var nutrients = this.findNutrients("Calories", "Fat", "Carbohydrates", "Protein");
+      var percents = []
+
+      for (var i = 0; i < nutrients.length; i++) {
+
+        var item = {
+          title: "",
+          percent: (nutrients[i].amount / diet[i]) * 100
+        }
+        percents.push(item);
+      }
+
+      if (percents[0] !== undefined) {
+
+        percents[0].title = "Calories";
+        percents[1].title = "Fat";
+        percents[2].title = "Carbohydrates";
+        percents[3].title = "Protein";
+
+      }
 
       return <div className="search-container"><h1>{this.state.recipe.name}</h1>
       <img className="detail-img" src={this.state.recipe.image} />
@@ -50,8 +95,14 @@ if (window.FC === undefined) { window.FC = {}; }
       <div>
         <h2>Nutritional Information</h2>
         <ul>
-          {nutrientsArray.map((nutrient, index) => {
+          {nutrients.map((nutrient, index) => {
             return <li key={index}>{nutrient.title + ": " + nutrient.amount + " " + nutrient.unit}</li>
+          })}
+        </ul>
+        <h2>Percent of Daily Diet</h2>
+        <ul>
+          {percents.map((nutrient, index) => {
+            return <li key={index}>{nutrient.title + ": " + nutrient.percent.toFixed(1) + "%"}</li> 
           })}
         </ul>
       </div>

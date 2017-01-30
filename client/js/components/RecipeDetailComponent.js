@@ -6,7 +6,7 @@ class RecipeDetailComponent extends React.Component {
 
   constructor() {
     super();
-    this.state = { data: { extendedIngredients: [] }, instructions: [] }
+    this.state = { data: { extendedIngredients: [] }, instructions: [], nutrients: [], diet: {} }
   }
 
   componentDidMount() {
@@ -23,17 +23,27 @@ class RecipeDetailComponent extends React.Component {
     .done((data) => {
 
       FC.dietData.storeRecipeInfo(data);
+      var diets = FC.dietData.getDietInfo();
+      var activeDiet = {};
+
+      diets.diets.map((diet) => {
+        if (diet.active === true) {
+          activeDiet = diet
+        }
+      });
 
       this.setState({
         data: data,
-        instructions: data.analyzedInstructions[0].steps
+        instructions: data.analyzedInstructions[0].steps,
+        nutrients: data.nutrition.nutrients,
+        diet: activeDiet
       });
 
     });
   }
 
   render() {
-
+    console.log(this.state);
     return <div className="search-container"><FC.SaveToComponent data={this.state.data}/><h1>{this.state.data.title}</h1>
       <img className="detail-img" src={this.state.data.image} />
       <h1>ingredients</h1>

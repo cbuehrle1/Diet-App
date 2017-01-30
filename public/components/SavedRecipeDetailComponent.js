@@ -22,7 +22,7 @@ if (window.FC === undefined) {
       var _this = _possibleConstructorReturn(this, (SavedRecipeDetailComponent.__proto__ || Object.getPrototypeOf(SavedRecipeDetailComponent)).call(this));
 
       _this.state = { recipe: { analyzedInstructions: [],
-          extendedIngredients: [], nutrients: [] } };
+          extendedIngredients: [], nutrients: [] }, diets: { diets: [] } };
       return _this;
     }
 
@@ -31,30 +31,76 @@ if (window.FC === undefined) {
       value: function componentWillReceiveProps() {
 
         var recipe = FC.dietData.getSavedRecipe(this.props.params.catagoryId, this.props.params.recipeId);
+        var diets = FC.dietData.getDietInfo();
 
         this.setState({
-          recipe: recipe
+          recipe: recipe,
+          diets: diets
         });
       }
     }, {
-      key: "render",
-      value: function render() {
+      key: "findNutrients",
+      value: function findNutrients(item, itemTwo, itemThree, itemFour) {
+
         var nutrientsArray = [];
 
         this.state.recipe.nutrients.map(function (nutrient) {
 
-          if (nutrient.title.indexOf("Calories") !== -1) {
+          if (nutrient.title.indexOf(item) !== -1) {
             nutrientsArray.push(nutrient);
-          } else if (nutrient.title.indexOf("Fat") !== -1) {
+          } else if (nutrient.title === itemTwo) {
             nutrientsArray.push(nutrient);
-          } else if (nutrient.title.indexOf("Carbohydrates") !== -1) {
+          } else if (nutrient.title.indexOf(itemThree) !== -1) {
             nutrientsArray.push(nutrient);
-          } else if (nutrient.title.indexOf("Protein") !== -1) {
+          } else if (nutrient.title.indexOf(itemFour) !== -1) {
             nutrientsArray.push(nutrient);
           }
         });
 
-        console.log(this.state.recipe);
+        return nutrientsArray;
+      }
+    }, {
+      key: "findActiveDiet",
+      value: function findActiveDiet() {
+        var activeDiet = {};
+        var dailyValueArray = [];
+        this.state.diets.diets.map(function (diet) {
+          if (diet.active === true) {
+            activeDiet = diet;
+          }
+        });
+
+        dailyValueArray.push(activeDiet.calories);
+        dailyValueArray.push(activeDiet.fat);
+        dailyValueArray.push(activeDiet.carbs);
+        dailyValueArray.push(activeDiet.protein);
+
+        return dailyValueArray;
+      }
+    }, {
+      key: "render",
+      value: function render() {
+
+        var diet = this.findActiveDiet();
+        var nutrients = this.findNutrients("Calories", "Fat", "Carbohydrates", "Protein");
+        var percents = [];
+
+        for (var i = 0; i < nutrients.length; i++) {
+
+          var item = {
+            title: "",
+            percent: nutrients[i].amount / diet[i] * 100
+          };
+          percents.push(item);
+        }
+
+        if (percents[0] !== undefined) {
+
+          percents[0].title = "Calories";
+          percents[1].title = "Fat";
+          percents[2].title = "Carbohydrates";
+          percents[3].title = "Protein";
+        }
 
         return React.createElement(
           "div",
@@ -89,11 +135,27 @@ if (window.FC === undefined) {
             React.createElement(
               "ul",
               null,
-              nutrientsArray.map(function (nutrient, index) {
+              nutrients.map(function (nutrient, index) {
                 return React.createElement(
                   "li",
                   { key: index },
                   nutrient.title + ": " + nutrient.amount + " " + nutrient.unit
+                );
+              })
+            ),
+            React.createElement(
+              "h2",
+              null,
+              "Percent of Daily Diet"
+            ),
+            React.createElement(
+              "ul",
+              null,
+              percents.map(function (nutrient, index) {
+                return React.createElement(
+                  "li",
+                  { key: index },
+                  nutrient.title + ": " + nutrient.percent.toFixed(1) + "%"
                 );
               })
             )

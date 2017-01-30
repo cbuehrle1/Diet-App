@@ -21,7 +21,7 @@ if (window.FC === undefined) {
 
       var _this = _possibleConstructorReturn(this, (RecipeDetailComponent.__proto__ || Object.getPrototypeOf(RecipeDetailComponent)).call(this));
 
-      _this.state = { data: { extendedIngredients: [] }, instructions: [] };
+      _this.state = { data: { extendedIngredients: [] }, instructions: [], nutrients: [], diet: {} };
       return _this;
     }
 
@@ -40,17 +40,27 @@ if (window.FC === undefined) {
         }).done(function (data) {
 
           FC.dietData.storeRecipeInfo(data);
+          var diets = FC.dietData.getDietInfo();
+          var activeDiet = {};
+
+          diets.diets.map(function (diet) {
+            if (diet.active === true) {
+              activeDiet = diet;
+            }
+          });
 
           _this2.setState({
             data: data,
-            instructions: data.analyzedInstructions[0].steps
+            instructions: data.analyzedInstructions[0].steps,
+            nutrients: data.nutrition.nutrients,
+            diet: activeDiet
           });
         });
       }
     }, {
       key: "render",
       value: function render() {
-
+        console.log(this.state);
         return React.createElement(
           "div",
           { className: "search-container" },
