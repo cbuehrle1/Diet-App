@@ -2,10 +2,12 @@ DIET APP by Chad Buehrle
 
 Goal: Create a platform for users to easily search for recipes and quickly understand how they fit within their current diet plan and nutritional macros.
 
-Technologies: Used Node.js with Express as the server-side framework. MongoDB is utilized as the storage source while using Mongoose to communicate with Mongo through Node. The front-end application utilizes SASS and the React framework to create the functionality of a Single Page Application once a user is logged in. Also includes Gulp for process management and babel for compiling ES6 in the client folder.
+Technologies: Used Node.js with Express as the server-side framework. MongoDB is utilized as the storage source while using Mongoose to communicate with Mongo through Node. The front-end application utilizes SASS and React to create the functionality of a Single Page Application once a user is logged in. Also includes Gulp for process management and babel for compiling ES6 in the client folder.
 
-functionality: Allows a user to create a profile, Create Diet plans within their account, and create categories to store recipes within under each diet. The site is also linked to an external database of over 350,000 recipes for users to look search through and save to their diet plans for easy access in the future.
+Functionality: Allows a user to create a profile, create diet plans within their account, and create categories to store recipes within under each diet. The site is also linked to an external api of over 350,000 recipes for users to look search through and save to their diet plans for easy access in the future.
 
 Current State: Under production - Currently working on polishing out the functionality of the website as well as more in-depth styling to the main components of the SPA. Following these steps, I will be working on making the application mobile responsive.
 
-For questions please contact at chad.buehrle@gmail.com or see additional code samples at https://github.com/cbuehrle1
+Currently Deployed on Heroku at https://diet-app.herokuapp.com/
+
+For questions please contact at chad.buehrle@gmail.com
