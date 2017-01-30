@@ -9,8 +9,9 @@ var User = require("./models/user");
 var apiRoutes = require("./api-routes.js")
 
 var app = express();
+var db = process.env.MONGODB_URI || "mongodb://localhost:27017/foodpair";
 
-mongoose.connect("mongodb://localhost:27017/foodpair");
+mongoose.connect(db);
 
 setUpPassport();
 
@@ -22,9 +23,10 @@ app.set('views', path.join(__dirname, '/views'));
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 
+var SECRET = process.env.SECRET || "bananaapple1305%$3#orange44521$$GdAGVvf!";
 
 app.use(session({
-  secret: "bananaapple1305%$3#orange44521$$GdAGVvf!",
+  secret: SECRET,
   resave: true,
   saveUninitialized: true
 }));
@@ -107,6 +109,8 @@ app.post("/signup", function(req, res, next) {
 
 app.use(require("./api-routes.js")());
 
-app.listen(5000, function() {
-  console.log('listening on port 5000.');
+var port = process.env.PORT || 5000;
+
+app.listen(port, function() {
+  console.log('listening on port');
 });
