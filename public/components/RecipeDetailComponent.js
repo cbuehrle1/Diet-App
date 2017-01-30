@@ -58,9 +58,32 @@ if (window.FC === undefined) {
         });
       }
     }, {
+      key: "findNutrients",
+      value: function findNutrients(item, itemTwo, itemThree, itemFour) {
+
+        var nutrientsArray = [];
+
+        this.state.nutrients.map(function (nutrient) {
+
+          if (nutrient.title.indexOf(item) !== -1) {
+            nutrientsArray.push(nutrient);
+          } else if (nutrient.title === itemTwo) {
+            nutrientsArray.push(nutrient);
+          } else if (nutrient.title.indexOf(itemThree) !== -1) {
+            nutrientsArray.push(nutrient);
+          } else if (nutrient.title.indexOf(itemFour) !== -1) {
+            nutrientsArray.push(nutrient);
+          }
+        });
+
+        return nutrientsArray;
+      }
+    }, {
       key: "render",
       value: function render() {
-        console.log(this.state);
+
+        var nutrientsArray = this.findNutrients("Calories", "Fat", "Carbohydrates", "Protein");
+
         return React.createElement(
           "div",
           { className: "search-container" },
@@ -71,6 +94,22 @@ if (window.FC === undefined) {
             this.state.data.title
           ),
           React.createElement("img", { className: "detail-img", src: this.state.data.image }),
+          React.createElement(
+            "h1",
+            null,
+            "Nutrition Per Serving"
+          ),
+          React.createElement(
+            "ul",
+            null,
+            nutrientsArray.map(function (nutrient, index) {
+              return React.createElement(
+                "li",
+                { key: index },
+                nutrient.title + ": " + nutrient.amount + " " + nutrient.unit
+              );
+            })
+          ),
           React.createElement(
             "h1",
             null,

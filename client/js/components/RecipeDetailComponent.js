@@ -42,10 +42,42 @@ class RecipeDetailComponent extends React.Component {
     });
   }
 
+  findNutrients(item, itemTwo, itemThree, itemFour) {
+
+    var nutrientsArray = []
+
+    this.state.nutrients.map((nutrient) => {
+
+      if (nutrient.title.indexOf(item) !== -1) {
+        nutrientsArray.push(nutrient);
+      }
+      else if (nutrient.title === itemTwo) {
+        nutrientsArray.push(nutrient);
+      }
+      else if (nutrient.title.indexOf(itemThree) !== -1) {
+        nutrientsArray.push(nutrient);
+      }
+      else if (nutrient.title.indexOf(itemFour) !== -1) {
+        nutrientsArray.push(nutrient);
+      }
+
+    });
+
+    return nutrientsArray;
+  }
+
   render() {
-    console.log(this.state);
+
+    var nutrientsArray = this.findNutrients("Calories", "Fat", "Carbohydrates", "Protein");
+
     return <div className="search-container"><FC.SaveToComponent data={this.state.data}/><h1>{this.state.data.title}</h1>
       <img className="detail-img" src={this.state.data.image} />
+      <h1>Nutrition Per Serving</h1>
+      <ul>
+        {nutrientsArray.map((nutrient, index) => {
+          return <li key={index}>{nutrient.title + ": " + nutrient.amount + " " + nutrient.unit}</li>
+        })}
+      </ul>
       <h1>ingredients</h1>
       <ul className="search-results">{this.state.data.extendedIngredients.map((ingredient, index) => {
         return <li key={index} >{ingredient.originalString}</li>;
