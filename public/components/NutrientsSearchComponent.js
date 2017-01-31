@@ -21,64 +21,149 @@ if (window.FC === undefined) {
 
       var _this = _possibleConstructorReturn(this, (NutrientsSearchComponent.__proto__ || Object.getPrototypeOf(NutrientsSearchComponent)).call(this));
 
-      _this.state = { form: true, advancedForm: false };
+      _this.state = { form: true, results: [], offset: 0, searchParams: {}, query: "" };
+      _this.handleScroll = _this.handleScroll.bind(_this);
       return _this;
     }
 
     _createClass(NutrientsSearchComponent, [{
-      key: "callSearch",
-      value: function callSearch(evt) {
+      key: "componentDidMount",
+      value: function componentDidMount() {
+        window.addEventListener("scroll", this.handleScroll);
+      }
+    }, {
+      key: "componentWillUnmount",
+      value: function componentWillUnmount() {
+        window.removeEventListener("scroll", this.handleScroll);
+      }
+    }, {
+      key: "handleScroll",
+      value: function handleScroll() {
         var _this2 = this;
 
-        evt.preventDefault();
+        var windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+        var body = document.body;
+        var html = document.documentElement;
+        var docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+        var windowBottom = windowHeight + window.pageYOffset;
 
-        var queryStr = this.queryInput.value;
-        var maxCalories = this.maxCalories.value;
-        var maxFat = this.maxFat.value;
-        var maxCarbs = this.maxCarbs.value;
-        var maxProtein = this.maxProtein.value;
+        if (windowBottom >= docHeight) {
+
+          var queryStr = this.state.searchParams.queryStr;
+          var offsetAmt = this.state.offset;
+          var maxCalories = this.state.searchParams.maxCalories;
+          var maxFat = this.state.searchParams.maxFat;
+          var maxCarbs = this.state.searchParams.maxCarbs;
+          var maxProtein = this.state.searchParams.maxProtein;
+
+          $.ajax({
+            url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?limitLicense=false" + maxCalories + maxCarbs + maxFat + maxProtein + "&number=10&offset=" + offsetAmt + queryStr + "&ranking=1",
+            type: 'GET',
+            beforeSend: function beforeSend(xhr) {
+              xhr.setRequestHeader("X-Mashape-Key", "lfLi0pd5ComshP5lbLvR2GHC5uP6p1b7AOujsnP5aI9GJrDgG1");
+              xhr.setRequestHeader("Accept", "application/json");
+            }
+          }).done(function (data) {
+            var concatRecipes = _this2.state.results.concat(data.results);
+
+            _this2.setState({
+              form: false,
+              results: concatRecipes,
+              offset: _this2.state.offset + 10,
+              searchParams: _this2.state.searchParams
+            });
+          });
+        }
+      }
+    }, {
+      key: "validateSearchParams",
+      value: function validateSearchParams(string, value) {
+
+        if (value === "") {
+          return "";
+        } else {
+          return string + value;
+        }
+      }
+    }, {
+      key: "callSearch",
+      value: function callSearch(evt) {
+        var _this3 = this;
+
+        evt.preventDefault();
+        var offsetAmt = "&offset=" + this.state.offset;
+        var queryStr = this.validateSearchParams("&query=", this.queryInput.value);
+        var maxCalories = this.validateSearchParams("&maxCalories=", this.maxCalories.value);
+        var maxFat = this.validateSearchParams("&maxFat=", this.maxFat.value);
+        var maxCarbs = this.validateSearchParams("&maxCarbs=", this.maxCarbs.value);
+        var maxProtein = this.validateSearchParams("&maxProtein=", this.maxProtein.value);
+        console.log("making ajax call");
 
         $.ajax({
-          url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?limitLicense=false&maxCalories=" + maxCalories + "&maxCarbs=" + maxCarbs + "&maxFat=" + maxFat + "&maxProtein=" + maxProtein + "&number=10&offset=0&query=" + queryStr + "&ranking=1",
+          url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?limitLicense=false" + maxCalories + maxCarbs + maxFat + maxProtein + "&number=10" + offsetAmt + queryStr + "&ranking=1",
           type: 'GET',
           beforeSend: function beforeSend(xhr) {
             xhr.setRequestHeader("X-Mashape-Key", "lfLi0pd5ComshP5lbLvR2GHC5uP6p1b7AOujsnP5aI9GJrDgG1");
             xhr.setRequestHeader("Accept", "application/json");
           }
         }).done(function (data) {
-          console.log(data.results);
-          _this2.setState({
-            form: false
+
+          var params = {
+            queryStr: queryStr,
+            maxCalories: maxCalories,
+            maxFat: maxFat,
+            maxCarbs: maxCarbs,
+            maxProtein: maxProtein
+          };
+
+          _this3.setState({
+            form: false,
+            results: data.results,
+            offset: _this3.state.offset + 10,
+            searchParams: params,
+            query: _this3.queryInput.value
           });
+          console.log(data);
+        });
+      }
+    }, {
+      key: "backToSearch",
+      value: function backToSearch() {
+        this.setState({
+          form: true,
+          searchParams: {},
+          query: "",
+          offset: 0
         });
       }
     }, {
       key: "render",
       value: function render() {
-        var _this3 = this;
+        var _this4 = this;
 
         var searchForm;
+        var searchResults;
 
         if (this.state.form === true) {
           searchForm = React.createElement(
             "form",
             { onSubmit: function onSubmit(evt) {
-                _this3.callSearch(evt);
+                _this4.callSearch(evt);
               } },
             React.createElement("input", { ref: function ref(input) {
-                _this3.queryInput = input;
+                _this4.queryInput = input;
               }, placeholder: "Recipe Keyword" }),
             React.createElement("input", { ref: function ref(input) {
-                _this3.maxCalories = input;
+                _this4.maxCalories = input;
               }, placeholder: "Max Calories" }),
             React.createElement("input", { ref: function ref(input) {
-                _this3.maxFat = input;
+                _this4.maxFat = input;
               }, placeholder: "Max Fat" }),
             React.createElement("input", { ref: function ref(input) {
-                _this3.maxCarbs = input;
+                _this4.maxCarbs = input;
               }, placeholder: "Max Carbohydrates" }),
             React.createElement("input", { ref: function ref(input) {
-                _this3.maxProtein = input;
+                _this4.maxProtein = input;
               }, placeholder: "Max Protein" }),
             React.createElement(
               "button",
@@ -87,10 +172,48 @@ if (window.FC === undefined) {
             )
           );
         } else {
+
           searchForm = React.createElement(
             "div",
             null,
-            "Search Results"
+            React.createElement(
+              "button",
+              { onClick: function onClick() {
+                  _this4.backToSearch();
+                } },
+              "New Search"
+            )
+          );
+          searchResults = React.createElement(
+            "div",
+            null,
+            React.createElement(
+              "h1",
+              null,
+              "Search results for \"",
+              this.state.query,
+              "\""
+            ),
+            React.createElement(
+              "ul",
+              { className: "search-results" },
+              this.state.results.map(function (recipe, index) {
+                return React.createElement(
+                  "li",
+                  { key: index },
+                  React.createElement("img", { src: recipe.image }),
+                  React.createElement(
+                    ReactRouter.Link,
+                    { to: "/recipe/" + recipe.id },
+                    React.createElement(
+                      "p",
+                      null,
+                      recipe.title
+                    )
+                  )
+                );
+              })
+            )
           );
         }
 
@@ -102,7 +225,8 @@ if (window.FC === undefined) {
             null,
             "Nutrients Search Thing"
           ),
-          searchForm
+          searchForm,
+          searchResults
         );
       }
     }]);
