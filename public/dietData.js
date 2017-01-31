@@ -12,6 +12,8 @@ if (window.FC === undefined) {
     catagoryInfo: {}
   };
 
+  var currentSearchInfo = {};
+
   window.FC.dietData = {
 
     getCatagories: function getCatagories(user, diet) {
@@ -43,6 +45,7 @@ if (window.FC === undefined) {
           $.ajax({
             url: "/api/catagory/" + activeDiet
           }).done(function (data) {
+            console.log(_this.callbacks);
             storedInfo.catagoryInfo = data;
             _this.callbacks.forEach(function (cb) {
               cb(userVar, dietVar, data);
@@ -139,7 +142,21 @@ if (window.FC === undefined) {
 
     getDietInfo: function getDietInfo() {
       return storedInfo.dietInfo;
+    },
+
+    onUnmount: function onUnmount(toRemove) {
+      var _this5 = this;
+
+      this.callbacks.forEach(function (callback, index) {
+
+        if (toRemove === callback) {
+          _this5.callbacks.splice(index - 1, 1);
+        }
+      });
+
+      console.log(this.callbacks);
     }
+
   };
 })();
 //# sourceMappingURL=dietData.js.map

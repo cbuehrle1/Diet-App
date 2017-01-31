@@ -13,6 +13,15 @@ if (window.FC === undefined) {
 }
 
 (function () {
+
+  var localStorageValue = localStorage.getItem("sidebar");
+
+  if (localStorageValue === null) {
+    localStorage.setItem("sidebar", "main-landing");
+  }
+
+  localStorageValue = localStorage.getItem("sidebar");
+
   var NavBar = function (_React$Component) {
     _inherits(NavBar, _React$Component);
 
@@ -23,12 +32,13 @@ if (window.FC === undefined) {
 
       _this.state = { user: {
           displayName: ""
-        }, sidebar: "main-landing",
+        }, sidebar: localStorageValue,
         height: window.innerHeight,
         diet: { diets: [] },
         addCat: false,
         catagory: { catagories: [] }
       };
+
       return _this;
     }
 
@@ -68,6 +78,7 @@ if (window.FC === undefined) {
     }, {
       key: "moveToSideBar",
       value: function moveToSideBar() {
+        localStorage.setItem("sidebar", "side-bar");
         this.props.callback();
         this.setState({
           user: this.state.user,

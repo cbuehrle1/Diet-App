@@ -13,6 +13,15 @@ if (window.FC === undefined) {
 }
 
 (function () {
+
+  var localStorageValue = localStorage.getItem("show");
+
+  if (localStorageValue === null) {
+    localStorage.setItem("show", "app-header-main");
+  }
+
+  localStorageValue = localStorage.getItem("show");
+
   var AppComponent = function (_React$Component) {
     _inherits(AppComponent, _React$Component);
 
@@ -25,6 +34,7 @@ if (window.FC === undefined) {
     _createClass(AppComponent, [{
       key: "renderChildren",
       value: function renderChildren() {
+        localStorage.setItem("show", "app-header");
         this.setState({
           show: true,
           appHeader: "app-header"
@@ -42,6 +52,49 @@ if (window.FC === undefined) {
         if (this.state !== null && this.state.show === true) {
           children = this.props.children;
           headerStyle = this.state.appHeader;
+          headerLinks = React.createElement(
+            "ul",
+            { className: "ul-left" },
+            React.createElement(
+              "li",
+              { className: "left-header-li" },
+              React.createElement(
+                ReactRouter.Link,
+                { to: "/" },
+                "Chads App"
+              )
+            ),
+            React.createElement(
+              "li",
+              { className: "left-header-li" },
+              React.createElement(
+                ReactRouter.Link,
+                { to: "/RecipeSearch" },
+                "Search Recipes"
+              )
+            ),
+            React.createElement(
+              "li",
+              { className: "nutrients-search" },
+              React.createElement(
+                ReactRouter.Link,
+                { to: "/NutrientsSearch" },
+                "Search by Nutrients"
+              )
+            ),
+            React.createElement(
+              "li",
+              { className: "left-header-li" },
+              React.createElement(
+                ReactRouter.Link,
+                { to: "/CreateDiet" },
+                "Create Diet"
+              )
+            )
+          );
+        } else if (localStorageValue === "app-header") {
+          children = this.props.children;
+          headerStyle = localStorageValue;
           headerLinks = React.createElement(
             "ul",
             { className: "ul-left" },

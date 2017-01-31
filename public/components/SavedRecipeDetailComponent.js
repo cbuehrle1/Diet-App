@@ -27,16 +27,51 @@ if (window.FC === undefined) {
     }
 
     _createClass(SavedRecipeDetailComponent, [{
+      key: "componentDidMount",
+      value: function componentDidMount() {
+        var _this2 = this;
+
+        var cb = function cb() {
+          var recipe = FC.dietData.getSavedRecipe(_this2.props.params.catagoryId, _this2.props.params.recipeId);
+          var diets = FC.dietData.getDietInfo();
+          console.log("did mount");
+          _this2.setState({
+            recipe: recipe,
+            diets: diets
+          });
+        };
+
+        FC.dietData.registerCallback(cb);
+        FC.dietData.loadUser();
+      }
+    }, {
       key: "componentWillReceiveProps",
       value: function componentWillReceiveProps() {
 
         var recipe = FC.dietData.getSavedRecipe(this.props.params.catagoryId, this.props.params.recipeId);
         var diets = FC.dietData.getDietInfo();
-
+        console.log("received props");
         this.setState({
           recipe: recipe,
           diets: diets
         });
+      }
+    }, {
+      key: "componentWillUnmount",
+      value: function componentWillUnmount() {
+        var _this3 = this;
+
+        var cb = function cb() {
+          var recipe = FC.dietData.getSavedRecipe(_this3.props.params.catagoryId, _this3.props.params.recipeId);
+          var diets = FC.dietData.getDietInfo();
+
+          _this3.setState({
+            recipe: recipe,
+            diets: diets
+          });
+        };
+
+        FC.dietData.onUnmount(cb);
       }
     }, {
       key: "findNutrients",

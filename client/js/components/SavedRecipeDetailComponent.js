@@ -10,16 +10,45 @@ if (window.FC === undefined) { window.FC = {}; }
       extendedIngredients: [], nutrients: [] }, diets: { diets: [] } }
     }
 
+    componentDidMount() {
+      var cb = () => {
+        var recipe = FC.dietData.getSavedRecipe(this.props.params.catagoryId, this.props.params.recipeId);
+        var diets = FC.dietData.getDietInfo();
+        console.log("did mount")
+        this.setState({
+          recipe: recipe,
+          diets: diets
+        });
+      }
+
+      FC.dietData.registerCallback(cb);
+      FC.dietData.loadUser();
+    }
+
     componentWillReceiveProps() {
 
-      var recipe = FC.dietData.getSavedRecipe(this.props.params.catagoryId, this.props.params.recipeId);
-      var diets = FC.dietData.getDietInfo();
+        var recipe = FC.dietData.getSavedRecipe(this.props.params.catagoryId, this.props.params.recipeId);
+        var diets = FC.dietData.getDietInfo();
+        console.log("received props")
+        this.setState({
+          recipe: recipe,
+          diets: diets
+        });
+      }
 
-      this.setState({
-        recipe: recipe,
-        diets: diets
-      });
+    componentWillUnmount() {
 
+      var cb = () => {
+        var recipe = FC.dietData.getSavedRecipe(this.props.params.catagoryId, this.props.params.recipeId);
+        var diets = FC.dietData.getDietInfo();
+
+        this.setState({
+          recipe: recipe,
+          diets: diets
+        });
+      }
+
+      FC.dietData.onUnmount(cb);
     }
 
     findNutrients(item, itemTwo, itemThree, itemFour) {
@@ -102,7 +131,7 @@ if (window.FC === undefined) { window.FC = {}; }
         <h2>Percent of Daily Diet</h2>
         <ul>
           {percents.map((nutrient, index) => {
-            return <li key={index}>{nutrient.title + ": " + nutrient.percent.toFixed(1) + "%"}</li> 
+            return <li key={index}>{nutrient.title + ": " + nutrient.percent.toFixed(1) + "%"}</li>
           })}
         </ul>
       </div>

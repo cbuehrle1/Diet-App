@@ -8,6 +8,8 @@ if (window.FC === undefined) { window.FC = {}; }
     catagoryInfo: {}
   }
 
+  var currentSearchInfo = {}
+  
   window.FC.dietData = {
 
     getCatagories: function (user, diet) {
@@ -37,6 +39,7 @@ if (window.FC === undefined) { window.FC = {}; }
             url: "/api/catagory/" + activeDiet
           })
           .done((data) => {
+            console.log(this.callbacks)
             storedInfo.catagoryInfo = data;
             this.callbacks.forEach((cb) => { cb(userVar, dietVar, data); })
           })
@@ -132,8 +135,21 @@ if (window.FC === undefined) { window.FC = {}; }
         return detailedRecipeInfo;
       },
 
-      getDietInfo() {
+      getDietInfo: function () {
         return storedInfo.dietInfo;
+      },
+
+      onUnmount: function(toRemove) {
+
+        this.callbacks.forEach((callback, index) => {
+
+          if (toRemove === callback) {
+            this.callbacks.splice(index - 1, 1);
+          }
+
+        });
+
+        console.log(this.callbacks);
       }
 
     }

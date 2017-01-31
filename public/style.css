@@ -170,7 +170,11 @@ header {
     font-size: 14px;
     color: white;
     padding-left: 12px;
-    padding-top: 3px; }
+    padding-top: 3px;
+    padding-right: 3%;
+    padding-bottom: 3px; }
+  .side-bar a {
+    text-decoration: none; }
   .side-bar .add-catagory {
     padding-left: 10px;
     display: block;

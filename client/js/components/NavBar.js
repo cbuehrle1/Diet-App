@@ -2,18 +2,25 @@ if (window.FC === undefined) { window.FC = {}; }
 
 (() => {
 
+  var localStorageValue = localStorage.getItem("sidebar");
+
+  if (localStorageValue === null) { localStorage.setItem("sidebar", "main-landing") }
+
+  localStorageValue = localStorage.getItem("sidebar");
+
   class NavBar extends React.Component {
 
     constructor() {
       super();
       this.state = { user: {
         displayName: ""
-      }, sidebar: "main-landing",
+      }, sidebar: localStorageValue,
       height: window.innerHeight,
       diet: { diets: [] },
       addCat: false,
       catagory: { catagories: [] }
       }
+
     }
 
     componentDidMount() {
@@ -51,11 +58,13 @@ if (window.FC === undefined) { window.FC = {}; }
     }
 
     moveToSideBar() {
+      localStorage.setItem("sidebar", "side-bar");
       this.props.callback();
       this.setState({
         user: this.state.user,
         sidebar: "side-bar"
       });
+
     }
 
     createCatagory() {
@@ -81,7 +90,7 @@ if (window.FC === undefined) { window.FC = {}; }
 
           if (diet.active === true) {
             activeId = diet.id;
-    
+
           }
 
         });
