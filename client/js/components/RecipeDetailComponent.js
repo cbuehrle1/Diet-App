@@ -21,7 +21,7 @@ class RecipeDetailComponent extends React.Component {
       }
     })
     .done((data) => {
-
+      console.log(data);
       FC.dietData.storeRecipeInfo(data);
       var diets = FC.dietData.getDietInfo();
       var activeDiet = {};
@@ -32,9 +32,18 @@ class RecipeDetailComponent extends React.Component {
         }
       });
 
+      var instructions;
+
+      if (data.analyzedInstructions.length === 0) {
+        instructions = data.instructions;
+      }
+      else {
+        instructions = data.analyzedInstructions[0].steps
+      }
+
       this.setState({
         data: data,
-        instructions: data.analyzedInstructions[0].steps,
+        instructions: instructions,
         nutrients: data.nutrition.nutrients,
         diet: activeDiet
       });
@@ -70,6 +79,22 @@ class RecipeDetailComponent extends React.Component {
 
     var nutrientsArray = this.findNutrients("Calories", "Fat", "Carbohydrates", "Protein");
 
+    var instructions;
+    console.log(this.state.instructions);
+    if (typeof this.state.instructions === "string") {
+      instructions = <p>{this.state.instructions}</p>
+    }
+    else if (this.state.instructions === null) {
+      instructions;
+    }
+    else {
+      instructions = <div><h1>instructions</h1><ol className="search-results">
+        {this.state.instructions.map((step, index) => {
+          return <li key={index}>{step.step}</li>;
+        })}
+      </ol></div>
+    }
+
     return <div className="search-container"><FC.SaveToComponent data={this.state.data}/><h1>{this.state.data.title}</h1>
       <img className="detail-img" src={this.state.data.image} />
       <h1>Nutrition Per Serving</h1>
@@ -83,12 +108,7 @@ class RecipeDetailComponent extends React.Component {
         return <li key={index} >{ingredient.originalString}</li>;
       })}
       </ul>
-      <h1>instructions</h1>
-      <ol className="search-results">
-        {this.state.instructions.map((step, index) => {
-          return <li key={index}>{step.step}</li>;
-        })}
-      </ol>
+      {instructions}
     </div>
   }
 }

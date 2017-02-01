@@ -12,7 +12,7 @@ if (window.FC === undefined) {
     catagoryInfo: {}
   };
 
-  var currentSearchInfo = {};
+  var currentSearchInfo = [];
 
   window.FC.dietData = {
 
@@ -45,7 +45,7 @@ if (window.FC === undefined) {
           $.ajax({
             url: "/api/catagory/" + activeDiet
           }).done(function (data) {
-            console.log(_this.callbacks);
+
             storedInfo.catagoryInfo = data;
             _this.callbacks.forEach(function (cb) {
               cb(userVar, dietVar, data);
@@ -114,7 +114,7 @@ if (window.FC === undefined) {
     getSavedRecipe: function getSavedRecipe(catagoryId, recipeId) {
       var detailedRecipeInfo;
       var selectedCatagory;
-      console.log(storedInfo.dietInfo);
+
       storedInfo.catagoryInfo.catagories.forEach(function (catagory) {
 
         if (catagory.id === catagoryId) {
@@ -153,8 +153,33 @@ if (window.FC === undefined) {
           _this5.callbacks.splice(index - 1, 1);
         }
       });
+    },
 
-      console.log(this.callbacks);
+    storeCurrentSearch: function storeCurrentSearch(results) {
+      currentSearchInfo.push(results);
+      console.log(currentSearchInfo);
+    },
+
+    deleteCurrentSearch: function deleteCurrentSearch() {
+      currentSearchInfo = [];
+      console.log("delete", currentSearchInfo);
+    },
+
+    getCurrentSearch: function getCurrentSearch() {
+
+      if (currentSearchInfo.length > 0) {
+
+        var searchArrConcat = [];
+
+        currentSearchInfo.forEach(function (arr, index) {
+          searchArrConcat = searchArrConcat.concat(arr);
+          console.log(arr.length, searchArrConcat.length);
+        });
+
+        return searchArrConcat;
+      } else {
+        return currentSearchInfo[0];
+      }
     }
 
   };

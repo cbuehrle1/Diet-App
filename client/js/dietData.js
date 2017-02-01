@@ -8,8 +8,8 @@ if (window.FC === undefined) { window.FC = {}; }
     catagoryInfo: {}
   }
 
-  var currentSearchInfo = {}
-  
+  var currentSearchInfo = []
+
   window.FC.dietData = {
 
     getCatagories: function (user, diet) {
@@ -39,7 +39,7 @@ if (window.FC === undefined) { window.FC = {}; }
             url: "/api/catagory/" + activeDiet
           })
           .done((data) => {
-            console.log(this.callbacks)
+
             storedInfo.catagoryInfo = data;
             this.callbacks.forEach((cb) => { cb(userVar, dietVar, data); })
           })
@@ -107,7 +107,7 @@ if (window.FC === undefined) { window.FC = {}; }
     getSavedRecipe: function(catagoryId, recipeId) {
       var detailedRecipeInfo;
       var selectedCatagory;
-      console.log(storedInfo.dietInfo);
+
         storedInfo.catagoryInfo.catagories.forEach((catagory) => {
 
           if (catagory.id === catagoryId) {
@@ -149,7 +149,36 @@ if (window.FC === undefined) { window.FC = {}; }
 
         });
 
-        console.log(this.callbacks);
+
+      },
+
+      storeCurrentSearch: function(results) {
+        currentSearchInfo.push(results)
+        console.log(currentSearchInfo);
+      },
+
+      deleteCurrentSearch: function() {
+        currentSearchInfo = []
+        console.log("delete", currentSearchInfo);
+      },
+
+      getCurrentSearch: function() {
+
+        if (currentSearchInfo.length > 0) {
+
+          var searchArrConcat = []
+
+          currentSearchInfo.forEach( (arr, index) => {
+            searchArrConcat = searchArrConcat.concat(arr)
+            console.log(arr.length, searchArrConcat.length);
+          });
+
+          return searchArrConcat
+        }
+        else {
+          return currentSearchInfo[0];
+        }
+
       }
 
     }

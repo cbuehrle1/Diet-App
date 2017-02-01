@@ -38,7 +38,7 @@ if (window.FC === undefined) {
             xhr.setRequestHeader("Accept", "application/json");
           }
         }).done(function (data) {
-
+          console.log(data);
           FC.dietData.storeRecipeInfo(data);
           var diets = FC.dietData.getDietInfo();
           var activeDiet = {};
@@ -49,9 +49,17 @@ if (window.FC === undefined) {
             }
           });
 
+          var instructions;
+
+          if (data.analyzedInstructions.length === 0) {
+            instructions = data.instructions;
+          } else {
+            instructions = data.analyzedInstructions[0].steps;
+          }
+
           _this2.setState({
             data: data,
-            instructions: data.analyzedInstructions[0].steps,
+            instructions: instructions,
             nutrients: data.nutrition.nutrients,
             diet: activeDiet
           });
@@ -83,6 +91,39 @@ if (window.FC === undefined) {
       value: function render() {
 
         var nutrientsArray = this.findNutrients("Calories", "Fat", "Carbohydrates", "Protein");
+
+        var instructions;
+        console.log(this.state.instructions);
+        if (typeof this.state.instructions === "string") {
+          instructions = React.createElement(
+            "p",
+            null,
+            this.state.instructions
+          );
+        } else if (this.state.instructions === null) {
+          instructions;
+        } else {
+          instructions = React.createElement(
+            "div",
+            null,
+            React.createElement(
+              "h1",
+              null,
+              "instructions"
+            ),
+            React.createElement(
+              "ol",
+              { className: "search-results" },
+              this.state.instructions.map(function (step, index) {
+                return React.createElement(
+                  "li",
+                  { key: index },
+                  step.step
+                );
+              })
+            )
+          );
+        }
 
         return React.createElement(
           "div",
@@ -126,22 +167,7 @@ if (window.FC === undefined) {
               );
             })
           ),
-          React.createElement(
-            "h1",
-            null,
-            "instructions"
-          ),
-          React.createElement(
-            "ol",
-            { className: "search-results" },
-            this.state.instructions.map(function (step, index) {
-              return React.createElement(
-                "li",
-                { key: index },
-                step.step
-              );
-            })
-          )
+          instructions
         );
       }
     }]);

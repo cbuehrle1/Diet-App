@@ -15,6 +15,8 @@ if (window.FC === undefined) { window.FC = {}; }
     }
 
     componentDidMount() {
+      var storedSearch = FC.dietData.getCurrentSearch();
+      console.log(storedSearch);
       window.addEventListener("scroll", this.handleScroll);
     }
 
@@ -43,6 +45,9 @@ if (window.FC === undefined) { window.FC = {}; }
         	}
         })
         .done((data) => {
+
+          FC.dietData.storeCurrentSearch(data.results);
+
           var concatRecipes = this.state.results.concat(data.results);
 
           this.setState({
@@ -58,6 +63,7 @@ if (window.FC === undefined) { window.FC = {}; }
     callSearch(evt) {
       evt.preventDefault();
       var queryStr = this.queryInput.value;
+      FC.dietData.deleteCurrentSearch();
 
       $.ajax({
       	url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=10&offset=0&query=" + queryStr,
@@ -68,7 +74,9 @@ if (window.FC === undefined) { window.FC = {}; }
       	}
       })
       .done((data) => {
-        console.log(data.results);
+
+        FC.dietData.storeCurrentSearch(data.results);
+
         this.setState({
           baseUri: data.baseUri,
           results: data.results,
