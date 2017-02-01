@@ -4,6 +4,10 @@ if (window.FC === undefined) { window.FC = {}; }
 
   class LandingComponent extends React.Component {
 
+    componentDidMount() {
+      FC.dietData.deleteCurrentSearch();
+    }
+    
     render() {
       return <div className="content-container"><h1>What would you like to do?</h1>
         <h1>Create a <ReactRouter.Link to={"/CreateDiet"}>diet</ReactRouter.Link></h1>

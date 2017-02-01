@@ -12,6 +12,7 @@ if (window.FC === undefined) { window.FC = {}; }
 
     componentDidMount() {
       window.addEventListener("scroll", this.handleScroll);
+      FC.dietData.deleteCurrentSearch();
     }
 
     componentWillUnmount() {

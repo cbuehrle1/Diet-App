@@ -9,14 +9,25 @@ if (window.FC === undefined) { window.FC = {}; }
       this.state = { baseUri: "",
       results: [],
       form: true,
-      offset: 1
+      offset: 0,
+      query: undefined
       }
       this.handleScroll = this.handleScroll.bind(this);
     }
 
     componentDidMount() {
       var storedSearch = FC.dietData.getCurrentSearch();
-      console.log(storedSearch);
+
+      if (storedSearch.data !== undefined) {
+        this.setState({
+          baseUri: storedSearch.baseUri,
+          results: storedSearch.data,
+          form: false,
+          offset: storedSearch.offset,
+          query: storedSearch.query
+        })
+      }
+
       window.addEventListener("scroll", this.handleScroll);
     }
 
@@ -35,6 +46,7 @@ if (window.FC === undefined) { window.FC = {}; }
 
         var queryStr = this.queryInput.value;
         var offsetAmt = this.state.offset;
+        console.log("RSC", offsetAmt);
 
         $.ajax({
           url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=10&offset=" + offsetAmt + "&query=" + queryStr,
@@ -46,7 +58,7 @@ if (window.FC === undefined) { window.FC = {}; }
         })
         .done((data) => {
 
-          FC.dietData.storeCurrentSearch(data.results);
+          FC.dietData.storeCurrentSearch(data.results, queryStr, offsetAmt, data.baseUri);
 
           var concatRecipes = this.state.results.concat(data.results);
 
@@ -75,13 +87,13 @@ if (window.FC === undefined) { window.FC = {}; }
       })
       .done((data) => {
 
-        FC.dietData.storeCurrentSearch(data.results);
+        FC.dietData.storeCurrentSearch(data.results, queryStr, 0, data.baseUri);
 
         this.setState({
           baseUri: data.baseUri,
           results: data.results,
           form: false,
-          offset: this.state.offset
+          offset: this.state.offset + 10
         });
 
       })
@@ -93,12 +105,17 @@ if (window.FC === undefined) { window.FC = {}; }
       var searchForm;
       var searchResults;
       var imageUrl;
+      var inputVal;
+
+      if (this.state.query !== undefined) {
+        inputVal = this.state.query
+      }
 
       if (this.state.form === true) {
         searchForm = <form><input ref={(input) => { this.queryInput = input }} placeholder="Search" /><button onClick={(evt) => { this.callSearch(evt); }}>Search</button></form>
       } else if (this.state.form === false) {
         imageUrl = this.state.baseUri
-        searchForm = <form><input ref={(input) => { this.queryInput = input }} placeholder="Search" /><button onClick={(evt) => { this.callSearch(evt); }}>Search</button></form>
+        searchForm = <form><input defaultValue={inputVal} ref={(input) => { this.queryInput = input }} placeholder="Search" /><button onClick={(evt) => { this.callSearch(evt); }}>Search</button></form>
         searchResults = <div><h1>Search results for "{this.queryInput.value}"</h1>
          <ul className="search-results">
           {this.state.results.map((recipe, index) => {

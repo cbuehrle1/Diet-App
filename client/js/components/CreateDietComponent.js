@@ -4,6 +4,10 @@ if (window.FC === undefined) { window.FC = {}; }
 
   class CreateDietComponent extends React.Component {
 
+    componentDidMount() {
+      FC.dietData.deleteCurrentSearch();
+    }
+
     saveDiet(evt) {
       evt.preventDefault();
 

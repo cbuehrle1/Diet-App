@@ -30,6 +30,7 @@ if (window.FC === undefined) {
       key: "componentDidMount",
       value: function componentDidMount() {
         window.addEventListener("scroll", this.handleScroll);
+        FC.dietData.deleteCurrentSearch();
       }
     }, {
       key: "componentWillUnmount",

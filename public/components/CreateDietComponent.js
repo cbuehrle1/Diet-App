@@ -23,6 +23,11 @@ if (window.FC === undefined) {
     }
 
     _createClass(CreateDietComponent, [{
+      key: "componentDidMount",
+      value: function componentDidMount() {
+        FC.dietData.deleteCurrentSearch();
+      }
+    }, {
       key: "saveDiet",
       value: function saveDiet(evt) {
         evt.preventDefault();

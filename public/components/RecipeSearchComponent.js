@@ -24,7 +24,8 @@ if (window.FC === undefined) {
       _this.state = { baseUri: "",
         results: [],
         form: true,
-        offset: 1
+        offset: 0,
+        query: undefined
       };
       _this.handleScroll = _this.handleScroll.bind(_this);
       return _this;
@@ -34,7 +35,17 @@ if (window.FC === undefined) {
       key: "componentDidMount",
       value: function componentDidMount() {
         var storedSearch = FC.dietData.getCurrentSearch();
-        console.log(storedSearch);
+
+        if (storedSearch.data !== undefined) {
+          this.setState({
+            baseUri: storedSearch.baseUri,
+            results: storedSearch.data,
+            form: false,
+            offset: storedSearch.offset,
+            query: storedSearch.query
+          });
+        }
+
         window.addEventListener("scroll", this.handleScroll);
       }
     }, {
@@ -57,6 +68,7 @@ if (window.FC === undefined) {
 
           var queryStr = this.queryInput.value;
           var offsetAmt = this.state.offset;
+          console.log("RSC", offsetAmt);
 
           $.ajax({
             url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=10&offset=" + offsetAmt + "&query=" + queryStr,
@@ -67,7 +79,7 @@ if (window.FC === undefined) {
             }
           }).done(function (data) {
 
-            FC.dietData.storeCurrentSearch(data.results);
+            FC.dietData.storeCurrentSearch(data.results, queryStr, offsetAmt, data.baseUri);
 
             var concatRecipes = _this2.state.results.concat(data.results);
 
@@ -98,13 +110,13 @@ if (window.FC === undefined) {
           }
         }).done(function (data) {
 
-          FC.dietData.storeCurrentSearch(data.results);
+          FC.dietData.storeCurrentSearch(data.results, queryStr, 0, data.baseUri);
 
           _this3.setState({
             baseUri: data.baseUri,
             results: data.results,
             form: false,
-            offset: _this3.state.offset
+            offset: _this3.state.offset + 10
           });
         });
       }
@@ -116,6 +128,11 @@ if (window.FC === undefined) {
         var searchForm;
         var searchResults;
         var imageUrl;
+        var inputVal;
+
+        if (this.state.query !== undefined) {
+          inputVal = this.state.query;
+        }
 
         if (this.state.form === true) {
           searchForm = React.createElement(
@@ -137,7 +154,7 @@ if (window.FC === undefined) {
           searchForm = React.createElement(
             "form",
             null,
-            React.createElement("input", { ref: function ref(input) {
+            React.createElement("input", { defaultValue: inputVal, ref: function ref(input) {
                 _this4.queryInput = input;
               }, placeholder: "Search" }),
             React.createElement(

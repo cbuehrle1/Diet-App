@@ -13,6 +13,9 @@ if (window.FC === undefined) {
   };
 
   var currentSearchInfo = [];
+  var queryStr;
+  var offset;
+  var baseUri;
 
   window.FC.dietData = {
 
@@ -155,17 +158,30 @@ if (window.FC === undefined) {
       });
     },
 
-    storeCurrentSearch: function storeCurrentSearch(results) {
+    storeCurrentSearch: function storeCurrentSearch(results, query, offsetNum, baseUri) {
+
+      queryStr = query;
+      offset = offsetNum;
+      baseUri = baseUri;
       currentSearchInfo.push(results);
-      console.log(currentSearchInfo);
     },
 
     deleteCurrentSearch: function deleteCurrentSearch() {
       currentSearchInfo = [];
-      console.log("delete", currentSearchInfo);
+      queryStr;
+      offset;
+      baseUri;
     },
 
     getCurrentSearch: function getCurrentSearch() {
+
+      console.log(baseUri);
+
+      var sendObj = {
+        query: queryStr,
+        offSet: offset,
+        baseUri: baseUri
+      };
 
       if (currentSearchInfo.length > 0) {
 
@@ -175,10 +191,11 @@ if (window.FC === undefined) {
           searchArrConcat = searchArrConcat.concat(arr);
           console.log(arr.length, searchArrConcat.length);
         });
-
-        return searchArrConcat;
+        sendObj.data = searchArrConcat;
+        return sendObj;
       } else {
-        return currentSearchInfo[0];
+        sendObj.data = currentSearchInfo[0];
+        return sendObj;
       }
     }
 

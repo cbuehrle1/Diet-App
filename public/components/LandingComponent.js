@@ -23,6 +23,11 @@ if (window.FC === undefined) {
     }
 
     _createClass(LandingComponent, [{
+      key: "componentDidMount",
+      value: function componentDidMount() {
+        FC.dietData.deleteCurrentSearch();
+      }
+    }, {
       key: "render",
       value: function render() {
         return React.createElement(
