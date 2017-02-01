@@ -117,6 +117,8 @@ if (window.FC === undefined) {
             maxProtein: maxProtein
           };
 
+          FC.dietData.storeCurrentNutrientSearch(params, data.results, _this3.queryInput.value, _this3.state.offset);
+
           _this3.setState({
             form: false,
             results: data.results,

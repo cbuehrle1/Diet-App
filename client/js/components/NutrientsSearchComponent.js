@@ -96,6 +96,8 @@ if (window.FC === undefined) { window.FC = {}; }
           maxProtein: maxProtein
         }
 
+        FC.dietData.storeCurrentNutrientSearch(params, data.results, this.queryInput.value, this.state.offset)
+
         this.setState({
           form: false,
           results: data.results,

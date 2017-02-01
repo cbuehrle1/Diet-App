@@ -13,6 +13,12 @@ if (window.FC === undefined) { window.FC = {}; }
   var offset;
   var baseUri;
 
+  var currentNutrientSearchInfo = []
+  var paramObj;
+  var nutQueryStr;
+  var nutOffset;
+
+
   window.FC.dietData = {
 
     getCatagories: function (user, diet) {
@@ -173,8 +179,6 @@ if (window.FC === undefined) { window.FC = {}; }
 
       getCurrentSearch: function() {
 
-        console.log(baseUri);
-
         var sendObj = {
           query: queryStr,
           offSet: offset,
@@ -196,6 +200,24 @@ if (window.FC === undefined) { window.FC = {}; }
           return sendObj;
         }
 
+      },
+
+      storeCurrentNutrientSearch: function(params, results, query, offsetNum) {
+        paramObj = params;
+        nutQueryStr = query;
+        nutOffset = offsetNum;
+        currentNutrientSearchInfo.push(results);
+      },
+
+      deleteCurrentNutrientSearch() {
+        paramObj;
+        nutQueryStr;
+        nutOffset;
+        currentNutrientSearchInfo = []
+      },
+
+      getCurrentNutrientSearch() {
+        
       }
 
     }
