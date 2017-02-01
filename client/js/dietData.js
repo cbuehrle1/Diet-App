@@ -155,11 +155,11 @@ if (window.FC === undefined) { window.FC = {}; }
 
       },
 
-      storeCurrentSearch: function(results, query, offsetNum, baseUri) {
+      storeCurrentSearch: function(results, query, offsetNum, link) {
 
         queryStr = query;
         offset = offsetNum;
-        baseUri = baseUri;
+        baseUri = link;
         currentSearchInfo.push(results);
 
       },
@@ -178,7 +178,7 @@ if (window.FC === undefined) { window.FC = {}; }
         var sendObj = {
           query: queryStr,
           offSet: offset,
-          baseUri: baseUri
+          base: baseUri
         }
 
         if (currentSearchInfo.length > 0) {
@@ -187,7 +187,6 @@ if (window.FC === undefined) { window.FC = {}; }
 
           currentSearchInfo.forEach( (arr, index) => {
             searchArrConcat = searchArrConcat.concat(arr)
-            console.log(arr.length, searchArrConcat.length);
           });
           sendObj.data = searchArrConcat;
           return sendObj;

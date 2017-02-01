@@ -38,10 +38,10 @@ if (window.FC === undefined) {
 
         if (storedSearch.data !== undefined) {
           this.setState({
-            baseUri: storedSearch.baseUri,
+            baseUri: storedSearch.base,
             results: storedSearch.data,
             form: false,
-            offset: storedSearch.offset,
+            offset: storedSearch.offSet,
             query: storedSearch.query
           });
         }
@@ -66,7 +66,7 @@ if (window.FC === undefined) {
 
         if (windowBottom >= docHeight) {
 
-          var queryStr = this.queryInput.value;
+          var queryStr = this.state.query;
           var offsetAmt = this.state.offset;
           console.log("RSC", offsetAmt);
 
@@ -87,7 +87,8 @@ if (window.FC === undefined) {
               baseUri: data.baseUri,
               results: concatRecipes,
               form: false,
-              offset: _this2.state.offset + 10
+              offset: _this2.state.offset + 10,
+              query: queryStr
             });
           });
         }
@@ -116,7 +117,8 @@ if (window.FC === undefined) {
             baseUri: data.baseUri,
             results: data.results,
             form: false,
-            offset: _this3.state.offset + 10
+            offset: _this3.state.offset + 10,
+            query: queryStr
           });
         });
       }
@@ -128,11 +130,6 @@ if (window.FC === undefined) {
         var searchForm;
         var searchResults;
         var imageUrl;
-        var inputVal;
-
-        if (this.state.query !== undefined) {
-          inputVal = this.state.query;
-        }
 
         if (this.state.form === true) {
           searchForm = React.createElement(
@@ -154,7 +151,7 @@ if (window.FC === undefined) {
           searchForm = React.createElement(
             "form",
             null,
-            React.createElement("input", { defaultValue: inputVal, ref: function ref(input) {
+            React.createElement("input", { ref: function ref(input) {
                 _this4.queryInput = input;
               }, placeholder: "Search" }),
             React.createElement(

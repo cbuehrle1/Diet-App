@@ -20,10 +20,10 @@ if (window.FC === undefined) { window.FC = {}; }
 
       if (storedSearch.data !== undefined) {
         this.setState({
-          baseUri: storedSearch.baseUri,
+          baseUri: storedSearch.base,
           results: storedSearch.data,
           form: false,
-          offset: storedSearch.offset,
+          offset: storedSearch.offSet,
           query: storedSearch.query
         })
       }
@@ -44,7 +44,7 @@ if (window.FC === undefined) { window.FC = {}; }
 
       if (windowBottom >= docHeight) {
 
-        var queryStr = this.queryInput.value;
+        var queryStr = this.state.query;
         var offsetAmt = this.state.offset;
         console.log("RSC", offsetAmt);
 
@@ -66,7 +66,8 @@ if (window.FC === undefined) { window.FC = {}; }
             baseUri: data.baseUri,
             results: concatRecipes,
             form: false,
-            offset: this.state.offset + 10
+            offset: this.state.offset + 10,
+            query: queryStr
           });
         });
       }
@@ -93,7 +94,8 @@ if (window.FC === undefined) { window.FC = {}; }
           baseUri: data.baseUri,
           results: data.results,
           form: false,
-          offset: this.state.offset + 10
+          offset: this.state.offset + 10,
+          query: queryStr
         });
 
       })
@@ -105,17 +107,12 @@ if (window.FC === undefined) { window.FC = {}; }
       var searchForm;
       var searchResults;
       var imageUrl;
-      var inputVal;
-
-      if (this.state.query !== undefined) {
-        inputVal = this.state.query
-      }
 
       if (this.state.form === true) {
         searchForm = <form><input ref={(input) => { this.queryInput = input }} placeholder="Search" /><button onClick={(evt) => { this.callSearch(evt); }}>Search</button></form>
       } else if (this.state.form === false) {
         imageUrl = this.state.baseUri
-        searchForm = <form><input defaultValue={inputVal} ref={(input) => { this.queryInput = input }} placeholder="Search" /><button onClick={(evt) => { this.callSearch(evt); }}>Search</button></form>
+        searchForm = <form><input ref={(input) => { this.queryInput = input }} placeholder="Search" /><button onClick={(evt) => { this.callSearch(evt); }}>Search</button></form>
         searchResults = <div><h1>Search results for "{this.queryInput.value}"</h1>
          <ul className="search-results">
           {this.state.results.map((recipe, index) => {
