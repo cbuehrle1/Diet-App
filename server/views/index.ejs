@@ -1,7 +1,15 @@
 <% include _header %>
 <% include _nav %>
-<div class="container">
-  <h1>Welcome to the Chad's App landing page</h1>
+<div class="ejs-title-header"><h1>DIET APP</h1></div>
+<div class="ejs-background">
+  <div class="ejs-container">
+
+    <div class="ejs-float"><h1>Goal:</h1><p>Create a platform for users to easily search for recipes and quickly understand how they fit within their current diet plan and nutritional macros.</p></div>
+
+    <div class="ejs-float"><h1>Technologies:</h1><p>Used Node.js with Express as the server-side framework. MongoDB is utilized as the storage source while using Mongoose to communicate with Mongo through Node. The front-end application utilizes SASS and React to create the functionality of a Single Page Application once a user is logged in. Also includes Gulp for process management and babel for compiling ES6 in the client folder.</p></div>
+
+    <div class="ejs-middle"><h1>Functionality:</h1><p>Allows a user to create a profile, create diet plans within their account, and create categories to store recipes within under each diet. The site is also linked to an external api of over 350,000 recipes for users to look search through and save to their diet plans for easy access in the future.</p></div>
+  </div>
 </div>
 
 <% include _footer %>

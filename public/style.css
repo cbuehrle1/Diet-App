@@ -49,10 +49,9 @@ body {
   font-family: 'PT Sans Narrow', sans-serif; }
 
 header {
-  background-color: #B8BDB5;
+  background-color: #63C7B2;
   color: white;
-  overflow: auto;
-  opacity: 0.7; }
+  overflow: auto; }
   header div {
     float: right;
     width: 5%;
@@ -60,6 +59,9 @@ header {
   header a {
     text-decoration: none;
     color: white; }
+
+.container {
+  position: relative; }
 
 .app-header-main {
   background-color: #63C7B2;
@@ -197,7 +199,21 @@ header {
   margin: 36px;
   float: right;
   width: 80%;
-  text-align: center; }
+  font-size: 36px;
+  position: relative;
+  left: 3%; }
+  .content-container h1 {
+    margin: 5% 0;
+    font-weight: bolder; }
+  .content-container a {
+    text-decoration: none; }
+
+.vertical-alignment {
+  position: absolute;
+  text-align: center;
+  left: 25%;
+  top: 40%;
+  transform: translateY(-50%); }
 
 .search-container {
   float: right;
@@ -230,5 +246,70 @@ header {
 .update-diet input {
   display: block;
   margin: 2% 0; }
+
+.ejs-title-header {
+  background-color: #63C7B2;
+  color: white;
+  text-align: center;
+  font-size: 36px;
+  padding: 0 0 36px 0;
+  font-weight: bolder; }
+
+.ejs-background {
+  background-color: #E0E2DB;
+  padding-top: 20px;
+  padding-bottom: 20px; }
+
+.ejs-container {
+  width: 960px;
+  margin: 25px auto;
+  overflow: auto; }
+
+.ejs-float {
+  float: left;
+  background-color: #5F7470;
+  width: 40%;
+  height: 235px;
+  margin: 15px 1.5%;
+  padding: 3.5%;
+  font-size: 18px;
+  color: white;
+  line-height: 1.5em;
+  font-weight: bold; }
+  .ejs-float h1 {
+    font-size: 24px;
+    padding-bottom: 10px; }
+
+.ejs-middle {
+  margin: 1.5%;
+  padding: 3.5%;
+  width: 90%;
+  background-color: #5F7470;
+  clear: both;
+  color: white;
+  line-height: 1.5em;
+  font-size: 18px;
+  font-weight: bold; }
+  .ejs-middle h1 {
+    font-size: 24px;
+    padding-top: 10px;
+    padding-bottom: 10px; }
+
+.ejs-form input {
+  padding: 25px;
+  margin: 25px auto;
+  font-size: 24px;
+  display: block;
+  width: 300px; }
+
+.ejs-form .input-button {
+  width: 150px;
+  background-color: #5F7470;
+  color: white; }
+
+.ejs-logging-h1 {
+  margin: 25px auto;
+  font-size: 36px;
+  text-align: center; }
 
 /*# sourceMappingURL=style.css.map */

@@ -19,7 +19,10 @@ if (window.FC === undefined) {
     function LandingComponent() {
       _classCallCheck(this, LandingComponent);
 
-      return _possibleConstructorReturn(this, (LandingComponent.__proto__ || Object.getPrototypeOf(LandingComponent)).apply(this, arguments));
+      var _this = _possibleConstructorReturn(this, (LandingComponent.__proto__ || Object.getPrototypeOf(LandingComponent)).call(this));
+
+      _this.state = { height: window.innerHeight - 36 };
+      return _this;
     }
 
     _createClass(LandingComponent, [{
@@ -32,40 +35,44 @@ if (window.FC === undefined) {
       value: function render() {
         return React.createElement(
           "div",
-          { className: "content-container" },
+          { className: "content-container", style: { height: this.state.height } },
           React.createElement(
-            "h1",
-            null,
-            "What would you like to do?"
-          ),
-          React.createElement(
-            "h1",
-            null,
-            "Create a ",
+            "div",
+            { className: "vertical-alignment" },
             React.createElement(
-              ReactRouter.Link,
-              { to: "/CreateDiet" },
-              "diet"
-            )
-          ),
-          React.createElement(
-            "h1",
-            null,
-            "Search for ",
+              "h1",
+              null,
+              "What would you like to do?"
+            ),
             React.createElement(
-              ReactRouter.Link,
-              { to: "/RecipeSearch" },
-              "recipes"
-            )
-          ),
-          React.createElement(
-            "h1",
-            null,
-            "Search for recipes by ",
+              "h1",
+              null,
+              "Create a ",
+              React.createElement(
+                ReactRouter.Link,
+                { to: "/CreateDiet" },
+                "diet"
+              )
+            ),
             React.createElement(
-              ReactRouter.Link,
-              { to: "/NutrientsSearch" },
-              "nutritional targets"
+              "h1",
+              null,
+              "Search for ",
+              React.createElement(
+                ReactRouter.Link,
+                { to: "/RecipeSearch" },
+                "recipes"
+              )
+            ),
+            React.createElement(
+              "h1",
+              null,
+              "Search for recipes by ",
+              React.createElement(
+                ReactRouter.Link,
+                { to: "/NutrientsSearch" },
+                "nutritional targets"
+              )
             )
           )
         );
