@@ -66,7 +66,7 @@ if (window.FC === undefined) {
             }
           }).done(function (data) {
             var concatRecipes = _this2.state.results.concat(data.results);
-
+            console.log(_this2.state.offset);
             _this2.setState({
               form: false,
               results: concatRecipes,
@@ -92,13 +92,12 @@ if (window.FC === undefined) {
         var _this3 = this;
 
         evt.preventDefault();
-        var offsetAmt = "&offset=" + this.state.offset;
+        var offsetAmt = "&offset=" + 0;
         var queryStr = this.validateSearchParams("&query=", this.queryInput.value);
         var maxCalories = this.validateSearchParams("&maxCalories=", this.maxCalories.value);
         var maxFat = this.validateSearchParams("&maxFat=", this.maxFat.value);
         var maxCarbs = this.validateSearchParams("&maxCarbs=", this.maxCarbs.value);
         var maxProtein = this.validateSearchParams("&maxProtein=", this.maxProtein.value);
-        console.log("making ajax call");
 
         $.ajax({
           url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?limitLicense=false" + maxCalories + maxCarbs + maxFat + maxProtein + "&number=10" + offsetAmt + queryStr + "&ranking=1",
@@ -126,7 +125,6 @@ if (window.FC === undefined) {
             searchParams: params,
             query: _this3.queryInput.value
           });
-          console.log(data);
         });
       }
     }, {
@@ -150,7 +148,7 @@ if (window.FC === undefined) {
         if (this.state.form === true) {
           searchForm = React.createElement(
             "form",
-            { onSubmit: function onSubmit(evt) {
+            { className: "react-form", onSubmit: function onSubmit(evt) {
                 _this4.callSearch(evt);
               } },
             React.createElement("input", { ref: function ref(input) {
@@ -177,14 +175,29 @@ if (window.FC === undefined) {
         } else {
 
           searchForm = React.createElement(
-            "div",
-            null,
+            "form",
+            { className: "react-form", onSubmit: function onSubmit(evt) {
+                _this4.callSearch(evt);
+              } },
+            React.createElement("input", { ref: function ref(input) {
+                _this4.queryInput = input;
+              }, placeholder: "Recipe Keyword" }),
+            React.createElement("input", { ref: function ref(input) {
+                _this4.maxCalories = input;
+              }, placeholder: "Max Calories" }),
+            React.createElement("input", { ref: function ref(input) {
+                _this4.maxFat = input;
+              }, placeholder: "Max Fat" }),
+            React.createElement("input", { ref: function ref(input) {
+                _this4.maxCarbs = input;
+              }, placeholder: "Max Carbohydrates" }),
+            React.createElement("input", { ref: function ref(input) {
+                _this4.maxProtein = input;
+              }, placeholder: "Max Protein" }),
             React.createElement(
               "button",
-              { onClick: function onClick() {
-                  _this4.backToSearch();
-                } },
-              "New Search"
+              null,
+              "Search"
             )
           );
           searchResults = React.createElement(
@@ -192,7 +205,7 @@ if (window.FC === undefined) {
             null,
             React.createElement(
               "h1",
-              null,
+              { className: "react-form-h1" },
               "Search results for \"",
               this.state.query,
               "\""
@@ -225,8 +238,8 @@ if (window.FC === undefined) {
           { className: "search-container" },
           React.createElement(
             "h1",
-            null,
-            "Nutrients Search Thing"
+            { className: "react-form-h1" },
+            "Search Recipe By Max Nutrients Amounts"
           ),
           searchForm,
           searchResults

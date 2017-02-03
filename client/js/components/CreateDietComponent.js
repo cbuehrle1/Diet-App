@@ -29,8 +29,8 @@ if (window.FC === undefined) { window.FC = {}; }
     }
 
     render() {
-      return <div className="search-container"><h1>Create a Diet</h1>
-      <form onSubmit={(evt) => { this.saveDiet(evt); }}>
+      return <div className="search-container"><h1 className="react-form-h1">Create a Diet</h1>
+      <form className="react-form" onSubmit={(evt) => { this.saveDiet(evt); }}>
         <input ref={(input) => { this.dietName = input }} placeholder="Diet Name" />
         <input ref={(input) => { this.calories = input }} placeholder="Target Calorie Count" />
         <input ref={(input) => { this.fats = input }} placeholder="Target Fat Count" />

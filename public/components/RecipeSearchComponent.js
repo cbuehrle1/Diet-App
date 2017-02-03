@@ -134,7 +134,7 @@ if (window.FC === undefined) {
         if (this.state.form === true) {
           searchForm = React.createElement(
             "form",
-            null,
+            { className: "react-form" },
             React.createElement("input", { ref: function ref(input) {
                 _this4.queryInput = input;
               }, placeholder: "Search" }),
@@ -150,7 +150,7 @@ if (window.FC === undefined) {
           imageUrl = this.state.baseUri;
           searchForm = React.createElement(
             "form",
-            null,
+            { className: "react-form" },
             React.createElement("input", { ref: function ref(input) {
                 _this4.queryInput = input;
               }, placeholder: "Search" }),
@@ -167,7 +167,7 @@ if (window.FC === undefined) {
             null,
             React.createElement(
               "h1",
-              null,
+              { className: "react-form-h1" },
               "Search results for \"",
               this.queryInput.value,
               "\""

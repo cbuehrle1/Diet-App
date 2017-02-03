@@ -57,12 +57,12 @@ if (window.FC === undefined) {
           { className: "search-container" },
           React.createElement(
             "h1",
-            null,
+            { className: "react-form-h1" },
             "Create a Diet"
           ),
           React.createElement(
             "form",
-            { onSubmit: function onSubmit(evt) {
+            { className: "react-form", onSubmit: function onSubmit(evt) {
                 _this2.saveDiet(evt);
               } },
             React.createElement("input", { ref: function ref(input) {

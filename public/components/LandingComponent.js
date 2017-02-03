@@ -21,22 +21,33 @@ if (window.FC === undefined) {
 
       var _this = _possibleConstructorReturn(this, (LandingComponent.__proto__ || Object.getPrototypeOf(LandingComponent)).call(this));
 
-      _this.state = { height: window.innerHeight - 36 };
+      _this.state = { height: window.innerHeight - 36, display: false };
       return _this;
     }
 
     _createClass(LandingComponent, [{
       key: "componentDidMount",
       value: function componentDidMount() {
+        var _this2 = this;
+
         FC.dietData.deleteCurrentSearch();
+
+        var delay = function delay() {
+          console.log("setTimeout");
+          _this2.setState({
+            height: _this2.state.height,
+            display: true
+          });
+        };
+
+        window.setTimeout(delay, 800);
       }
     }, {
       key: "render",
       value: function render() {
-        return React.createElement(
-          "div",
-          { className: "content-container", style: { height: this.state.height } },
-          React.createElement(
+        var landingContent;
+        if (this.state.display !== false) {
+          landingContent = React.createElement(
             "div",
             { className: "vertical-alignment" },
             React.createElement(
@@ -74,7 +85,12 @@ if (window.FC === undefined) {
                 "nutritional targets"
               )
             )
-          )
+          );
+        }
+        return React.createElement(
+          "div",
+          { className: "content-container", style: { height: this.state.height } },
+          landingContent
         );
       }
     }]);

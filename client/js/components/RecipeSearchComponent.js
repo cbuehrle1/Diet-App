@@ -109,11 +109,11 @@ if (window.FC === undefined) { window.FC = {}; }
       var imageUrl;
 
       if (this.state.form === true) {
-        searchForm = <form><input ref={(input) => { this.queryInput = input }} placeholder="Search" /><button onClick={(evt) => { this.callSearch(evt); }}>Search</button></form>
+        searchForm = <form className="react-form"><input ref={(input) => { this.queryInput = input }} placeholder="Search" /><button onClick={(evt) => { this.callSearch(evt); }}>Search</button></form>
       } else if (this.state.form === false) {
         imageUrl = this.state.baseUri
-        searchForm = <form><input ref={(input) => { this.queryInput = input }} placeholder="Search" /><button onClick={(evt) => { this.callSearch(evt); }}>Search</button></form>
-        searchResults = <div><h1>Search results for "{this.queryInput.value}"</h1>
+        searchForm = <form className="react-form"><input ref={(input) => { this.queryInput = input }} placeholder="Search" /><button onClick={(evt) => { this.callSearch(evt); }}>Search</button></form>
+        searchResults = <div><h1 className="react-form-h1">Search results for "{this.queryInput.value}"</h1>
          <ul className="search-results">
           {this.state.results.map((recipe, index) => {
             return <li key={index}><img src={imageUrl + recipe.image} />

@@ -129,14 +129,14 @@ if (window.FC === undefined) { window.FC = {}; }
 
     render() {
       var navBar;
-      var top = (this.state.height/2) - 151;
+      var top = (this.state.height/2) - 170;
       var theHeight = this.state.height - 36;
       var active;
 
       if (this.state.sidebar === "side-bar") {
 
         navBar = <div className={this.state.sidebar} style={ { height: theHeight } }>
-          <h1 className="title-h1">{this.state.user.displayName + "'"}s Pairings</h1>
+          <h1 className="title-h1">{this.state.user.displayName + "'"}s Diets</h1>
           {this.state.diet.diets.map((diet) => {
 
             var catagories;
@@ -167,7 +167,7 @@ if (window.FC === undefined) { window.FC = {}; }
         </div>
       } else {
         navBar = <div className={this.state.sidebar} style={ { height: theHeight } }><div style={{ width: "620px", margin: "0 auto", paddingTop: top }}><h1>Welcome {this.state.user.displayName}</h1>
-        <p>This is an app designed around food pairing. Press Enter to start exploring new custom recipies today!</p>
+        <p>This is an app designed around searching and saving recipes within the context of your diet.</p><p>Press Enter to start exploring recipies today!</p>
         <div className="start-button" onClick={() => { this.moveToSideBar(); }}>Enter</div></div>
         </div>;
       }

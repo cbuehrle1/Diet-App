@@ -112,6 +112,7 @@ header{
   float: left;
   width: 19%;
   padding-left: 1%;
+  padding-right: 1%;
   background-color: #63C7B2;
   color: white;
   opacity: 1;
@@ -128,7 +129,7 @@ header{
   }
   h2{
     display: inline-block;
-    font-size: 14px;
+    font-size: 16px;
     color: white;
     padding-left: 10px;
   }
@@ -137,12 +138,12 @@ header{
     font-size: 24px;
   }
   h3{
-    font-size: 14px;
+    font-size: 16px;
     color: white;
     padding: 5px 0;
   }
   p{
-    font-size: 14px;
+    font-size: 16px;
     color: white;
     padding-left: 12px;
     padding-top: 3px;
@@ -210,6 +211,10 @@ header{
   p{
     margin: 1% 0;
   }
+  .react-form-h1{
+    font-size: 24px;
+    margin: 20px 5px 20px 5px;
+  }
 }
 .search-results{
   li{
@@ -218,6 +223,10 @@ header{
   p{
     display: inline;
     padding-right: 15px;
+    font-size: 24px;
+  }
+  a{
+    text-decoration: none;
   }
   img{
     width: 100px;
@@ -310,4 +319,28 @@ header{
   margin: 25px auto;
   font-size: 36px;
   text-align: center;
+}
+
+.react-form{
+  input{
+    display: inline-block;
+    margin: 15px 5px;
+    padding: 5px;
+    font-size: 12px;
+  }
+  button{
+    padding: 5px;
+    margin-left: 5px;
+    background-color: #5F7470;
+    color: white;
+    font-size: 12px;
+  }
+}
+
+.react-button{
+  padding: 5px;
+  margin-left: 5px;
+  background-color: #5F7470;
+  color: white;
+  font-size: 12px;
 }

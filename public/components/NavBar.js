@@ -147,7 +147,7 @@ if (window.FC === undefined) {
         var _this4 = this;
 
         var navBar;
-        var top = this.state.height / 2 - 151;
+        var top = this.state.height / 2 - 170;
         var theHeight = this.state.height - 36;
         var active;
 
@@ -160,7 +160,7 @@ if (window.FC === undefined) {
               "h1",
               { className: "title-h1" },
               this.state.user.displayName + "'",
-              "s Pairings"
+              "s Diets"
             ),
             this.state.diet.diets.map(function (diet) {
 
@@ -254,7 +254,12 @@ if (window.FC === undefined) {
               React.createElement(
                 "p",
                 null,
-                "This is an app designed around food pairing. Press Enter to start exploring new custom recipies today!"
+                "This is an app designed around searching and saving recipes within the context of your diet."
+              ),
+              React.createElement(
+                "p",
+                null,
+                "Press Enter to start exploring recipies today!"
               ),
               React.createElement(
                 "div",

@@ -45,7 +45,7 @@ if (window.FC === undefined) { window.FC = {}; }
         })
         .done((data) => {
           var concatRecipes = this.state.results.concat(data.results);
-
+          console.log(this.state.offset);
           this.setState({
             form: false,
             results: concatRecipes,
@@ -70,13 +70,13 @@ if (window.FC === undefined) { window.FC = {}; }
 
     callSearch(evt) {
       evt.preventDefault();
-      var offsetAmt = "&offset="+ this.state.offset;
+      var offsetAmt = "&offset=" + 0;
       var queryStr = this.validateSearchParams("&query=", this.queryInput.value);
       var maxCalories = this.validateSearchParams("&maxCalories=", this.maxCalories.value);
       var maxFat = this.validateSearchParams("&maxFat=", this.maxFat.value);
       var maxCarbs = this.validateSearchParams("&maxCarbs=", this.maxCarbs.value);
       var maxProtein = this.validateSearchParams("&maxProtein=", this.maxProtein.value);
-      console.log("making ajax call")
+      
 
       $.ajax({
         url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?limitLicense=false" + maxCalories + maxCarbs +  maxFat + maxProtein + "&number=10" + offsetAmt + queryStr + "&ranking=1",
@@ -105,7 +105,7 @@ if (window.FC === undefined) { window.FC = {}; }
           searchParams: params,
           query: this.queryInput.value
         });
-        console.log(data);
+
       });
 
     }
@@ -124,7 +124,7 @@ if (window.FC === undefined) { window.FC = {}; }
       var searchResults;
 
       if (this.state.form === true) {
-        searchForm = <form onSubmit={(evt) => { this.callSearch(evt)}}><input ref={(input) => { this.queryInput = input }} placeholder="Recipe Keyword" />
+        searchForm = <form className="react-form" onSubmit={(evt) => { this.callSearch(evt)}}><input ref={(input) => { this.queryInput = input }} placeholder="Recipe Keyword" />
         <input ref={(input) => { this.maxCalories = input}} placeholder="Max Calories" />
         <input ref={(input) => { this.maxFat = input}} placeholder="Max Fat" />
         <input ref={(input) => { this.maxCarbs = input}} placeholder="Max Carbohydrates" />
@@ -132,8 +132,13 @@ if (window.FC === undefined) { window.FC = {}; }
         <button>Search</button></form>
       } else {
 
-        searchForm = <div><button onClick={() => { this.backToSearch(); }}>New Search</button></div>
-        searchResults = <div><h1>Search results for "{this.state.query}"</h1>
+        searchForm = <form className="react-form" onSubmit={(evt) => { this.callSearch(evt)}}><input ref={(input) => { this.queryInput = input }} placeholder="Recipe Keyword" />
+        <input ref={(input) => { this.maxCalories = input}} placeholder="Max Calories" />
+        <input ref={(input) => { this.maxFat = input}} placeholder="Max Fat" />
+        <input ref={(input) => { this.maxCarbs = input}} placeholder="Max Carbohydrates" />
+        <input ref={(input) => { this.maxProtein = input}} placeholder="Max Protein" />
+        <button>Search</button></form>
+        searchResults = <div><h1 className="react-form-h1">Search results for "{this.state.query}"</h1>
         <ul className="search-results">
           {this.state.results.map((recipe, index) => {
             return <li key={index}><img src={recipe.image} />
@@ -142,7 +147,7 @@ if (window.FC === undefined) { window.FC = {}; }
         </ul></div>
       }
 
-      return <div className="search-container"><h1>Nutrients Search Thing</h1>
+      return <div className="search-container"><h1 className="react-form-h1">Search Recipe By Max Nutrients Amounts</h1>
       {searchForm}{searchResults}</div>
     }
   }
