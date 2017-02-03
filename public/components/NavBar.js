@@ -157,86 +157,90 @@ if (window.FC === undefined) {
             "div",
             { className: this.state.sidebar, style: { height: theHeight } },
             React.createElement(
-              "h1",
-              { className: "title-h1" },
-              this.state.user.displayName + "'",
-              "s Diets"
-            ),
-            this.state.diet.diets.map(function (diet) {
+              "div",
+              { className: "left-nav-container" },
+              React.createElement(
+                "h1",
+                { className: "title-h1" },
+                this.state.user.displayName + "'",
+                "s Diets"
+              ),
+              this.state.diet.diets.map(function (diet) {
 
-              var catagories;
+                var catagories;
 
-              if (diet.active === false) {
-                active = React.createElement(
-                  "h2",
-                  { id: diet.id, onClick: function onClick(evt) {
-                      _this4.makeActive(evt);
-                    } },
-                  "Activate"
-                );
-              } else {
-                active = undefined;
-
-                if (_this4.state.addCat === false) {
-                  catagories = React.createElement(
-                    "div",
-                    null,
-                    React.createElement(
-                      "p",
-                      { className: "add-catagory", onClick: function onClick() {
-                          _this4.createCatagory();
-                        } },
-                      "add catagory"
-                    ),
-                    React.createElement(FC.SavedRecipeComponent, { dietId: diet.id, catagory: _this4.state.catagory.catagories })
+                if (diet.active === false) {
+                  active = React.createElement(
+                    "h2",
+                    { id: diet.id, onClick: function onClick(evt) {
+                        _this4.makeActive(evt);
+                      } },
+                    "Activate"
                   );
                 } else {
-                  catagories = React.createElement(
-                    "div",
+                  active = undefined;
+
+                  if (_this4.state.addCat === false) {
+                    catagories = React.createElement(
+                      "div",
+                      null,
+                      React.createElement(
+                        "h3",
+                        { className: "add-catagory", onClick: function onClick() {
+                            _this4.createCatagory();
+                          } },
+                        "add catagory"
+                      ),
+                      React.createElement(FC.SavedRecipeComponent, { dietId: diet.id, catagory: _this4.state.catagory.catagories })
+                    );
+                  } else {
+                    catagories = React.createElement(
+                      "div",
+                      null,
+                      React.createElement(
+                        "form",
+                        { onSubmit: function onSubmit(evt) {
+                            _this4.saveCatagory(evt);
+                          } },
+                        React.createElement("input", { ref: function ref(input) {
+                            _this4.catagoryName = input;
+                          }, placeholder: "add catagory" })
+                      ),
+                      React.createElement(FC.SavedRecipeComponent, { dietId: diet.id,
+                        catagory: _this4.state.catagory.catagories })
+                    );
+                  }
+                }
+
+                return React.createElement(
+                  "div",
+                  { key: diet.id },
+                  React.createElement(
+                    "h1",
+                    null,
+                    diet.diet
+                  ),
+                  React.createElement(
+                    "h2",
                     null,
                     React.createElement(
-                      "form",
-                      { onSubmit: function onSubmit(evt) {
-                          _this4.saveCatagory(evt);
-                        } },
-                      React.createElement("input", { ref: function ref(input) {
-                          _this4.catagoryName = input;
-                        }, placeholder: "add catagory" })
-                    ),
-                    React.createElement(FC.SavedRecipeComponent, { dietId: diet.id,
-                      catagory: _this4.state.catagory.catagories })
-                  );
-                }
-              }
-
-              return React.createElement(
-                "div",
-                { key: diet.id },
-                React.createElement(
-                  "h1",
-                  null,
-                  diet.diet
-                ),
-                React.createElement(
-                  "h2",
-                  null,
+                      ReactRouter.Link,
+                      { to: "/diet/" + diet.id },
+                      "Edit"
+                    )
+                  ),
                   React.createElement(
-                    ReactRouter.Link,
-                    { to: "/diet/" + diet.id },
-                    "Edit"
-                  )
-                ),
-                React.createElement(
-                  "h2",
-                  { onClick: function onClick() {
-                      FC.dietData.deleteDiet(diet.id);
-                    } },
-                  "Delete"
-                ),
-                active,
-                catagories
-              );
-            })
+                    "h2",
+                    { onClick: function onClick() {
+                        FC.dietData.deleteDiet(diet.id);
+                      } },
+                    "Delete"
+                  ),
+                  active,
+                  catagories
+                );
+              })
+            )
           );
         } else {
           navBar = React.createElement(

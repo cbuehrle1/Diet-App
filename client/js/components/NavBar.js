@@ -135,7 +135,7 @@ if (window.FC === undefined) { window.FC = {}; }
 
       if (this.state.sidebar === "side-bar") {
 
-        navBar = <div className={this.state.sidebar} style={ { height: theHeight } }>
+        navBar = <div className={this.state.sidebar} style={ { height: theHeight } }><div className="left-nav-container">
           <h1 className="title-h1">{this.state.user.displayName + "'"}s Diets</h1>
           {this.state.diet.diets.map((diet) => {
 
@@ -148,7 +148,7 @@ if (window.FC === undefined) { window.FC = {}; }
               active = undefined;
 
               if (this.state.addCat === false) {
-                catagories = <div><p className="add-catagory" onClick={() => { this.createCatagory(); }} >add catagory</p>
+                catagories = <div><h3 className="add-catagory" onClick={() => { this.createCatagory(); }} >add catagory</h3>
                 <FC.SavedRecipeComponent dietId={diet.id} catagory={this.state.catagory.catagories} />
                 </div>
 
@@ -164,6 +164,7 @@ if (window.FC === undefined) { window.FC = {}; }
             return <div key={diet.id}><h1>{diet.diet}</h1><h2><ReactRouter.Link to={"/diet/" + diet.id}>Edit</ReactRouter.Link>
             </h2><h2 onClick={() => { FC.dietData.deleteDiet(diet.id); }}>Delete</h2>{active}{catagories}</div>
           })}
+        </div>
         </div>
       } else {
         navBar = <div className={this.state.sidebar} style={ { height: theHeight } }><div style={{ width: "620px", margin: "0 auto", paddingTop: top }}><h1>Welcome {this.state.user.displayName}</h1>
