@@ -29,6 +29,19 @@ if (window.FC === undefined) {
     _createClass(NutrientsSearchComponent, [{
       key: "componentDidMount",
       value: function componentDidMount() {
+        var storedSearch = FC.dietData.getCurrentNutrientSearch();
+
+        if (storedSearch.data !== undefined) {
+
+          this.setState({
+            form: false,
+            results: storedSearch.data,
+            offset: storedSearch.offset,
+            searchParams: storedSearch.params,
+            query: storedSearch.query
+          });
+        }
+
         window.addEventListener("scroll", this.handleScroll);
         FC.dietData.deleteCurrentSearch();
       }
@@ -65,8 +78,11 @@ if (window.FC === undefined) {
               xhr.setRequestHeader("Accept", "application/json");
             }
           }).done(function (data) {
+
+            FC.dietData.storeCurrentNutrientSearch(_this2.state.searchParams, data.results, _this2.queryInput.value, _this2.state.offset);
+
             var concatRecipes = _this2.state.results.concat(data.results);
-            console.log(_this2.state.offset);
+
             _this2.setState({
               form: false,
               results: concatRecipes,

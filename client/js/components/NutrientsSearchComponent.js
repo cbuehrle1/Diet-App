@@ -11,6 +11,20 @@ if (window.FC === undefined) { window.FC = {}; }
     }
 
     componentDidMount() {
+      var storedSearch = FC.dietData.getCurrentNutrientSearch();
+
+      if (storedSearch.data !== undefined) {
+
+        this.setState({
+          form: false,
+          results: storedSearch.data,
+          offset: storedSearch.offset,
+          searchParams: storedSearch.params,
+          query: storedSearch.query
+        });
+
+      }
+
       window.addEventListener("scroll", this.handleScroll);
       FC.dietData.deleteCurrentSearch();
     }
@@ -44,8 +58,11 @@ if (window.FC === undefined) { window.FC = {}; }
         	}
         })
         .done((data) => {
+
+          FC.dietData.storeCurrentNutrientSearch(this.state.searchParams, data.results, this.queryInput.value, this.state.offset);
+
           var concatRecipes = this.state.results.concat(data.results);
-          console.log(this.state.offset);
+
           this.setState({
             form: false,
             results: concatRecipes,
@@ -76,7 +93,7 @@ if (window.FC === undefined) { window.FC = {}; }
       var maxFat = this.validateSearchParams("&maxFat=", this.maxFat.value);
       var maxCarbs = this.validateSearchParams("&maxCarbs=", this.maxCarbs.value);
       var maxProtein = this.validateSearchParams("&maxProtein=", this.maxProtein.value);
-      
+
 
       $.ajax({
         url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?limitLicense=false" + maxCalories + maxCarbs +  maxFat + maxProtein + "&number=10" + offsetAmt + queryStr + "&ranking=1",

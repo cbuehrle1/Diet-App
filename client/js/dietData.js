@@ -217,7 +217,30 @@ if (window.FC === undefined) { window.FC = {}; }
       },
 
       getCurrentNutrientSearch() {
-        
+
+        var sendObj = {
+          query: nutQueryStr,
+          offset: nutOffset,
+          params: paramObj
+        }
+
+        console.log(sendObj.offset)
+
+        if (currentNutrientSearchInfo.length > 0) {
+
+          var searchArrConcat = []
+
+          currentNutrientSearchInfo.forEach( (arr, index) => {
+            searchArrConcat = searchArrConcat.concat(arr)
+          });
+          sendObj.data = searchArrConcat;
+          return sendObj;
+        }
+        else {
+          sendObj.data = currentSearchInfo[0]
+          return sendObj;
+        }
+
       }
 
     }
