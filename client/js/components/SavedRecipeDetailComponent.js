@@ -134,6 +134,7 @@ if (window.FC === undefined) { window.FC = {}; }
             return <li key={index}>{nutrient.title + ": " + nutrient.percent.toFixed(1) + "%"}</li>
           })}
         </ul>
+        <FC.BarChartComponent percents={percents} />
       </div>
       <div>
       <h1>ingredients</h1>

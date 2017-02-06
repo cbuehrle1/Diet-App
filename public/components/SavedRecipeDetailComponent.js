@@ -193,7 +193,8 @@ if (window.FC === undefined) {
                   nutrient.title + ": " + nutrient.percent.toFixed(1) + "%"
                 );
               })
-            )
+            ),
+            React.createElement(FC.BarChartComponent, { percents: percents })
           ),
           React.createElement(
             "div",
