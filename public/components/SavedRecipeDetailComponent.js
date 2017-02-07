@@ -139,105 +139,89 @@ if (window.FC === undefined) {
 
         return React.createElement(
           "div",
-          { className: "search-container" },
+          { className: "detail-container" },
           React.createElement(
             "h1",
-            null,
+            { className: "react-detail-h1" },
             this.state.recipe.name
           ),
-          React.createElement("img", { className: "detail-img", src: this.state.recipe.image }),
-          React.createElement(
-            "h2",
-            null,
-            "Servings: ",
-            this.state.recipe.servings
-          ),
-          React.createElement(
-            "h2",
-            null,
-            "Ready in ",
-            this.state.recipe.readyInMinutes,
-            " minutes"
-          ),
           React.createElement(
             "div",
-            null,
+            { className: "float-container" },
             React.createElement(
-              "h2",
-              null,
-              "Nutritional Information"
+              "div",
+              { className: "detail-float" },
+              React.createElement("img", { className: "detail-img", src: this.state.recipe.image }),
+              React.createElement(FC.BarChartComponent, { percents: percents })
             ),
             React.createElement(
-              "ul",
-              null,
-              nutrients.map(function (nutrient, index) {
-                return React.createElement(
-                  "li",
-                  { key: index },
-                  nutrient.title + ": " + nutrient.amount + " " + nutrient.unit
-                );
-              })
-            ),
-            React.createElement(
-              "h2",
-              null,
-              "Percent of Daily Diet"
-            ),
-            React.createElement(
-              "ul",
-              null,
-              percents.map(function (nutrient, index) {
-                return React.createElement(
-                  "li",
-                  { key: index },
-                  nutrient.title + ": " + nutrient.percent.toFixed(1) + "%"
-                );
-              })
-            ),
-            React.createElement(FC.BarChartComponent, { percents: percents })
-          ),
-          React.createElement(
-            "div",
-            null,
-            React.createElement(
-              "h1",
-              null,
-              "ingredients"
-            ),
-            React.createElement(
-              "ul",
-              { className: "search-results" },
-              this.state.recipe.extendedIngredients.map(function (ingredient, index) {
-                return React.createElement(
-                  "li",
-                  { key: index },
-                  ingredient.originalString
-                );
-              })
-            )
-          ),
-          React.createElement(
-            "div",
-            null,
-            React.createElement(
-              "h1",
-              null,
-              "Instructions"
-            ),
-            this.state.recipe.analyzedInstructions.map(function (recipe, index) {
-              return React.createElement(
+              "div",
+              { className: "detail-float" },
+              React.createElement(
+                "h2",
+                null,
+                "Servings: ",
+                this.state.recipe.servings
+              ),
+              React.createElement(
+                "h2",
+                null,
+                "Ready in ",
+                this.state.recipe.readyInMinutes,
+                " minutes"
+              ),
+              React.createElement(
+                "h2",
+                null,
+                "Nutritional Information"
+              ),
+              React.createElement(
                 "ul",
-                { className: "search-results", key: index },
-                recipe.steps.map(function (step, index) {
+                null,
+                nutrients.map(function (nutrient, index) {
                   return React.createElement(
                     "li",
                     { key: index },
-                    step.step
+                    nutrient.title + ": " + nutrient.amount + " " + nutrient.unit
                   );
                 })
-              );
-            })
-          )
+              ),
+              React.createElement(
+                "h2",
+                null,
+                "Ingredients"
+              ),
+              React.createElement(
+                "ul",
+                null,
+                this.state.recipe.extendedIngredients.map(function (ingredient, index) {
+                  return React.createElement(
+                    "li",
+                    { key: index },
+                    ingredient.originalString
+                  );
+                })
+              )
+            )
+          ),
+          React.createElement(
+            "h2",
+            null,
+            "Instructions"
+          ),
+          this.state.recipe.analyzedInstructions.map(function (recipe, index) {
+            return React.createElement(
+              "ul",
+              { key: index },
+              recipe.steps.map(function (step, index) {
+                return React.createElement(
+                  "li",
+                  { key: index },
+                  step.step
+                );
+              })
+            );
+          })
         );
       }
     }]);

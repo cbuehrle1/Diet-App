@@ -88,23 +88,23 @@ class RecipeDetailComponent extends React.Component {
       instructions;
     }
     else {
-      instructions = <div><h1>instructions</h1><ol className="search-results">
+      instructions = <div><h2>instructions</h2><ul className="">
         {this.state.instructions.map((step, index) => {
           return <li key={index}>{step.step}</li>;
         })}
-      </ol></div>
+      </ul></div>
     }
 
-    return <div className="search-container"><FC.SaveToComponent data={this.state.data}/><h1>{this.state.data.title}</h1>
+    return <div className="detail-container"><FC.SaveToComponent data={this.state.data}/><h1>{this.state.data.title}</h1>
       <img className="detail-img" src={this.state.data.image} />
-      <h1>Nutrition Per Serving</h1>
+      <h2>Nutrition Per Serving</h2>
       <ul>
         {nutrientsArray.map((nutrient, index) => {
           return <li key={index}>{nutrient.title + ": " + nutrient.amount + " " + nutrient.unit}</li>
         })}
       </ul>
-      <h1>ingredients</h1>
-      <ul className="search-results">{this.state.data.extendedIngredients.map((ingredient, index) => {
+      <h2>ingredients</h2>
+      <ul className="">{this.state.data.extendedIngredients.map((ingredient, index) => {
         return <li key={index} >{ingredient.originalString}</li>;
       })}
       </ul>

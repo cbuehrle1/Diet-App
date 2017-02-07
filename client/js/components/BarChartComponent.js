@@ -15,14 +15,28 @@ if (window.FC === undefined) { window.FC = {}; }
     }
 
     componentDidUpdate() {
+      var cb = () => {
+        this.setState({
+          data: this.dataTable(),
+          options: this.chartOptions()
+        })
+        this.draw()
+      }
 
-      if (this.props.percents.length > 0) {
+      if (this.props.percents.length > 0 && google.visualization.arrayToDataTable !== undefined) {
 
         this.state = {
         data: this.dataTable(),
         options: this.chartOptions()
         }
         this.draw()
+      }
+      else {
+
+        google.charts.load('visualization', '1', {
+          'packages': ['corechart'] })
+        google.charts.setOnLoadCallback(cb);
+
       }
 
     }
@@ -64,7 +78,7 @@ if (window.FC === undefined) { window.FC = {}; }
 
     render() {
       console.log(this.props.percents)
-      return <div ref={(div) => {this.chartDiv = div}}></div>
+      return <div className="graph-div" ref={(div) => {this.chartDiv = div}}></div>
     }
   }
 

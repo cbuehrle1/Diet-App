@@ -107,13 +107,13 @@ if (window.FC === undefined) {
             "div",
             null,
             React.createElement(
-              "h1",
+              "h2",
               null,
               "instructions"
             ),
             React.createElement(
-              "ol",
-              { className: "search-results" },
+              "ul",
+              { className: "" },
               this.state.instructions.map(function (step, index) {
                 return React.createElement(
                   "li",
@@ -127,7 +127,7 @@ if (window.FC === undefined) {
 
         return React.createElement(
           "div",
-          { className: "search-container" },
+          { className: "detail-container" },
           React.createElement(FC.SaveToComponent, { data: this.state.data }),
           React.createElement(
             "h1",
@@ -136,7 +136,7 @@ if (window.FC === undefined) {
           ),
           React.createElement("img", { className: "detail-img", src: this.state.data.image }),
           React.createElement(
-            "h1",
+            "h2",
             null,
             "Nutrition Per Serving"
           ),
@@ -152,13 +152,13 @@ if (window.FC === undefined) {
             })
           ),
           React.createElement(
-            "h1",
+            "h2",
             null,
             "ingredients"
           ),
           React.createElement(
             "ul",
-            { className: "search-results" },
+            { className: "" },
             this.state.data.extendedIngredients.map(function (ingredient, index) {
               return React.createElement(
                 "li",

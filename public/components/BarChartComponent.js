@@ -32,14 +32,28 @@ if (window.FC === undefined) {
     _createClass(BarChartComponent, [{
       key: 'componentDidUpdate',
       value: function componentDidUpdate() {
+        var _this2 = this;
 
-        if (this.props.percents.length > 0) {
+        var cb = function cb() {
+          _this2.setState({
+            data: _this2.dataTable(),
+            options: _this2.chartOptions()
+          });
+          _this2.draw();
+        };
+
+        if (this.props.percents.length > 0 && google.visualization.arrayToDataTable !== undefined) {
 
           this.state = {
             data: this.dataTable(),
             options: this.chartOptions()
           };
           this.draw();
+        } else {
+
+          google.charts.load('visualization', '1', {
+            'packages': ['corechart'] });
+          google.charts.setOnLoadCallback(cb);
         }
       }
     }, {
@@ -76,11 +90,11 @@ if (window.FC === undefined) {
     }, {
       key: 'render',
       value: function render() {
-        var _this2 = this;
+        var _this3 = this;
 
         console.log(this.props.percents);
-        return React.createElement('div', { ref: function ref(div) {
-            _this2.chartDiv = div;
+        return React.createElement('div', { className: 'graph-div', ref: function ref(div) {
+            _this3.chartDiv = div;
           } });
       }
     }]);

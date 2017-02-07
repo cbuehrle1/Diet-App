@@ -28,22 +28,43 @@ if (window.FC === undefined) {
     _createClass(SaveToComponent, [{
       key: "componentDidMount",
       value: function componentDidMount() {
+        var _this2 = this;
 
-        var data = FC.dietData.sendRecipeInfo();
+        var cb = function cb() {
+          var data = FC.dietData.sendRecipeInfo();
 
-        this.setState({
-          info: data,
-          click: false
-        });
+          _this2.setState({
+            info: data,
+            click: false
+          });
+        };
+
+        FC.dietData.registerCallback(cb);
+        FC.dietData.loadUser();
       }
     }, {
       key: "componentWillUnmount",
       value: function componentWillUnmount() {
+        var _this3 = this;
+
+        var cb = function cb() {
+          var data = FC.dietData.sendRecipeInfo();
+
+          _this3.setState({
+            info: data,
+            click: false
+          });
+        };
+
         FC.dietData.recipeInfo = [];
+        FC.dietData.onUnmount(cb);
       }
     }, {
       key: "clicked",
       value: function clicked() {
+        if (this.cataList !== undefined) {
+          console.log(this.cataList.offsetHeight);
+        }
 
         if (this.state.click === false) {
           this.setState({
@@ -84,19 +105,21 @@ if (window.FC === undefined) {
     }, {
       key: "render",
       value: function render() {
-        var _this2 = this;
+        var _this4 = this;
 
         var dropDown;
-
+        console.log("render", this.state.info.catagoryInfo.catagories);
         if (this.state.click === true) {
           dropDown = React.createElement(
             "ul",
-            null,
+            { ref: function ref(list) {
+                _this4.cataList = list;
+              }, className: "save-to-dropdown" },
             this.state.info.catagoryInfo.catagories.map(function (catagory, index) {
               return React.createElement(
                 "li",
                 { key: index, id: catagory.id, onClick: function onClick(evt) {
-                    _this2.saveCatagory(evt);
+                    _this4.saveCatagory(evt);
                   } },
                 catagory.name
               );
@@ -108,11 +131,16 @@ if (window.FC === undefined) {
           "div",
           null,
           React.createElement(
-            "button",
-            { onClick: function onClick() {
-                _this2.clicked();
+            "div",
+            { className: "save-to-button", onClick: function onClick() {
+                _this4.clicked();
               } },
-            "Save Me"
+            "Save To ",
+            React.createElement(
+              "span",
+              null,
+              "\u25BC"
+            )
           ),
           dropDown
         );

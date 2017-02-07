@@ -10,21 +10,37 @@ if (window.FC === undefined) { window.FC = {}; }
     }
 
     componentDidMount() {
-
+      var cb = () => {
       var data = FC.dietData.sendRecipeInfo();
 
       this.setState({
         info: data,
         click: false
       });
+      }
 
+      FC.dietData.registerCallback(cb);
+      FC.dietData.loadUser();
     }
 
     componentWillUnmount() {
+      var cb = () => {
+        var data = FC.dietData.sendRecipeInfo();
+
+        this.setState({
+          info: data,
+          click: false
+        });
+      }
+
       FC.dietData.recipeInfo = []
+      FC.dietData.onUnmount(cb);
     }
 
     clicked() {
+      if (this.cataList !== undefined ) {
+        console.log(this.cataList.offsetHeight);
+      }
 
       if (this.state.click === false) {
         this.setState({
@@ -67,14 +83,14 @@ if (window.FC === undefined) { window.FC = {}; }
 
     render() {
       var dropDown;
-
+      console.log("render", this.state.info.catagoryInfo.catagories);
       if (this.state.click === true){
-        dropDown = <ul>{this.state.info.catagoryInfo.catagories.map((catagory, index) => {
+        dropDown = <ul ref={(list) => { this.cataList = list }} className="save-to-dropdown">{this.state.info.catagoryInfo.catagories.map((catagory, index) => {
           return <li key={index} id={catagory.id} onClick={(evt) => { this.saveCatagory(evt); }}>{catagory.name}</li>
         })}</ul>
       }
 
-      return <div><button onClick={() => { this.clicked(); }}>Save Me</button>{dropDown}</div>
+      return <div><div className="save-to-button" onClick={() => { this.clicked(); }}>Save To <span>&#9660;</span></div>{dropDown}</div>
     }
 
   }
