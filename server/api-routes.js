@@ -235,5 +235,16 @@ module.exports = function() {
 
   })
 
+  router.post("/api/catagory/:catagoryId/recipe/:recipeId", function(req, res) {
+
+    var cb = (err, data) => {
+      console.log(data);
+    }
+
+    console.log(req.body);
+
+
+  })
+
   return router;
 }

@@ -74,7 +74,8 @@ if (window.FC === undefined) { window.FC = {}; }
         sidebar: this.state.sidebar,
         height: window.innerHeight,
         diet: this.state.diet,
-        addCat: true
+        addCat: true,
+        showeDelete: false
       });
 
     }

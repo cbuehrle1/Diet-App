@@ -157,16 +157,17 @@ header {
   .side-bar .left-nav-container {
     width: 250px; }
   .side-bar h1 {
-    font-size: 22px;
+    font-size: 24px;
     color: white;
     text-align: left;
     padding: 10px 0;
     display: inline-block; }
   .side-bar h2 {
     display: inline-block;
-    font-size: 14px;
+    font-size: 12px;
     color: white;
-    padding-left: 10px; }
+    padding-left: 10px;
+    cursor: pointer; }
   .side-bar .title-h1 {
     padding: 20px 0;
     font-size: 24px; }
@@ -181,6 +182,9 @@ header {
     padding-top: 3px;
     padding-right: 3%;
     padding-bottom: 3px; }
+  .side-bar p:hover {
+    font-weight: bolder;
+    color: #FFE3D0; }
   .side-bar a {
     text-decoration: none;
     color: white; }
@@ -399,5 +403,8 @@ header {
   .save-to-dropdown li {
     padding: 5px;
     cursor: pointer; }
+  .save-to-dropdown li:hover {
+    font-weight: bolder;
+    color: #4A72AD; }
 
 /*# sourceMappingURL=style.css.map */

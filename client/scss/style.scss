@@ -127,7 +127,7 @@ header{
     width: 250px;
   }
   h1{
-    font-size: 22px;
+    font-size: 24px;
     color: white;
     text-align: left;
     padding: 10px 0;
@@ -135,9 +135,10 @@ header{
   }
   h2{
     display: inline-block;
-    font-size: 14px;
+    font-size: 12px;
     color: white;
     padding-left: 10px;
+    cursor: pointer;
   }
   .title-h1{
     padding: 20px 0;
@@ -155,6 +156,10 @@ header{
     padding-top: 3px;
     padding-right: 3%;
     padding-bottom: 3px;
+  }
+  p:hover{
+    font-weight: bolder;
+    color: #FFE3D0;
   }
   a{
     text-decoration: none;
@@ -417,6 +422,10 @@ header{
   li{
     padding: 5px;
     cursor: pointer;
+  }
+  li:hover{
+    font-weight: bolder;
+    color: #4A72AD;
   }
 
 }
