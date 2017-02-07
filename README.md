@@ -6,7 +6,7 @@ Technologies: Used Node.js with Express as the server-side framework. MongoDB is
 
 Functionality: Allows a user to create a profile, create diet plans within their account, and create categories to store recipes within under each diet. The site is also linked to an external api of over 350,000 recipes for users to look search through and save to their diet plans for easy access in the future.
 
-Current State: Under production - Currently working on polishing out the functionality of the website as well as more in-depth styling to the main components of the SPA. Following these steps, I will be working on making the application mobile responsive.
+Future Dev: Make the application responsive and add deletion to recipes from categories.
 
 Currently Deployed on Heroku at https://diet-app.herokuapp.com/
 
