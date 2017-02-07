@@ -30,20 +30,36 @@ if (window.FC === undefined) {
     }
 
     _createClass(BarChartComponent, [{
-      key: 'componentDidMount',
-      value: function componentDidMount() {
-        this.state = {
-          data: this.dataTable()
+      key: 'componentDidUpdate',
+      value: function componentDidUpdate() {
+
+        if (this.props.percents.length > 0) {
+
+          this.state = {
+            data: this.dataTable(),
+            options: this.chartOptions()
+          };
+          this.draw();
+        }
+      }
+    }, {
+      key: 'chartOptions',
+      value: function chartOptions() {
+        var options = {
+          title: 'Percent of Diets Daily Value',
+          width: 400,
+          height: 300,
+          bar: { groupWidth: "90%" },
+          legend: { position: "none" }
         };
-        this.draw();
+
+        return options;
       }
     }, {
       key: 'dataTable',
       value: function dataTable() {
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Element');
-        data.addColumn('number', 'Percentage');
-        data.addRows([['Nitrogen', 0.78], ['Oxygen', 0.21], ['Other', 0.01]]);
+
+        var data = google.visualization.arrayToDataTable([['Nutrient', 'Percent', { role: 'style' }], [this.props.percents[0].title, this.props.percents[0].percent, '#91E0D1'], [this.props.percents[1].title, this.props.percents[1].percent, '#99B6E1'], [this.props.percents[2].title, this.props.percents[2].percent, '#FFC8A5'], [this.props.percents[3].title, this.props.percents[3].percent, '#FFDEA5']]);
 
         return data;
       }
@@ -52,10 +68,10 @@ if (window.FC === undefined) {
       value: function draw() {
 
         var data = this.state.data;
-        console.log(data);
+        var options = this.state.options;
         var element = this.chartDiv;
-        var chart = new google.visualization.PieChart(element);
-        chart.draw(data, null);
+        var chart = new google.visualization.BarChart(element);
+        chart.draw(data, options);
       }
     }, {
       key: 'render',
