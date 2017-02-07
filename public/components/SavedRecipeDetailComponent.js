@@ -205,23 +205,27 @@ if (window.FC === undefined) {
             )
           ),
           React.createElement(
-            "h2",
-            null,
-            "Instructions"
-          ),
-          this.state.recipe.analyzedInstructions.map(function (recipe, index) {
-            return React.createElement(
-              "ul",
-              { key: index },
-              recipe.steps.map(function (step, index) {
-                return React.createElement(
-                  "li",
-                  { key: index },
-                  step.step
-                );
-              })
-            );
-          })
+            "div",
+            { className: "instructions" },
+            React.createElement(
+              "h2",
+              null,
+              "Instructions"
+            ),
+            this.state.recipe.analyzedInstructions.map(function (recipe, index) {
+              return React.createElement(
+                "ul",
+                { key: index },
+                recipe.steps.map(function (step, index) {
+                  return React.createElement(
+                    "li",
+                    { key: index },
+                    step.step
+                  );
+                })
+              );
+            })
+          )
         );
       }
     }]);

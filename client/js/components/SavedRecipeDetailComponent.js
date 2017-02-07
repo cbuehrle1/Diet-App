@@ -139,12 +139,14 @@ if (window.FC === undefined) { window.FC = {}; }
         </ul>
       </div>
       </div>
+      <div className="instructions">
         <h2>Instructions</h2>
         {this.state.recipe.analyzedInstructions.map((recipe, index) => {
           return <ul key={index} >{recipe.steps.map((step, index) => {
             return <li key={index} >{step.step}</li>
           })}</ul>
         })}
+      </div>
       </div>
     }
 

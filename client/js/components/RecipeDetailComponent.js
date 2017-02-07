@@ -95,7 +95,7 @@ class RecipeDetailComponent extends React.Component {
       </ul></div>
     }
 
-    return <div className="detail-container"><FC.SaveToComponent data={this.state.data}/><h1>{this.state.data.title}</h1>
+    return <div className="detail-container"><div className="position-me-relative"><FC.SaveToComponent data={this.state.data}/></div><h1 className="react-detail-h1">{this.state.data.title}</h1>
       <img className="detail-img" src={this.state.data.image} />
       <h2>Nutrition Per Serving</h2>
       <ul>

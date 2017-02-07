@@ -128,10 +128,14 @@ if (window.FC === undefined) {
         return React.createElement(
           "div",
           { className: "detail-container" },
-          React.createElement(FC.SaveToComponent, { data: this.state.data }),
+          React.createElement(
+            "div",
+            { className: "position-me-relative" },
+            React.createElement(FC.SaveToComponent, { data: this.state.data })
+          ),
           React.createElement(
             "h1",
-            null,
+            { className: "react-detail-h1" },
             this.state.data.title
           ),
           React.createElement("img", { className: "detail-img", src: this.state.data.image }),

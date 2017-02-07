@@ -238,6 +238,9 @@ header {
   .search-container .react-form-h1 {
     font-size: 24px;
     margin: 20px 5px 20px 5px; }
+  .search-container .detail-img {
+    width: 250px;
+    padding-left: 2%; }
 
 .search-results li {
   margin: 1% 0; }
@@ -350,21 +353,16 @@ header {
   float: right;
   width: 76%;
   overflow: auto;
-  position: relative;
-  margin: 52px 2% 2% 2%;
-  border: solid 1px black; }
+  margin: 52px 2% 2% 2%; }
   .detail-container .react-detail-h1 {
     font-size: 28px;
-    margin: 20px 5px 20px 5px; }
+    margin: 20px 0 20px 5px; }
   .detail-container .detail-float {
     float: left;
     width: 48%;
     z-index: -1000; }
   .detail-container .detail-img {
-    width: 250px;
-    padding-left: 2%; }
-  .detail-container .graph-div {
-    padding-left: 2%; }
+    width: 350px; }
   .detail-container h1 {
     clear: left; }
   .detail-container h2 {
@@ -374,6 +372,11 @@ header {
     margin: 2% 0; }
   .detail-container li {
     margin: 2% 0; }
+  .detail-container .position-me-relative {
+    position: relative;
+    overflow-y: visible; }
+  .detail-container .instructions {
+    clear: left; }
 
 .save-to-button {
   padding: 5px;
@@ -382,7 +385,6 @@ header {
   cursor: pointer;
   width: 6%;
   text-align: center;
-  border: solid 1px red;
   margin-bottom: 10px; }
   .save-to-button span {
     font-size: 12px; }
@@ -392,9 +394,8 @@ header {
   padding: 5px;
   display: inline-block;
   position: absolute;
-  top: 0;
-  left: 0;
-  border: solid 1px blue;
+  top: 7px;
+  left: 0px;
   z-index: 1; }
   .save-to-dropdown li {
     padding: 5px;

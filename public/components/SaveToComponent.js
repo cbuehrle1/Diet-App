@@ -62,9 +62,6 @@ if (window.FC === undefined) {
     }, {
       key: "clicked",
       value: function clicked() {
-        if (this.cataList !== undefined) {
-          console.log(this.cataList.offsetHeight);
-        }
 
         if (this.state.click === false) {
           this.setState({

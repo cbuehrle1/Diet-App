@@ -38,10 +38,7 @@ if (window.FC === undefined) { window.FC = {}; }
     }
 
     clicked() {
-      if (this.cataList !== undefined ) {
-        console.log(this.cataList.offsetHeight);
-      }
-
+    
       if (this.state.click === false) {
         this.setState({
           info: this.state.info,

@@ -226,6 +226,10 @@ header{
     font-size: 24px;
     margin: 20px 5px 20px 5px;
   }
+  .detail-img {
+    width: 250px;
+    padding-left: 2%;
+  }
 }
 .search-results{
   li{
@@ -357,12 +361,10 @@ header{
   float: right;
   width: 76%;
   overflow: auto;
-  position: relative;
   margin: 52px 2% 2% 2%;
-  border: solid 1px black;
   .react-detail-h1{
     font-size: 28px;
-    margin: 20px 5px 20px 5px;
+    margin: 20px 0 20px 5px;
   }
   .detail-float{
     float: left;
@@ -370,11 +372,7 @@ header{
     z-index: -1000;
   }
   .detail-img {
-    width: 250px;
-    padding-left: 2%;
-  }
-  .graph-div{
-    padding-left: 2%;
+    width: 350px;
   }
   h1{
     clear: left;
@@ -389,6 +387,13 @@ header{
   li{
     margin: 2% 0;
   }
+  .position-me-relative{
+    position: relative;
+    overflow-y: visible;
+  }
+  .instructions{
+    clear: left;
+  }
 
 }
 .save-to-button{
@@ -398,7 +403,6 @@ header{
   cursor: pointer;
   width: 6%;
   text-align: center;
-  border: solid 1px red;
   margin-bottom: 10px;
   span{
     font-size: 12px;
@@ -409,9 +413,8 @@ header{
   padding: 5px;
   display: inline-block;
   position: absolute;
-  top: 0;
-  left: 0;
-  border: solid 1px blue;
+  top: 7px;
+  left: 0px;
   z-index: 1;
   li{
     padding: 5px;
