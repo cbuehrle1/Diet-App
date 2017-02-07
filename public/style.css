@@ -191,7 +191,8 @@ header {
   .side-bar .add-catagory {
     padding-left: 10px;
     display: block;
-    padding-bottom: 5px; }
+    padding-bottom: 5px;
+    cursor: pointer; }
   .side-bar ul {
     padding-left: 10px; }
   .side-bar li {
