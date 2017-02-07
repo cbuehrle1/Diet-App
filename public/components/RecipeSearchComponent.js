@@ -45,7 +45,7 @@ if (window.FC === undefined) {
             query: storedSearch.query
           });
         }
-
+        FC.dietData.deleteCurrentNutrientSearch();
         window.addEventListener("scroll", this.handleScroll);
       }
     }, {
@@ -205,6 +205,11 @@ if (window.FC === undefined) {
         return React.createElement(
           "div",
           { className: "search-container" },
+          React.createElement(
+            "h1",
+            { className: "react-form-h1" },
+            "Search Recipe By Keyword"
+          ),
           searchForm,
           searchResults
         );

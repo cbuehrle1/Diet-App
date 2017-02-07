@@ -49,9 +49,9 @@ if (window.FC === undefined) { window.FC = {}; }
 
     render() {
       console.log(this.state.diet.diet);
-      return <div className="search-container"><h1>Edit Diet Component</h1>
+      return <div className="search-container"><h1 className="react-form-h1">Edit Active Diet</h1>
       {this.state.diet.diet.map((diet, index) => {
-        return <form key={index} className="update-diet" onSubmit={(evt) => { this.editDiet(evt); }}><input ref={(input) => { this.dietName = input }} defaultValue={diet.name}></input>
+        return <form key={index} className="react-form" onSubmit={(evt) => { this.editDiet(evt); }}><input ref={(input) => { this.dietName = input }} defaultValue={diet.name}></input>
           <input ref={(input) => { this.calories = input }} defaultValue={diet.calories}></input>
           <input ref={(input) => { this.fats = input }} defaultValue={diet.fat}></input>
           <input ref={(input) => { this.carbs = input }} defaultValue={diet.carbohydrates}></input>

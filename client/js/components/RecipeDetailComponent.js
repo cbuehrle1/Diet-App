@@ -88,7 +88,7 @@ class RecipeDetailComponent extends React.Component {
       instructions;
     }
     else {
-      instructions = <div><h2>instructions</h2><ul className="">
+      instructions = <div className="instructions"><h2>instructions</h2><ul className="">
         {this.state.instructions.map((step, index) => {
           return <li key={index}>{step.step}</li>;
         })}
@@ -96,7 +96,10 @@ class RecipeDetailComponent extends React.Component {
     }
 
     return <div className="detail-container"><div className="position-me-relative"><FC.SaveToComponent data={this.state.data}/></div><h1 className="react-detail-h1">{this.state.data.title}</h1>
+      <div className="detail-float">
       <img className="detail-img" src={this.state.data.image} />
+      </div>
+      <div className="detail-float">
       <h2>Nutrition Per Serving</h2>
       <ul>
         {nutrientsArray.map((nutrient, index) => {
@@ -108,6 +111,7 @@ class RecipeDetailComponent extends React.Component {
         return <li key={index} >{ingredient.originalString}</li>;
       })}
       </ul>
+      </div>
       {instructions}
     </div>
   }

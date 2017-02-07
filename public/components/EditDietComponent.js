@@ -74,13 +74,13 @@ if (window.FC === undefined) {
           { className: "search-container" },
           React.createElement(
             "h1",
-            null,
-            "Edit Diet Component"
+            { className: "react-form-h1" },
+            "Edit Active Diet"
           ),
           this.state.diet.diet.map(function (diet, index) {
             return React.createElement(
               "form",
-              { key: index, className: "update-diet", onSubmit: function onSubmit(evt) {
+              { key: index, className: "react-form", onSubmit: function onSubmit(evt) {
                   _this3.editDiet(evt);
                 } },
               React.createElement("input", { ref: function ref(input) {

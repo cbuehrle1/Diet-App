@@ -27,7 +27,7 @@ if (window.FC === undefined) { window.FC = {}; }
           query: storedSearch.query
         })
       }
-
+      FC.dietData.deleteCurrentNutrientSearch();
       window.addEventListener("scroll", this.handleScroll);
     }
 
@@ -124,7 +124,7 @@ if (window.FC === undefined) { window.FC = {}; }
          </div>
       }
 
-      return <div className="search-container">{searchForm}{searchResults}</div>
+      return <div className="search-container"><h1 className="react-form-h1">Search Recipe By Keyword</h1>{searchForm}{searchResults}</div>
     }
   }
 

@@ -105,7 +105,7 @@ if (window.FC === undefined) {
         } else {
           instructions = React.createElement(
             "div",
-            null,
+            { className: "instructions" },
             React.createElement(
               "h2",
               null,
@@ -138,38 +138,46 @@ if (window.FC === undefined) {
             { className: "react-detail-h1" },
             this.state.data.title
           ),
-          React.createElement("img", { className: "detail-img", src: this.state.data.image }),
           React.createElement(
-            "h2",
-            null,
-            "Nutrition Per Serving"
+            "div",
+            { className: "detail-float" },
+            React.createElement("img", { className: "detail-img", src: this.state.data.image })
           ),
           React.createElement(
-            "ul",
-            null,
-            nutrientsArray.map(function (nutrient, index) {
-              return React.createElement(
-                "li",
-                { key: index },
-                nutrient.title + ": " + nutrient.amount + " " + nutrient.unit
-              );
-            })
-          ),
-          React.createElement(
-            "h2",
-            null,
-            "ingredients"
-          ),
-          React.createElement(
-            "ul",
-            { className: "" },
-            this.state.data.extendedIngredients.map(function (ingredient, index) {
-              return React.createElement(
-                "li",
-                { key: index },
-                ingredient.originalString
-              );
-            })
+            "div",
+            { className: "detail-float" },
+            React.createElement(
+              "h2",
+              null,
+              "Nutrition Per Serving"
+            ),
+            React.createElement(
+              "ul",
+              null,
+              nutrientsArray.map(function (nutrient, index) {
+                return React.createElement(
+                  "li",
+                  { key: index },
+                  nutrient.title + ": " + nutrient.amount + " " + nutrient.unit
+                );
+              })
+            ),
+            React.createElement(
+              "h2",
+              null,
+              "ingredients"
+            ),
+            React.createElement(
+              "ul",
+              { className: "" },
+              this.state.data.extendedIngredients.map(function (ingredient, index) {
+                return React.createElement(
+                  "li",
+                  { key: index },
+                  ingredient.originalString
+                );
+              })
+            )
           ),
           instructions
         );
