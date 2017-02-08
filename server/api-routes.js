@@ -238,10 +238,33 @@ module.exports = function() {
   router.post("/api/catagory/:catagoryId/recipe/:recipeId", function(req, res) {
 
     var cb = (err, data) => {
-      console.log(data);
+
+      if (err) {
+        console.log(err);
+      }
+
+      res.send(data);
     }
 
-    console.log(req.body);
+    var info;
+
+    var newArr = (err, data) => {
+      var recipeArr = []
+
+      data.recipes.forEach((recipe, index) => {
+
+        if (recipe.id !== req.params.recipeId) {
+            recipeArr.push(recipe)
+        }
+
+      });
+
+      info = recipeArr;
+
+      Catagory.findByIdAndUpdate(req.params.catagoryId, { recipes: info }, {new: true, safe: true}, cb)
+    }
+
+    Catagory.findById(req.params.catagoryId, newArr);
 
 
   })

@@ -31,6 +31,7 @@ if (window.FC === undefined) {
           "ul",
           null,
           this.props.catagory.map(function (catagory, index) {
+            console.log(catagory);
             catagoryId = catagory.id;
             return React.createElement(
               "li",
@@ -41,15 +42,7 @@ if (window.FC === undefined) {
                 catagory.name
               ),
               catagory.recipes.map(function (recipe, index) {
-                return React.createElement(
-                  ReactRouter.Link,
-                  { key: index, to: "/catagory/" + catagoryId + "/recipe/" + recipe.id },
-                  React.createElement(
-                    "p",
-                    null,
-                    recipe.name
-                  )
-                );
+                return React.createElement(FC.SingleRecipeComponent, { key: index, id: index, catagoryId: catagoryId, recipe: recipe });
               })
             );
           })

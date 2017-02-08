@@ -54,6 +54,11 @@ if (window.FC === undefined) { window.FC = {}; }
     findNutrients(item, itemTwo, itemThree, itemFour) {
 
       var nutrientsArray = []
+      var deletedRecipeMsg = "This Recipe Has Been Deleted"
+
+      if (this.state.recipe === undefined) {
+        return deletedRecipeMsg;
+      }
 
       this.state.recipe.nutrients.map((nutrient) => {
 
@@ -98,6 +103,10 @@ if (window.FC === undefined) { window.FC = {}; }
       var diet = this.findActiveDiet();
       var nutrients = this.findNutrients("Calories", "Fat", "Carbohydrates", "Protein");
       var percents = []
+
+      if (this.state.recipe === undefined) {
+        return <div className="detail-container"><h1 className="react-detail-h1">{nutrients}</h1></div>
+      }
 
       for (var i = 0; i < nutrients.length; i++) {
 

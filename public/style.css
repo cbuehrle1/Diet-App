@@ -176,12 +176,13 @@ header {
     color: white;
     padding: 5px 0; }
   .side-bar p {
-    font-size: 16px;
+    font-size: 15px;
     color: white;
     padding-left: 12px;
     padding-top: 3px;
     padding-right: 3%;
-    padding-bottom: 3px; }
+    padding-bottom: 3px;
+    display: inline-block; }
   .side-bar p:hover {
     font-weight: bolder;
     color: #FFE3D0; }

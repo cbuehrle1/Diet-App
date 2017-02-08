@@ -12,10 +12,11 @@ if (window.FC === undefined) { window.FC = {}; }
 
       var catagoryId;
       return <ul>{this.props.catagory.map((catagory, index) => {
+        console.log(catagory)
         catagoryId = catagory.id;
         return<li key={index}><h3>{catagory.name}</h3>
         {catagory.recipes.map((recipe, index) => {
-          return <ReactRouter.Link key={index} to={"/catagory/" + catagoryId + "/recipe/" + recipe.id}><p>{recipe.name}</p></ReactRouter.Link>
+          return <FC.SingleRecipeComponent key={index} id={index} catagoryId={catagoryId} recipe={recipe} />
         })}</li>
       })}</ul>
     }
