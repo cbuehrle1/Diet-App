@@ -16,7 +16,7 @@ class RecipeDetailComponent extends React.Component {
       url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/" + this.props.params.recipeId + "/information?includeNutrition=true",
       type: 'GET',
       beforeSend: function (xhr) {
-        xhr.setRequestHeader("X-Mashape-Key", "lfLi0pd5ComshP5lbLvR2GHC5uP6p1b7AOujsnP5aI9GJrDgG1");
+        xhr.setRequestHeader("X-Mashape-Key", FC.apiKey.mashKey);
         xhr.setRequestHeader("Accept", "application/json");
       }
     })

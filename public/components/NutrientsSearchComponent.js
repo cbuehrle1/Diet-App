@@ -29,6 +29,8 @@ if (window.FC === undefined) {
     _createClass(NutrientsSearchComponent, [{
       key: "componentDidMount",
       value: function componentDidMount() {
+        FC.dietData.deleteCurrentSearch();
+
         var storedSearch = FC.dietData.getCurrentNutrientSearch();
 
         if (storedSearch.data !== undefined) {
@@ -43,7 +45,6 @@ if (window.FC === undefined) {
         }
 
         window.addEventListener("scroll", this.handleScroll);
-        FC.dietData.deleteCurrentSearch();
       }
     }, {
       key: "componentWillUnmount",
@@ -74,7 +75,7 @@ if (window.FC === undefined) {
             url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?limitLicense=false" + maxCalories + maxCarbs + maxFat + maxProtein + "&number=10&offset=" + offsetAmt + queryStr + "&ranking=1",
             type: 'GET',
             beforeSend: function beforeSend(xhr) {
-              xhr.setRequestHeader("X-Mashape-Key", "lfLi0pd5ComshP5lbLvR2GHC5uP6p1b7AOujsnP5aI9GJrDgG1");
+              xhr.setRequestHeader("X-Mashape-Key", FC.apiKey.mashKey);
               xhr.setRequestHeader("Accept", "application/json");
             }
           }).done(function (data) {
@@ -119,7 +120,7 @@ if (window.FC === undefined) {
           url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?limitLicense=false" + maxCalories + maxCarbs + maxFat + maxProtein + "&number=10" + offsetAmt + queryStr + "&ranking=1",
           type: 'GET',
           beforeSend: function beforeSend(xhr) {
-            xhr.setRequestHeader("X-Mashape-Key", "lfLi0pd5ComshP5lbLvR2GHC5uP6p1b7AOujsnP5aI9GJrDgG1");
+            xhr.setRequestHeader("X-Mashape-Key", FC.apiKey.mashKey);
             xhr.setRequestHeader("Accept", "application/json");
           }
         }).done(function (data) {

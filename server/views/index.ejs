@@ -1,6 +1,6 @@
 <% include _header %>
 <% include _nav %>
-<div class="ejs-title-header"><h1>DIET APP</h1></div>
+<div><h1 class="ejs-title-header">DIET APP</h1></div>
 <div class="ejs-background">
   <div class="ejs-container">
 
@@ -11,5 +11,10 @@
     <div class="ejs-middle"><h1>Functionality:</h1><p>Allows a user to create a profile, create diet plans within their account, and create categories to store recipes within under each diet. The site is also linked to an external api of over 350,000 recipes for users to look search through and save to their diet plans for easy access in the future.</p></div>
   </div>
 </div>
+<script>
+  var backgroundDiv = document.querySelector(".ejs-container");
 
+  backgroundDiv.style.height = (window.innerHeight - 112) + "px"
+
+</script>
 <% include _footer %>

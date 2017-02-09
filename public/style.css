@@ -287,7 +287,8 @@ header {
 .ejs-container {
   width: 960px;
   margin: 25px auto;
-  overflow: auto; }
+  overflow: auto;
+  height: 100%; }
 
 .ejs-float {
   float: left;
