@@ -125,13 +125,25 @@ if (window.FC === undefined) {
           );
         }
 
+        var saveComponent;
+
+        if (this.state.diet.diet !== undefined) {
+          saveComponent = React.createElement(FC.SaveToComponent, { data: this.state.data });
+        } else {
+          saveComponent = React.createElement(
+            "h2",
+            null,
+            "Activate a Diet to add catagories"
+          );
+        }
+
         return React.createElement(
           "div",
           { className: "detail-container" },
           React.createElement(
             "div",
             { className: "position-me-relative" },
-            React.createElement(FC.SaveToComponent, { data: this.state.data })
+            saveComponent
           ),
           React.createElement(
             "h1",

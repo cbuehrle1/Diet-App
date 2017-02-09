@@ -12,6 +12,7 @@ if (window.FC === undefined) { window.FC = {}; }
     componentDidMount() {
       var cb = () => {
       var data = FC.dietData.sendRecipeInfo();
+      console.log(data);
 
       this.setState({
         info: data,

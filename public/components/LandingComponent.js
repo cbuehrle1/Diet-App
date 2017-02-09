@@ -53,12 +53,7 @@ if (window.FC === undefined) {
             React.createElement(
               "h1",
               null,
-              "What would you like to do?"
-            ),
-            React.createElement(
-              "h1",
-              null,
-              "Create a ",
+              "Create and activate a ",
               React.createElement(
                 ReactRouter.Link,
                 { to: "/CreateDiet" },
@@ -84,6 +79,11 @@ if (window.FC === undefined) {
                 { to: "/NutrientsSearch" },
                 "nutritional targets"
               )
+            ),
+            React.createElement(
+              "h1",
+              null,
+              "Start Saving Recipes!"
             )
           );
         }

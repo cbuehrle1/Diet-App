@@ -95,7 +95,16 @@ class RecipeDetailComponent extends React.Component {
       </ul></div>
     }
 
-    return <div className="detail-container"><div className="position-me-relative"><FC.SaveToComponent data={this.state.data}/></div><h1 className="react-detail-h1">{this.state.data.title}</h1>
+    var saveComponent;
+
+    if (this.state.diet.diet !== undefined) {
+      saveComponent = <FC.SaveToComponent data={this.state.data}/>
+    }
+    else {
+      saveComponent = <h2>Activate a Diet to add catagories</h2>;
+    }
+
+    return <div className="detail-container"><div className="position-me-relative">{saveComponent}</div><h1 className="react-detail-h1">{this.state.data.title}</h1>
       <div className="detail-float">
       <img className="detail-img" src={this.state.data.image} />
       </div>

@@ -32,6 +32,7 @@ if (window.FC === undefined) {
 
         var cb = function cb() {
           var data = FC.dietData.sendRecipeInfo();
+          console.log(data);
 
           _this2.setState({
             info: data,
