@@ -434,3 +434,12 @@ header{
   }
 
 }
+
+@media (max-width: 1000px) {
+  .detail-container{
+    .detail-float{
+      float: none;
+      width: 100%;
+    }
+  }
+}

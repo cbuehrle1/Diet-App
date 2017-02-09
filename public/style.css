@@ -412,4 +412,9 @@ header {
     font-weight: bolder;
     color: #4A72AD; }
 
+@media (max-width: 1000px) {
+  .detail-container .detail-float {
+    float: none;
+    width: 100%; } }
+
 /*# sourceMappingURL=style.css.map */
