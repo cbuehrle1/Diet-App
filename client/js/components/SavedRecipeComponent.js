@@ -12,7 +12,7 @@ if (window.FC === undefined) { window.FC = {}; }
 
       var catagoryId;
       return <ul>{this.props.catagory.map((catagory, index) => {
-        console.log(catagory)
+        
         catagoryId = catagory.id;
         return<li key={index}><h3>{catagory.name}</h3>
         {catagory.recipes.map((recipe, index) => {

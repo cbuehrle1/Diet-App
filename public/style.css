@@ -177,6 +177,10 @@ header {
     padding: 5px 0; }
   .side-bar p {
     font-size: 15px;
+    width: 175px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: white;
     padding-left: 12px;
     padding-top: 3px;
@@ -184,7 +188,6 @@ header {
     padding-bottom: 3px;
     display: inline-block; }
   .side-bar p:hover {
-    font-weight: bolder;
     color: #FFE3D0; }
   .side-bar a {
     text-decoration: none;

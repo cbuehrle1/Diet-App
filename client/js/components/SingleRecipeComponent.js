@@ -42,10 +42,10 @@ if (window.FC === undefined) { window.FC = {}; }
       var deleteIcon;
 
       if (this.state.showDelete === true) {
-        deleteIcon = <i onClick={() => { this.deleteRecipe(); }} className="material-icons" style={ { verticalAlign: "middle", cursor: "pointer" } }>delete_forever</i>
+        deleteIcon = <i onClick={() => { this.deleteRecipe(); }} className="material-icons trash-can" style={ { cursor: "pointer" } }>delete_forever</i>
       }
 
-      return <div onMouseOver={() => { this.showDelete(); }} onMouseLeave={() => { this.hideDelete(); }}><ReactRouter.Link key={this.props.id} to={"/catagory/" + this.props.catagoryId + "/recipe/" + this.props.recipe.id}>
+      return <div onMouseOver={() => { this.showDelete(); }} onMouseLeave={() => { this.hideDelete(); }}><ReactRouter.Link title={this.props.recipe.name} key={this.props.id} to={"/catagory/" + this.props.catagoryId + "/recipe/" + this.props.recipe.id}>
       <p>{this.props.recipe.name}</p></ReactRouter.Link>{deleteIcon}</div>
     }
   }

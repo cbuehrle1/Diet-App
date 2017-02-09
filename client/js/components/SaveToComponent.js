@@ -38,7 +38,7 @@ if (window.FC === undefined) { window.FC = {}; }
     }
 
     clicked() {
-    
+
       if (this.state.click === false) {
         this.setState({
           info: this.state.info,

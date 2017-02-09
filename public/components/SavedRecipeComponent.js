@@ -31,7 +31,7 @@ if (window.FC === undefined) {
           "ul",
           null,
           this.props.catagory.map(function (catagory, index) {
-            console.log(catagory);
+
             catagoryId = catagory.id;
             return React.createElement(
               "li",

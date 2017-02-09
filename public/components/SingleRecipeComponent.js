@@ -67,7 +67,7 @@ if (window.FC === undefined) {
             "i",
             { onClick: function onClick() {
                 _this2.deleteRecipe();
-              }, className: "material-icons", style: { verticalAlign: "middle", cursor: "pointer" } },
+              }, className: "material-icons trash-can", style: { cursor: "pointer" } },
             "delete_forever"
           );
         }
@@ -81,7 +81,7 @@ if (window.FC === undefined) {
             } },
           React.createElement(
             ReactRouter.Link,
-            { key: this.props.id, to: "/catagory/" + this.props.catagoryId + "/recipe/" + this.props.recipe.id },
+            { title: this.props.recipe.name, key: this.props.id, to: "/catagory/" + this.props.catagoryId + "/recipe/" + this.props.recipe.id },
             React.createElement(
               "p",
               null,
