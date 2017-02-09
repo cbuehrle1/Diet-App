@@ -264,7 +264,7 @@ if (window.FC === undefined) {
               React.createElement(
                 "p",
                 null,
-                "Press Enter to start exploring recipies today!"
+                "Click Enter to start exploring recipies today!"
               ),
               React.createElement(
                 "div",

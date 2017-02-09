@@ -169,7 +169,7 @@ if (window.FC === undefined) { window.FC = {}; }
         </div>
       } else {
         navBar = <div className={this.state.sidebar} style={ { height: theHeight } }><div style={{ width: "620px", margin: "0 auto", paddingTop: top }}><h1>Welcome {this.state.user.displayName}</h1>
-        <p>This is an app designed around searching and saving recipes within the context of your diet.</p><p>Press Enter to start exploring recipies today!</p>
+        <p>This is an app designed around searching and saving recipes within the context of your diet.</p><p>Click Enter to start exploring recipies today!</p>
         <div className="start-button" onClick={() => { this.moveToSideBar(); }}>Enter</div></div>
         </div>;
       }
