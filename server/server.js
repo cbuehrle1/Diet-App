@@ -71,11 +71,11 @@ app.get("/logout", function(req, res) {
 
 app.get("/profile", ensureAuthenticated, function(req, res) {
   res.render("profile.ejs");
-})
+});
 
 app.get("/app", ensureAuthenticated, function(req, res) {
   res.render("app.ejs");
-})
+});
 
 app.post("/login", passport.authenticate("login", {
   successRedirect: "/app",
@@ -109,7 +109,7 @@ app.post("/signup", function(req, res, next) {
 
 app.use(require("./api-routes.js")());
 
-var port = process.env.PORT || 5000;
+var port = process.env.PORT || 5001;
 
 app.listen(port, function() {
   console.log('listening on port');
