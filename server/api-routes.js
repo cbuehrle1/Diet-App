@@ -1,4 +1,5 @@
-e
+var express = require("express");
+var User = require("./models/user.js");
 var Diet = require("./models/diet.js");
 var Catagory = require("./models/catagory.js");
 var uuid = require("node-uuid");
@@ -7,11 +8,33 @@ module.exports = function() {
 
   var router = express.Router();
 
+  router.get("/api/user", function(req, res) {
+    var userInfo = {}
+
+    User.find({
+      _id: req.user._id
+    })
+    .exec(function(err, data) {
+      // console.log(data);
+      if (err) {
+        console.log(err);
+      }
+
+      userInfo = {
+        id: data[0]._id,
+        email: data[0].username,
+        displayName: data[0].displayName
+      }
+
+      res.send(userInfo);
+    });
+  });
+
   router.post("/api/diet", function(req, res) {
 
     var cb = (err, data) => {
       // console.log(data);
-      res.send(data);r
+      res.send(data);
     }
 
     var diet = new Diet();

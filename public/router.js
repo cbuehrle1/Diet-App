@@ -10,6 +10,8 @@ if (window.FC === undefined) {
   var Router = ReactRouter.Router;
   var Route = ReactRouter.Route;
 
+  console.log(ReactRouter);
+
   var router = React.createElement(
     Router,
     { history: ReactRouter.hashHistory },

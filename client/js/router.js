@@ -6,6 +6,8 @@ if (window.FC === undefined) { window.FC = {}; }
   var Router = ReactRouter.Router;
   var Route = ReactRouter.Route;
 
+  console.log(ReactRouter);
+
   var router = <Router history={ReactRouter.hashHistory}>
     <Route path="/" component={FC.AppComponent}>
       <ReactRouter.IndexRoute component={FC.LandingComponent} />
