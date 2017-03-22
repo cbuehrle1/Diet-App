@@ -28,7 +28,10 @@ if (window.FC === undefined) {
     function AppComponent() {
       _classCallCheck(this, AppComponent);
 
-      return _possibleConstructorReturn(this, (AppComponent.__proto__ || Object.getPrototypeOf(AppComponent)).apply(this, arguments));
+      var _this = _possibleConstructorReturn(this, (AppComponent.__proto__ || Object.getPrototypeOf(AppComponent)).call(this));
+
+      _this.state = { show: false };
+      return _this;
     }
 
     _createClass(AppComponent, [{
@@ -135,7 +138,7 @@ if (window.FC === undefined) {
               )
             )
           );
-        } else if (this.state === null) {
+        } else if (this.state.show === false) {
           headerStyle = "app-header-main";
         }
 
@@ -164,7 +167,7 @@ if (window.FC === undefined) {
               _this2.renderChildren();
             } }),
           children,
-          React.createElement(FC.DailyDietComponent, null)
+          React.createElement(FC.DailyDietComponent, { show: this.state.show })
         );
       }
     }]);

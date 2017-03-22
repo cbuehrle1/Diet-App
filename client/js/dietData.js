@@ -50,6 +50,7 @@ if (window.FC === undefined) { window.FC = {}; }
           .done((data) => {
 
             storedInfo.catagoryInfo = data;
+            console.log(this.callbacks);
             this.callbacks.forEach((cb) => { cb(userVar, dietVar, data); })
           })
 

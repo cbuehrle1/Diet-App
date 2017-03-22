@@ -10,6 +10,11 @@ if (window.FC === undefined) { window.FC = {}; }
 
   class AppComponent extends React.Component {
 
+    constructor() {
+      super();
+      this.state = { show: false }
+    }
+
     renderChildren() {
       localStorage.setItem("show", "app-header");
       this.setState({
@@ -39,7 +44,7 @@ if (window.FC === undefined) { window.FC = {}; }
         <li className="nutrients-search"><ReactRouter.Link to={"/NutrientsSearch"}>Search by Nutrients</ReactRouter.Link></li>
         <li className="left-header-li"><ReactRouter.Link to={"/CreateDiet"}>Create Diet</ReactRouter.Link></li></ul>;
       }
-      else if (this.state === null) {
+      else if (this.state.show === false) {
         headerStyle = "app-header-main";
       }
 
@@ -49,7 +54,7 @@ if (window.FC === undefined) { window.FC = {}; }
       </header>
         <FC.NavBar callback={() => { this.renderChildren(); }}/>
         {children}
-        <FC.DailyDietComponent />
+        <FC.DailyDietComponent show={this.state.show} />
     </div>
     }
   }

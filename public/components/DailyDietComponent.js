@@ -19,16 +19,59 @@ if (window.FC === undefined) {
     function DailyDietComponent() {
       _classCallCheck(this, DailyDietComponent);
 
-      return _possibleConstructorReturn(this, (DailyDietComponent.__proto__ || Object.getPrototypeOf(DailyDietComponent)).apply(this, arguments));
+      var _this = _possibleConstructorReturn(this, (DailyDietComponent.__proto__ || Object.getPrototypeOf(DailyDietComponent)).call(this));
+
+      _this.state = { diet: {} };
+      return _this;
     }
 
     _createClass(DailyDietComponent, [{
+      key: "componentDidMount",
+      value: function componentDidMount() {
+        var _this2 = this;
+
+        var cb = function cb(noop, diets, noop2) {
+
+          var active;
+
+          console.log(diets);
+
+          diets.diets.forEach(function (diet) {
+            if (diet.active) {
+              active = diet;
+            }
+          });
+
+          _this2.setState({
+            diet: active
+          });
+        };
+
+        FC.dietData.registerCallback(cb);
+      }
+    }, {
+      key: "componentWillUnmount",
+      value: function componentWillUnmount() {
+        console.log(unmounting);
+      }
+    }, {
       key: "render",
       value: function render() {
+
+        var display;
+
+        if (this.props.show) {
+          display = React.createElement(
+            "p",
+            null,
+            "Daily Diet Component"
+          );
+        }
+
         return React.createElement(
           "div",
           { className: "fixed-diet-window" },
-          "Daily Diet Component"
+          display
         );
       }
     }]);

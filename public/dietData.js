@@ -55,6 +55,7 @@ if (window.FC === undefined) {
           }).done(function (data) {
 
             storedInfo.catagoryInfo = data;
+            console.log(_this.callbacks);
             _this.callbacks.forEach(function (cb) {
               cb(userVar, dietVar, data);
             });
