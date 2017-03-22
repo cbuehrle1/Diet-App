@@ -34,25 +34,18 @@ if (window.FC === undefined) {
 
           var active;
 
-          console.log(diets);
-
           diets.diets.forEach(function (diet) {
             if (diet.active) {
               active = diet;
             }
           });
-
+          console.log(active);
           _this2.setState({
             diet: active
           });
         };
 
         FC.dietData.registerCallback(cb);
-      }
-    }, {
-      key: "componentWillUnmount",
-      value: function componentWillUnmount() {
-        console.log(unmounting);
       }
     }, {
       key: "render",
@@ -62,9 +55,37 @@ if (window.FC === undefined) {
 
         if (this.props.show) {
           display = React.createElement(
-            "p",
+            "div",
             null,
-            "Daily Diet Component"
+            React.createElement(
+              "ul",
+              null,
+              React.createElement(
+                "li",
+                null,
+                this.state.diet.diet
+              ),
+              React.createElement(
+                "li",
+                null,
+                "Calories: " + this.state.diet.calories
+              ),
+              React.createElement(
+                "li",
+                null,
+                "Fat: " + this.state.diet.fat
+              ),
+              React.createElement(
+                "li",
+                null,
+                'Carbs: ' + this.state.diet.carbs
+              ),
+              React.createElement(
+                "li",
+                null,
+                'Protein: ' + this.state.diet.protein
+              )
+            )
           );
         }
 

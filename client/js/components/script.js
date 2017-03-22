@@ -23,10 +23,22 @@ if (window.FC === undefined) { window.FC = {}; }
       });
     }
 
+    passShowProp() {
+
+      if (localStorageValue === "app-header") {
+        return true;
+      }
+      else {
+        return this.state.show;
+      }
+
+    }
+
     render() {
       var children;
       var headerStyle;
       var headerLinks;
+      var showProp = this.passShowProp();
 
       if (this.state !== null && this.state.show === true) {
         children = this.props.children;
@@ -54,7 +66,7 @@ if (window.FC === undefined) { window.FC = {}; }
       </header>
         <FC.NavBar callback={() => { this.renderChildren(); }}/>
         {children}
-        <FC.DailyDietComponent show={this.state.show} />
+        <FC.DailyDietComponent show={showProp} />
     </div>
     }
   }

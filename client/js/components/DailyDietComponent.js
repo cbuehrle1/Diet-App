@@ -15,14 +15,12 @@ if (window.FC === undefined) { window.FC = {}; }
 
         var active;
 
-        console.log(diets);
-
         diets.diets.forEach((diet) => {
           if (diet.active) {
             active = diet;
           }
         });
-
+        console.log(active)
         this.setState({
           diet: active
         })
@@ -31,16 +29,17 @@ if (window.FC === undefined) { window.FC = {}; }
       FC.dietData.registerCallback(cb);
     }
 
-    componentWillUnmount() {
-      console.log(unmounting);
-    }
-
     render() {
 
       var display;
 
       if (this.props.show) {
-        display = <p>Daily Diet Component</p>
+        display = <div><ul><li>{this.state.diet.diet}</li>
+        <li>{"Calories: " + this.state.diet.calories}</li>
+        <li>{"Fat: " + this.state.diet.fat}</li>
+        <li>{'Carbs: ' + this.state.diet.carbs}</li>
+        <li>{'Protein: ' + this.state.diet.protein}</li>
+        </ul></div>
       }
 
       return <div className="fixed-diet-window">{display}</div>;

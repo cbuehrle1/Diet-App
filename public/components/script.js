@@ -44,6 +44,16 @@ if (window.FC === undefined) {
         });
       }
     }, {
+      key: "passShowProp",
+      value: function passShowProp() {
+
+        if (localStorageValue === "app-header") {
+          return true;
+        } else {
+          return this.state.show;
+        }
+      }
+    }, {
       key: "render",
       value: function render() {
         var _this2 = this;
@@ -51,6 +61,7 @@ if (window.FC === undefined) {
         var children;
         var headerStyle;
         var headerLinks;
+        var showProp = this.passShowProp();
 
         if (this.state !== null && this.state.show === true) {
           children = this.props.children;
@@ -167,7 +178,7 @@ if (window.FC === undefined) {
               _this2.renderChildren();
             } }),
           children,
-          React.createElement(FC.DailyDietComponent, { show: this.state.show })
+          React.createElement(FC.DailyDietComponent, { show: showProp })
         );
       }
     }]);
