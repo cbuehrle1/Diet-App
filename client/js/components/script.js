@@ -49,6 +49,7 @@ if (window.FC === undefined) { window.FC = {}; }
       </header>
         <FC.NavBar callback={() => { this.renderChildren(); }}/>
         {children}
+        <FC.DailyDietComponent />
     </div>
     }
   }

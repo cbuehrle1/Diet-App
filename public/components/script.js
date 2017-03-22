@@ -163,7 +163,8 @@ if (window.FC === undefined) {
           React.createElement(FC.NavBar, { callback: function callback() {
               _this2.renderChildren();
             } }),
-          children
+          children,
+          React.createElement(FC.DailyDietComponent, null)
         );
       }
     }]);

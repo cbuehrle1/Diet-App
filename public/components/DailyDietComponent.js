@@ -23,18 +23,11 @@ if (window.FC === undefined) {
     }
 
     _createClass(DailyDietComponent, [{
-      key: "pullDiets",
-      value: function pullDiets() {
-        return FC.dietData.getDietInfo();
-      }
-    }, {
       key: "render",
       value: function render() {
-        var diets = FC.dietData.getDietInfo();
-        console.log(diets);
         return React.createElement(
           "div",
-          null,
+          { className: "fixed-diet-window" },
           "Daily Diet Component"
         );
       }

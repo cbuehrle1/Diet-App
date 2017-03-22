@@ -435,6 +435,12 @@ header{
   }
 
 }
+.fixed-diet-window{
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  border: solid 1px black; 
+}
 
 @media (max-width: 1000px) {
   .detail-container{
