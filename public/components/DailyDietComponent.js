@@ -39,13 +39,47 @@ if (window.FC === undefined) {
               active = diet;
             }
           });
-          console.log(active);
-          _this2.setState({
-            diet: active
-          });
+
+          if (active === undefined) {
+            _this2.setState({
+              diet: {}
+            });
+          } else {
+            _this2.setState({
+              diet: active
+            });
+          }
         };
 
         FC.dietData.registerCallback(cb);
+      }
+    }, {
+      key: "componentWillUnmount",
+      value: function componentWillUnmount() {
+        var _this3 = this;
+
+        var cb = function cb(noop, diets, noop2) {
+
+          var active;
+
+          diets.diets.forEach(function (diet) {
+            if (diet.active) {
+              active = diet;
+            }
+          });
+
+          if (active === undefined) {
+            _this3.setState({
+              diet: {}
+            });
+          } else {
+            _this3.setState({
+              diet: active
+            });
+          }
+        };
+
+        FC.dietData.onUnmount(cb);
       }
     }, {
       key: "render",
@@ -53,7 +87,7 @@ if (window.FC === undefined) {
 
         var display;
 
-        if (this.props.show) {
+        if (this.props.show && this.state.diet.diet !== undefined) {
           display = React.createElement(
             "div",
             null,
