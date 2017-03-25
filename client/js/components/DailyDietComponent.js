@@ -70,7 +70,7 @@ if (window.FC === undefined) { window.FC = {}; }
       var display;
 
       if (this.props.show && this.state.diet.diet !== undefined) {
-        display = <div><ul><li>{this.state.diet.diet}</li>
+        display = <div><ul><li className="list-diet-title">{this.state.diet.diet}</li>
         <li>{"Calories: " + this.state.diet.calories}</li>
         <li>{"Fat: " + this.state.diet.fat}</li>
         <li>{'Carbs: ' + this.state.diet.carbs}</li>

@@ -96,7 +96,7 @@ if (window.FC === undefined) {
               null,
               React.createElement(
                 "li",
-                null,
+                { className: "list-diet-title" },
                 this.state.diet.diet
               ),
               React.createElement(
