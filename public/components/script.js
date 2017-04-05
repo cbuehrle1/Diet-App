@@ -104,6 +104,15 @@ if (window.FC === undefined) {
                 { to: "/CreateDiet" },
                 "Create Diet"
               )
+            ),
+            React.createElement(
+              "li",
+              { className: "left-header-li" },
+              React.createElement(
+                ReactRouter.Link,
+                { to: '/MealPlan' },
+                "Meal Plan"
+              )
             )
           );
         } else if (localStorageValue === "app-header") {
@@ -146,6 +155,15 @@ if (window.FC === undefined) {
                 ReactRouter.Link,
                 { to: "/CreateDiet" },
                 "Create Diet"
+              )
+            ),
+            React.createElement(
+              "li",
+              { className: "left-header-li" },
+              React.createElement(
+                ReactRouter.Link,
+                { to: '/MealPlan' },
+                "Meal Plan"
               )
             )
           );
