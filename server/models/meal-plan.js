@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var mealPlanSchema = mongoose.Schema({
   dietId: { type: mongoose.Schema.Types.ObjectId, required: true },
-  active: Boolean,
+  active: { type: Boolean, default: false },
   plan: Array
 });
 

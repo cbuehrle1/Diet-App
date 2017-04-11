@@ -119,6 +119,24 @@ if (window.FC === undefined) {
                 null,
                 'Protein: ' + this.state.diet.protein
               )
+            ),
+            React.createElement(
+              "table",
+              null,
+              React.createElement(
+                "thead",
+                null,
+                React.createElement(
+                  "tr",
+                  null,
+                  React.createElement(
+                    "th",
+                    null,
+                    "Monday"
+                  )
+                )
+              ),
+              React.createElement("tbody", null)
             )
           );
         }

@@ -75,7 +75,17 @@ if (window.FC === undefined) { window.FC = {}; }
         <li>{"Fat: " + this.state.diet.fat}</li>
         <li>{'Carbs: ' + this.state.diet.carbs}</li>
         <li>{'Protein: ' + this.state.diet.protein}</li>
-        </ul></div>
+        </ul>
+        <table>
+          <thead>
+            <tr>
+              <th>Monday</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+        </div>
       }
 
       return <div className="fixed-diet-window">{display}</div>;
